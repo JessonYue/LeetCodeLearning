@@ -2,8 +2,7 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
         int[] arr = {2, 7, 11, 15};
-
-        System.out.println(twoSum(arr,9));
+        Sysou(twoSum(arr,9));
     }
 
     public int[] twoSum(int[] nums, int target) {
@@ -16,7 +15,7 @@ public class ExampleUnitTest {
             } else if((sum > target)){
                 j--;
             } else{
-                return new int[]{i, j};
+                return new int[]{i+1, j+1};
             }
         }
         return new int[]{-1, -1};
