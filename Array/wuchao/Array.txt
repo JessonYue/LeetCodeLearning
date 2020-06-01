@@ -1,5 +1,6 @@
 class Solution {
-    class Solution {
+    class Solution {、
+        //leetcode 167
         //在原有头尾指针的基础上，加入二分查找，缩小start和end的范围
         public int[] twoSum(int[] numbers, int target) {
             int start = 0;
@@ -33,6 +34,20 @@ class Solution {
                 }
             }
             return new int[]{-1,-1};
+        }
+
+        //leetcode 70
+        public int climbStairs(int n) {
+            //最后如果剩1步，1步走完
+            if(n==1){
+                return 1;
+            }
+            //最后如果剩2步，可以1步1步走完，也可以2步走完
+            if(n==2){
+                return 2;
+            }
+            //表示走1步之后，n-1个台阶的走法，加上，走2步之后，n-2个台阶的走法
+            return climbStairs(n-1) + climbStairs(n-2);
         }
     }
 }
