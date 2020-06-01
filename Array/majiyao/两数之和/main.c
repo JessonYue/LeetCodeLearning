@@ -11,7 +11,7 @@ int main() {
     return 0;
 }
 
-void sumArray01(int* array, int target) {
+void sumArray(int* array, int target) {
     //获取数组的长度
     int size = sizeof(array) / sizeof(int);
     for (int i = 0; i < size; ++i) {
@@ -25,15 +25,5 @@ void sumArray01(int* array, int target) {
             }
         }
     }
-}
-
-void sumArray(int* array, int target){
-    int size = sizeof(array) / sizeof(int);
-    set<>
-    for (int i = 0; i < size; ++i) {
-        int a = target - array[i];
-        if()
-    }
-
 }
 
