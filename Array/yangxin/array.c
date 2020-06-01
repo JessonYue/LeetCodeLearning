@@ -63,12 +63,31 @@ int *twoSum(int *numbers, int numbersSize, int target, int *returnSize) {
     return arr;
 }
 
+int climbStairs(int n) {
+    if (n == 0) {
+        return 0;
+    }
+
+    if (n == 1) {
+        return 1;
+    }
+
+    if (n == 2) {
+        return 2;
+    }
+
+    int one = 1, two = 2, r = 0;
+    //斐波那契数列，递归改用循环的方式实现，参考别人代码
+    for (int i = 2; i < n; i++) {
+        r = one + two;
+        one = two;
+        two = r;
+    }
+
+    return r;
+}
 
 int main() {
-    int a[] = {2, 7, 11, 15, 18};
-    int target = 9;
-    int r = -1;
-    int *c = twoSum(a, sizeof(a) / sizeof(a[0]), target, &r);
-    printf("%d---%d", c[0], c[1]);
+    printf("%d", climbStairs(4));
     return 0;
 }
