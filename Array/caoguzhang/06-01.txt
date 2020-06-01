@@ -1,1 +1,40 @@
-第一次上传。
+    private static void test(int[] array,int target){
+        int index = getNewArrayIndex(array,target);
+        System.out.println(index);
+        int[] newArray = new int[index+1];
+        System.arraycopy(array,0,newArray,0,index+1);
+        for (int i = 0; i < newArray.length; i++) {
+            for (int j = newArray.length - 1; j > i; j-- ){
+                if (array[i] + array[j] == target){
+                    System.out.println("index1 = "+(i+1)+",index2 = "+(j+1));
+                    return;
+                }
+            }
+        }
+    }
+
+    private static int getNewArrayIndex(int[] array,int target){
+        int start = 0; //第一个下标
+        int end = array.length - 1;//最后一个下标
+        int middle;
+        if (target >= array[end]){
+            return end;
+        }
+        if (target <= array[start]){
+            return -1;
+        }
+        while (start <= end) {
+            middle = (start + end) / 2;
+            if (array[middle] == target) {
+                return array[middle];
+            } else if (array[middle] < target) {
+                start = middle + 1;
+            } else {
+                end = middle - 1;
+            }
+            if (start == end || start +1 == end){
+                return start;
+            }
+        }
+        return -1;
+    }
