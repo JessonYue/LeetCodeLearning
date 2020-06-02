@@ -1,5 +1,5 @@
 
-public class Solution1 {
+public class Solution167 {
     /**
      * 思路1.
      * 双层循序 
