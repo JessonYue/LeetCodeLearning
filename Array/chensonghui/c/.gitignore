@@ -5,3 +5,4 @@
 
 # CMake
 cmake-build-*/
+*.idea

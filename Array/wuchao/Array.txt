@@ -49,5 +49,40 @@ class Solution {
             //表示走1步之后，n-1个台阶的走法，加上，走2步之后，n-2个台阶的走法
             return climbStairs(n-1) + climbStairs(n-2);
         }
+
+        //leetcode 27
+        //思路：头尾指针，头指针在等于该值的元素停下，尾指针在不等于该值的元素停下，交换两个元素，头指针向后移动一步，尾指针向前移动一步，直到头指针等于尾指针
+        public int removeElement(int[] nums, int val) {
+            if(nums.length==0){
+                return 0;
+            }
+            int start = 0;
+            int end = nums.length -1;
+            while(start<end){
+                if(nums[start]==val){
+                    if(nums[end]!=val){
+                        swap(nums,start,end);
+                        start++;
+                    }
+                    end--;
+                } else {
+                    start++;
+                }
+            }
+            //返回的是数组的长度需要下标+1;
+            if(nums[start]==val){
+                //说明前一个元素是数组删除完之后的最后一个元素
+                return start;
+            } else {
+                //说明当前元素是数组删除完之后的最后一个元素
+                return start+1;
+            }
+        }
+
+        public void swap(int[] nums,int a,int b){
+            int temp = nums[a];
+            nums[a] = nums[b];
+            nums[b] = temp;
+        }
     }
 }
