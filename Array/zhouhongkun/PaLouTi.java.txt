@@ -1,0 +1,38 @@
+package com.chow;
+
+/**
+ * 分析：
+ * 当n=1时，结果为1
+ * 当n=2时，结果为2
+ * 当n=3时，结果为3
+ * 当n=4时，结果为5
+ * 当n=5时，结果为8
+ * 当n=6时，结果为13
+ * 当n=7时，结果为21
+ * ...............
+ * 观察可以发现，当n大于等于3时，结果为前两个的结果之和
+ *
+ */
+public class Main {
+
+    public static void main(String[] args) {
+	    // write your code here
+        int n = 7;
+        System.out.println(String.format("楼梯有%d阶时,有%d种方法可以爬到楼顶", n, getResult(n)));
+    }
+
+    private static int getResult(int n){
+        if(n == 1){
+            return 1;
+        }
+        
+        if(n == 2){
+            return 2;
+        }
+
+        if(n >= 3){
+            return getResult(n-1) + getResult(n-2);
+        }
+        return 0;
+    }
+}
