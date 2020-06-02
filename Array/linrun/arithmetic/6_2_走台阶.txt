@@ -1,0 +1,46 @@
+    @Test
+    public void testAl(){
+        /**
+         *  测试台阶数分别为1到10的情况
+         */
+        for (int i =1; i < 10; i++){
+            takeStairs(i);
+        }
+    }
+
+    /**
+     * 爬楼梯
+     * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+     * 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+     * @param stairs 楼梯数
+     */
+    private void takeStairs(int stairs) {
+        int sum = 0;
+        //最多能有几次机会可以一次走两个台阶
+        int maxTwoStairCount = stairs / 2;
+        //走的次数（一个台阶或者两个台阶）
+        int walkCount = 0;
+        //twoStairCount表示一次走两个台阶的次数
+        for (int twoStairCount = 0; twoStairCount <= maxTwoStairCount; twoStairCount++) {
+            //走完台阶共分几次走
+            walkCount = stairs - twoStairCount;
+            sum += selectAFromB(twoStairCount, walkCount);
+        }
+        System.out.println(stairs + "层的楼梯有" + sum + "种走法");
+    }
+
+    /**
+     *  从b个数中选出a个数，有几种选法（不算顺序的）
+     */
+    private int selectAFromB(int a, int b) {
+        if (a >= b || a == 0) {
+            return 1;
+        }
+        int beDivider = b;
+        int divider = 1;
+        for (int count = 1; count < a; count++) {
+            beDivider *= (b - count);
+            divider *= (count + 1);
+        }
+        return beDivider / divider;
+    }
