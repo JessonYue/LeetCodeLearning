@@ -1,0 +1,33 @@
+/**
+     *  从有序数组（无重复数据）中挑出两数，使其相加之和等于目标数，顺序输出两个数的下标（下标从1开始）
+     * @param numbers 输入数组
+     * @param target 目标数
+     */
+    private void getTargetIndex(int[] numbers, int target) {
+        /*
+         * 边界判断
+         */
+        if (numbers == null || numbers.length < 2
+                || target >= numbers[numbers.length - 1] * 2 || target <= numbers[0] * 2) {
+            return;
+        }
+        //较小的下标
+        int smallerIndex = 0;
+        //较大的下标
+        int biggerIndex = numbers.length - 1;
+        //两数相加之和
+        int sum;
+        //运算次数（复杂度）
+        int calculateTime = 0;
+        while (biggerIndex > smallerIndex) {
+            calculateTime++;
+            sum = numbers[smallerIndex] + numbers[biggerIndex];
+            if (sum > target) {
+                biggerIndex--;
+            } else if (sum < target) {
+                smallerIndex++;
+            } else {
+                System.out.println("index1:" + (smallerIndex + 1) + "   index2:" + (biggerIndex + 1) + "  timeComplexity:" + calculateTime);
+                break;
+            }
+        }

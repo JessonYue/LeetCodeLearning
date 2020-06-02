@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14.0)
-project(array C)
+project(array CXX)
 
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 11)
 
-add_executable(array main.c)
+add_executable(array main.cpp)
