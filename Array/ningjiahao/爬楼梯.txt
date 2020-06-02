@@ -1,0 +1,24 @@
+class Solution {
+    public int climbStairs(int n) {
+        int a = 1, b = 2;
+        if(n == 1){
+            return a;
+        }else if(n == 2){
+            return b;
+        }
+        // 从第3阶开始循环，直至爬到 n 阶。
+        while(n > 2){
+            int temp = a + b;
+            a = b;
+            b = temp;
+            n--;
+        }
+        return b;
+    }
+
+}
+
+爬一个台阶只有一种方法,爬两节台阶有两种方法,爬三节台阶有3种方法,爬四阶台阶有5中办法
+可以看到每种台阶是前两种的方法数的和(大于2的时候),所以循环累减,记录数字,最后返回
+这是挺暴力的一种办法...
+明天开始,做算法题也要用C实现。
