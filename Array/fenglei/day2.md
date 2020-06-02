@@ -94,7 +94,7 @@
 int climbStairs(int floor){
     int temp = 1;
     int a = 2;
-    for (int i = 0; i < floor; ++i) {
+    for (int i = 1; i < floor; ++i) {
         a = a + temp;
         temp = a - temp;
     }
