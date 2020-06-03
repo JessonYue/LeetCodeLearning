@@ -13,12 +13,11 @@ public class ClimbStairs {
         }
         return second;
     }
-}
 
 // 动态规划解法，思路： 到第n台阶的方法是到第（n-1）和第（n-2）的方法之和
 
 class Solution {
-    public int climbStairs(int n) {
+    public int climbStairs1(int n) {
        if (n == 1) {
             return 1;
         }
@@ -33,7 +32,7 @@ class Solution {
 }
 
 // 动态规划的详细解释
-public int climbStairs(int n) {
+public int climbStairs2(int n) {
     int[] dp = new int[n + 2]; //该数组每个元素的指针对应的是台阶数,元素的值存放的是台阶数对应的方法数
     //dp[0] = 0; //不管怎样,数组下标指针肯定是从0开始的,所以要考虑0.有0个台阶,不需要爬,所以没有方法数(但从斐波那契角度,dp[0]=1)
     dp[1] = 1; //1阶台阶,只有一种方式(1)
@@ -50,3 +49,6 @@ public int climbStairs(int n) {
 
     return dp[n];
 }
+
+}
+
