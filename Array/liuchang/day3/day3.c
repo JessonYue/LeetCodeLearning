@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 //思路同java 思路
+//因为没找到 c 如何拼接 字符串 所以 直接使用了string库当中的方法 后续会研究如何拼接字符串的
 int main() {
     char haystack[] = {"hello"};
     char needle[] = {"ll"};
