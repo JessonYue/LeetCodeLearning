@@ -44,19 +44,19 @@ int main() {
 
 
 **/
-printf("Hello, World!\n");
+    printf("Hello, World!\n");
 
-int n=4;//台阶数
+    int n = 4;//台阶数
 
-long s;
-if(n==1)
-s=1;
-else if(n==2)
-s=2;
-else
-s=f(n-1)+f(n-2);
+    long s;
+    if (n == 1)
+        s = 1;
+    else if (n == 2)
+        s = 2;
+    else
+        s = f(n - 1) + f(n - 2);
 
-printf("%d\n",s);
+    printf("%d\n", s);
 
 }
 
