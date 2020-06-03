@@ -17,8 +17,8 @@ package luge
 输出: [1,2]
 解释: 2 与 7 之和等于目标数 9 。因此 index1 = 1, index2 = 2 。*/
 
-private val nums = intArrayOf(-1, -2, -3, -4, -5)
-private val target = -5
+private val nums = intArrayOf(1, 2, 5, 8, -88)
+private val target = 7
 
 
 fun main() {
@@ -26,6 +26,10 @@ fun main() {
     println("the index is : ${+index1[0]},${+index1[1]}")
     val index2 = getIndex2(nums, target)
     println("the index is : ${+index2[0]},${+index2[1]}")
+
+    val index3 = getIndex3(nums, target)
+    println("the index is : ${+index3[0]},${+index3[1]}")
+    println(200 * 300 * 400 * 500)
 
 }
 
@@ -46,26 +50,44 @@ fun getIndex1(nums: IntArray, target: Int): IntArray {
     return intArrayOf(-1, -1)
 }
 
-// 两遍哈希表
+// 2遍哈希表
 fun getIndex2(nums: IntArray, target: Int): IntArray {
 
     var map: HashMap<Int, Int> = HashMap()
-    nums.forEachIndexed { index, i ->
-        map[index] = i
+
+    nums.forEachIndexed { index, value ->
+        map[value] = index
     }
 
-    
-
-
-
+    nums.forEachIndexed { index, value ->
+        if (map.containsKey(target - value) && index != target - value) {
+            return intArrayOf(index,map[target - value]!!)
+        }
+    }
 
     return intArrayOf(-1, -1)
 
 }
 
-fun getIndex() {
+
+// 1遍哈希表
+fun getIndex3(nums: IntArray, target: Int): IntArray {
+
+    var map: HashMap<Int, Int> = HashMap()
+
+    nums.forEachIndexed { index, value ->
+
+        var complement = target - value
+
+        if (map.containsKey(complement)) {
+            return intArrayOf(map[complement]!!, index)
+        }
+        map[value] = index
+    }
+    return intArrayOf(-1, -1)
 
 }
+
 
 /*2020.06.11
 
