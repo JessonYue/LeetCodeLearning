@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <malloc.h>
+#include <string.h>
 
 
 /**
@@ -87,7 +88,103 @@ int climbStairs(int n) {
     return r;
 }
 
+/**
+ * 28. 实现 strStr() //https://leetcode-cn.com/problems/implement-strstr/
+ * 实现 strStr() 函数。
+ * 给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。
+ *
+ * 性能不好，稍后查看学kmp算法提高效率
+ */
+int strStr(char *haystack, char *needle) {
+    int index = -1;
+    if (haystack == NULL || needle == NULL) {
+        return index;
+    }
+//    这里跟java不同不能这么写判断是不是空串，原因不是很理解
+//    if (haystack == "" || needle == "") {
+//        return 0;
+//    }
+
+    int needleLength = 0;
+    int haystackLength = 0;
+    char cNeedle = needle[0];
+    char cHaystack = haystack[0];
+    //求出搜索字符串的长度
+    while (cNeedle != '\0') {
+        needleLength++;
+        cNeedle = needle[needleLength];
+    }
+    //满足力扣验证规则，只有搜索字符串为空时才输出0
+    if (needleLength == 0) {
+        return 0;
+    }
+
+    //求出被搜索字符串的长度
+    while (cHaystack != '\0') {
+        haystackLength++;
+        cHaystack = haystack[haystackLength];
+    }
+
+    if (haystackLength == 0) {
+        return index;
+    }
+
+    for (int i = 0, isEnd = 0; i < haystackLength && isEnd != 1; i++) {
+        for (int j = 0; j < needleLength; j++) {
+            cNeedle = needle[j];
+            if (i + j > haystackLength) {
+                isEnd = 1;
+                break;
+            }
+            cHaystack = haystack[i + j];
+            if (cHaystack == cNeedle && j == (needleLength - 1)) {
+                index = i;
+                isEnd = 1;
+                break;
+            } else if (cHaystack != cNeedle) {
+                break;
+            }
+        }
+    }
+
+    return index;
+}
+
+void MoveNext(int *next, int size) {
+    for (int i = size - 1; i > 0; i--) {
+        next[i] = next[i - 1];
+    }
+    next[0] = -1;
+}
+
+// 通过计算返回字串T的next数组
+void GetNext(char *needle, int *next) {
+    int pre = 0; //前缀
+    int suf = 1; //后缀
+    int len = strlen(needle);
+    next[0] = 0;
+    while (suf < len) {
+        if (needle[suf] == needle[pre]) {
+            pre++;
+            next[suf] = pre;
+            suf++;
+        } else {
+            if (pre > 0)
+                pre = next[pre - 1];
+            else {
+                next[suf] = 0;
+                suf++;
+            }
+        }
+    }
+
+    MoveNext(next, len);
+}
+
 int main() {
-    printf("%d", climbStairs(4));
+    char *haystack = "mississippi";
+    char *needle = "pi";
+
+    printf("%d", strStr(haystack, needle));
     return 0;
 }
