@@ -26,6 +26,9 @@
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/climbing-stairs
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+
+首先看到这道题后第一个想法就是递归，把所有的可能性累计添加，然后通过递归的方式实现，后来查了一些资料，发现该数据属于斐波那契数列可以通过公式直接计算
 **/
 
 
@@ -33,11 +36,7 @@
 class Solution {
     public int climbStairs(int n) {
         // return climbStairs(0, n);
-        // return f(n);
-
-        double sqrt5=Math.sqrt(5);
-        double fibn=Math.pow((1+sqrt5)/2,n+1)-Math.pow((1-sqrt5)/2,n+1);
-        return (int)(fibn/sqrt5);
+        return f(n);
     }
 
     private int climbStairs(int index, int n) {

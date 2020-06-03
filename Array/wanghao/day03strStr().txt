@@ -1,0 +1,86 @@
+
+//28. 实现 strStr()
+//实现 strStr() 函数。
+//
+//给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。
+//
+//示例 1:
+//
+//输入: haystack = "hello", needle = "ll"
+//输出: 2
+//示例 2:
+//
+//输入: haystack = "aaaaa", needle = "bba"
+//输出: -1
+//说明:
+//
+//当 needle 是空字符串时，我们应当返回什么值呢？这是一个在面试中很好的问题。
+//
+//对于本题而言，当 needle 是空字符串时我们应当返回 0 。这与C语言的 strstr() 以及 Java的 indexOf() 定义相符。
+//
+//自己理解的方式，类似于标准方法第一种
+class Solution {
+    public int strStr(String haystack, String needle) {
+        if(needle.length() == 0){
+            return 0;
+        }
+       
+        for(int i = 0; i <=(haystack.length() - needle .length());i++){
+            if(haystack.substring(i,i+needle .length()).equals(needle)){
+                return i;
+            }
+        }
+        return -1;
+        
+    }
+}
+// 官方题解第三种，需要慢慢理解，感觉挺帅的，先记下来。
+//大致思路
+1.计算子字符串 haystack.substring(0, L) 和 needle.substring(0, L) 的哈希值。
+
+2.从起始位置开始遍历：从第一个字符遍历到第 N - L 个字符。
+
+   1)根据前一个哈希值计算滚动哈希。
+
+   2)如果子字符串哈希值与 needle 字符串哈希值相等，返回滑动窗口起始位置。
+
+3.返回 -1，这时候 haystack 字符串中不存在 needle 字符串。
+
+
+//具体实现
+class Solution {
+  // function to convert character to integer
+  public int charToInt(int idx, String s) {
+    return (int)s.charAt(idx) - (int)'a';
+  }
+
+  public int strStr(String haystack, String needle) {
+    int L = needle.length(), n = haystack.length();
+    if (L > n) return -1;
+
+    // base value for the rolling hash function
+    int a = 26;
+    // modulus value for the rolling hash function to avoid overflow
+    long modulus = (long)Math.pow(2, 31);
+
+    // compute the hash of strings haystack[:L], needle[:L]
+    long h = 0, ref_h = 0;
+    for (int i = 0; i < L; ++i) {
+      h = (h * a + charToInt(i, haystack)) % modulus;
+      ref_h = (ref_h * a + charToInt(i, needle)) % modulus;
+    }
+    if (h == ref_h) return 0;
+
+    // const value to be used often : a**L % modulus
+    long aL = 1;
+    for (int i = 1; i <= L; ++i) aL = (aL * a) % modulus;
+
+    for (int start = 1; start < n - L + 1; ++start) {
+      // compute rolling hash in O(1) time
+      h = (h * a - charToInt(start - 1, haystack) * aL
+              + charToInt(start + L - 1, haystack)) % modulus;
+      if (h == ref_h) return start;
+    }
+    return -1;
+  }
+}
