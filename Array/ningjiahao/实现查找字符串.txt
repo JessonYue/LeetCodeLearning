@@ -1,0 +1,38 @@
+class Solution {
+    public int strStr(String source, String target) {
+        final int sourceLength = source.length();
+        final int targetLength = target.length();
+        int fromIndex=0;
+        if (fromIndex >= sourceLength) {
+            return (targetLength == 0 ? sourceLength : -1);
+        }
+        if (fromIndex < 0) {
+            fromIndex = 0;
+        }
+        if (targetLength == 0) {
+            return fromIndex;
+        }
+
+        char first = target.charAt(0);
+        int max = (sourceLength - targetLength);
+
+        for (int i = fromIndex; i <= max; i++) {
+            if (source.charAt(i)!= first) {
+                while (++i <= max && source.charAt(i) != first);
+            }
+            if (i <= max) {
+                int j = i + 1;
+                int end = j + targetLength - 1;
+                for (int k = 1; j < end && source.charAt(j)
+                         == target.charAt(k); j++, k++);
+
+                if (j == end) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+}
+
+本身自己想的方法很暴力 就是完全靠循环比较,后来参考了SDK的String.indexOf()源码，当然啦 也是避免不了循环的嘛
