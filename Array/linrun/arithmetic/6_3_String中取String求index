@@ -1,0 +1,33 @@
+
+    @Test
+    public void testC() {
+        int index = strStr("gdfywgfwef8w", "fwe");
+        System.out.println(index);
+    }
+
+    /**
+     * 在字符串haystack中找字符串needle，求出needle的index
+     */
+    private int strStr(String haystack, String needle) {
+        if(needle == null || haystack == null || needle.length()> haystack.length()){
+            return -1;
+        }
+        int needleLength = needle.length();
+        if(needleLength == 0){
+            return -1;
+        }
+        int haystackLength = haystack.length();
+        for(int i = 0; i < haystackLength; i++){
+            boolean isMatch = true;
+            for(int j =0; j < needle.length(); j++){
+                if(needle.charAt(j) != haystack.charAt(i+j)){
+                    isMatch = false;
+                    break;
+                }
+            }
+            if(isMatch){
+                return i;
+            }
+        }
+        return -1;
+    }

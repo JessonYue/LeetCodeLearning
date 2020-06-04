@@ -6,3 +6,4 @@ out
 gen
 *.DS_Store
 */.DS_Store
+cmake-build-debug
