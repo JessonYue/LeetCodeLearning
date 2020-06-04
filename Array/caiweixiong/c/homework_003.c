@@ -16,7 +16,7 @@ struct ListNode
     struct ListNode *next;
 };
 
-// 实现 strStr() 函数
+// 实现 strStr() 函数，LeetCode第28题
 void homework_003_028(void)
 {
     char haystack[64], needle[16];
