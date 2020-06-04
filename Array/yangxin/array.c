@@ -150,35 +150,32 @@ int strStr(char *haystack, char *needle) {
     return index;
 }
 
-void MoveNext(int *next, int size) {
-    for (int i = size - 1; i > 0; i--) {
-        next[i] = next[i - 1];
-    }
-    next[0] = -1;
-}
-
-// 通过计算返回字串T的next数组
-void GetNext(char *needle, int *next) {
-    int pre = 0; //前缀
-    int suf = 1; //后缀
-    int len = strlen(needle);
-    next[0] = 0;
-    while (suf < len) {
-        if (needle[suf] == needle[pre]) {
-            pre++;
-            next[suf] = pre;
-            suf++;
+/**
+ * 面试题 10.01. 合并排序的数组
+ *
+ * 给定两个排序后的数组 A 和 B，其中 A 的末端有足够的缓冲空间容纳 B。
+ * 编写一个方法，将 B 合并入 A 并排序。初始化 A 和 B 的元素数量分别为 m 和 n。
+ */
+void merge(int *A, int ASize, int m, int *B, int BSize, int n) {
+    int i = m - 1;
+    int j = n - 1;
+    int index = m + n - 1;
+    //从后面向前填写，避免从前往后的移动损耗，学习别人思路
+    while (i >= 0 && j >= 0 && index >= 0) {
+        if (A[i] > B[j]) {
+            A[index--] = A[i--];
         } else {
-            if (pre > 0)
-                pre = next[pre - 1];
-            else {
-                next[suf] = 0;
-                suf++;
-            }
+            A[index--] = B[j--];
         }
     }
-
-    MoveNext(next, len);
+    //如果i大于0说明a数组还没遍历完成，继续填写剩余数据
+    while (i >= 0 && index >= 0) {
+        A[index--] = A[i--];
+    }
+    //如果j大于0说明b数组还没遍历完成，继续填写剩余数据
+    while (j >= 0 && index >= 0) {
+        A[index--] = B[j--];
+    }
 }
 
 int main() {
