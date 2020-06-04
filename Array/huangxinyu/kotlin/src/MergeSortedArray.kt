@@ -79,14 +79,7 @@ class MergeSortedArray {
             var ida = m - 1
             var idb = n - 1
             while (idb >= 0 && ida >= 0) {
-                if (A[ida] >= B[idb]) {
-                    A[cur] = A[ida]
-                    ida--
-                } else {
-                    A[cur] = B[idb]
-                    idb--
-                }
-                cur--
+                A[cur--] = if (A[ida] >= B[idb]) A[ida--] else B[idb--]
             }
             while (idb >= 0) {
                 A[cur--] = B[idb--]
