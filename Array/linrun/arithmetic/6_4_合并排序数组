@@ -1,0 +1,43 @@
+    @Test
+    public void testC() {
+        int[] a = {1,3,3,5,7,9,0,0,0,0,0,0};
+        int[] b = {2,6,6,8,10,22};
+        mergeBToA(a,b);
+        output(a);
+    }
+
+    private void output(int[] array) {
+        for (int i : array) {
+            System.out.print(i + "  ");
+        }
+        System.out.println("  ");
+    }
+
+    /**
+     * 给定两个排序后的数组 A 和 B，其中 A 的末端有足够的缓冲空间容纳 B。将 B 合并入 A 并排序。
+     * @param a 排序后的数组 A
+     * @param b 排序后的数组 B
+     */
+    private void mergeBToA(int[] a, int[] b) {
+        int[] temp = new int[a.length];
+        int m = 0;
+        int n = 0;
+        int k = 0;
+        int validLengthOfA = a.length - b.length;
+        while (m < validLengthOfA && n < b.length) {
+            if (a[m] < b[n]) {
+                temp[k++] = a[m++];
+            } else {
+                temp[k++] = b[n++];
+            }
+        }
+        while (m < validLengthOfA) {
+            temp[k++] = a[m++];
+        }
+        while (n < b.length) {
+            temp[k++] = b[n++];
+        }
+        for(int j = 0; j < a.length ; j++){
+            a[j] = temp[j];
+        }
+    }

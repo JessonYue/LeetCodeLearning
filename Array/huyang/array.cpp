@@ -82,3 +82,45 @@ public:
 };
 
 
+
+//第四道  合并排序的数组
+class Solution {
+public:
+    void merge(vector<int>& A, int m, vector<int>& B, int n) {
+        if(n == 0){
+           return;
+        }
+
+        if(m == 0){
+            A = B;
+        }
+
+        int pa = m-1;
+        int pb = n-1;
+        int p = m+n-1;
+        while(pa >= 0  &&  pb >= 0  ){
+            if(B[pb] > A[pa]){
+               A[p] = B[pb];
+               pb--;
+            }else{
+               A[p] = A[pa];
+               pa--;
+            }
+            p --;
+        }
+
+        while(pa >= 0){
+            A[p] = A[pa];
+            pa--;
+            p --;
+        }
+
+        while(pb >= 0){
+            A[p] = B[pb];
+            pb--;
+            p --;
+        }
+
+
+    }
+};
