@@ -8,12 +8,63 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct ListNode
 {
     int val;
     struct ListNode *next;
 };
+
+// 实现 strStr() 函数，LeetCode第28题
+void homework_003_028(void)
+{
+    char haystack[64], needle[16];
+    printf("请输入字符串 haystack ：");
+    scanf("%s", haystack);
+    printf("请输入字符串 needle ：");
+    scanf("%s", needle);
+    printf("字符串 haystack 为：%s\n字符串 needle 为：%s\n", haystack, needle);
+    int strStr(char *haystack, char *needle);
+    int resultCode = strStr(haystack, needle);
+    if(resultCode == -1)
+        printf("字符串 haystack 中不存在子字符串 needle\n");
+    else
+        printf("字符串 haystack 中子字符串 needle 所在位置的索引为：%d\n", resultCode);
+}
+
+int strStr(char *haystack, char *needle)
+{
+    if(haystack == NULL)
+        return -1;
+    if(needle == NULL)
+        // 与c与java保持一致，但我个人认为，空集为任何集合子集，所以为 0
+        return 0;
+    long haystackLen = strlen(haystack);
+    long needleLen = strlen(needle);
+    if(haystackLen < needleLen)
+        return -1;
+    else {
+        int i, j = 0;
+        for(i = 0; i < haystackLen;) {
+            if(haystack[i] != needle[j]) {
+                if(j == 0) {  // 当字符不匹配重置后才需要将长串索引后移，否则将会跳过了一个字符
+                    i++;
+                } else {
+                    // 不符合条件，重置大串位置到匹配成功后一位，小串的索引归0
+                    i = i - j + 1;  // 修复 bug，不成功这样重置就可以了
+                    j = 0;
+                }
+            } else {
+                i++;
+                // 当小串的索引与小串长度相等，则为匹配成功
+                if(++j == needleLen)
+                    return i - j;
+            }
+        }
+    }
+    return -1;
+}
 
 // 两数相加，LeetCode第2题
 void homework_003_002(void)

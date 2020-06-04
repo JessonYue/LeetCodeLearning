@@ -52,6 +52,28 @@ int climbStairs(int n) {
     return step1 + step2;
 }
 
+// 字符串查找
+int strStr(string haystack, string needle) {
+    if (needle.empty()) {
+        return 0;
+    }
+    if (haystack.empty()) {
+        return -1;
+    }
+    for (int i = 0; i < haystack.size(); ++i) {
+        if (haystack.size() - i >= needle.size()) {
+            for (int j = 0; j < needle.size(); ++j) {
+                if (haystack[i + j] != needle[j]) {
+                    break;
+                }
+                if (j == needle.size() - 1) {
+                    return i;
+                }
+            }
+        }
+    }
+    return -1;
+}
 
 int main() {
 
@@ -63,6 +85,8 @@ int main() {
     }
     cout << endl;
     cout << climbStairs(45) << endl;
+
+    cout << strStr("hello", "ll") << endl;
     return 0;
 }
 
