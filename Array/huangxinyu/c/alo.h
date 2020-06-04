@@ -13,4 +13,5 @@ int climbStairs(int n);
 
 int strStr(const char *haystack, const char *needle);
 
+void merge(int *A, int ASize, int m, int *B, int BSize, int n)
 #endif //LEETCODE_ALO_H
