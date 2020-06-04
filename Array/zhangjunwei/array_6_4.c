@@ -20,12 +20,14 @@
 
 void mergeArray(int *source, int const *target, int m, int n);
 
+void mergeArray2(int *source, int const *target, int m, int n);
+
 int main() {
     int A[] = {1, 2, 3, 7, 8, 45, 98, 0, 0, 0, 0, 0};
     int B[] = {2, 5, 6, 33, 99};
     int n = sizeof(B) / sizeof(int);
     int m = sizeof(A) / sizeof(int) - n;
-    mergeArray(A, B, m, n);
+    mergeArray2(A, B, m, n);
     printf("%p", A);
     return 0;
 }
@@ -43,4 +45,21 @@ void mergeArray(int *source, int const *target, int m, int n) {
     //target 还有数据时
     while (pt >= 0)
         source[current--] = target[pt--];
+}
+
+void mergeArray2(int *source, int const *target, int m, int n) {
+    //利用3个指针
+    //比较两数组元素大小  将大值放于 A数组末尾
+    //插入数据的指针 指向 A数组的末尾
+    int *current = &source[m + n - 1];
+    int *ps = &source[m - 1];
+    int *pt = &target[n - 1];
+    while (ps >= source && pt >= target)
+        *(current--) = *ps >= *pt ? *ps-- : *pt--;
+    //source 还有数据时
+    while (ps >= source)
+        *current-- = *ps--;
+    //target 还有数据时
+    while (pt >= target)
+        *current-- = *pt--;
 }
