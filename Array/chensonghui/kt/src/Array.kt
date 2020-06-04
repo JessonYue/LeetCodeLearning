@@ -1,11 +1,20 @@
+import sun.plugin.javascript.navig.LinkArray
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+
 fun main(args: Array<String>) {
-    val nums = intArrayOf(2, 7, 11, 15)
-    val target = 9
-    println(twoSum(nums, target).toList())
+    //val nums = intArrayOf(2, 7, 11, 15)
+    //val target = 9
+    //println(twoSum(nums, target).toList())
     //暴力爬楼梯
     //println(climbStairs1(45))
     //记忆法爬楼梯
-    println(climbStairs2(45))
+    //println(climbStairs2(45))
+
+    //
+    println(strStr("hello",
+            "ll"))
 }
 
 /**
@@ -56,6 +65,32 @@ fun climbStairs2(n: Int): Int {
     val step2 = climbStairs2(n - 2)
     map[n - 2] = step2
     return step1 + step2
+}
+
+/**
+ * 字符串查找
+ */
+fun strStr(haystack: String, needle: String): Int {
+    if (needle.isEmpty()) {
+        return 0
+    }
+    if (haystack.isEmpty()) {
+        return -1
+    }
+    for (index in haystack.indices) {
+        if (haystack.length - index >= needle.length) {
+            for (i in needle.indices) {
+                if (needle[i] != haystack[i + index]) {
+                    break
+                }
+                if (i == needle.length - 1) {
+                    return index
+                }
+            }
+
+        }
+    }
+    return -1
 }
 
 
