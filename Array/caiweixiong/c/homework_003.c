@@ -16,7 +16,7 @@ struct ListNode
     struct ListNode *next;
 };
 
-// 实现 strStr() 函数
+// 实现 strStr() 函数，LeetCode第28题
 void homework_003_028(void)
 {
     char haystack[64], needle[16];
@@ -44,20 +44,18 @@ int strStr(char *haystack, char *needle)
     long needleLen = strlen(needle);
     if(haystackLen < needleLen)
         return -1;
-    else
-    {
+    else {
         int i, j = 0;
-        for(i = 0; i < haystackLen;)
-        {
-            if(haystack[i] != needle[j])
-            {
-                if(j == 0)  // 当字符不匹配重置后才需要将长串索引后移，否则将会跳过了一个字符
+        for(i = 0; i < haystackLen;) {
+            if(haystack[i] != needle[j]) {
+                if(j == 0) {  // 当字符不匹配重置后才需要将长串索引后移，否则将会跳过了一个字符
                     i++;
-                // 不符合条件，重置小串的索引
-                j = 0;
-            }
-            else
-            {
+                } else {
+                    // 不符合条件，重置大串位置到匹配成功后一位，小串的索引归0
+                    i = i - j + 1;  // 修复 bug，不成功这样重置就可以了
+                    j = 0;
+                }
+            } else {
                 i++;
                 // 当小串的索引与小串长度相等，则为匹配成功
                 if(++j == needleLen)

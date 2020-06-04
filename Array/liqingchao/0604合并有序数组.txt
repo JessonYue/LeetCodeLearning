@@ -1,0 +1,25 @@
+ public void merge(int[] intA, int m, int[] intB, int n) {
+	// 思路  从m+n -1的位置开始往前遍历，从两个数组末尾那数字比较，大的插入A末尾，
+        // 如果其中一个数组已经都插完了，插另一个数组
+        int length = m + n;
+        n--;
+        m--;
+        for (int i = length - 1; i >= 0; i--) {
+            if (m >= 0 && n >= 0 && intA[m] > intB[n]) {
+                intA[i] = intA[m];
+                m--;
+            } else if (m >= 0 && n >= 0) {
+                intA[i] = intB[n];
+                n--;
+            } else if (m < 0) {
+                intA[i] = intB[n];
+                n--;
+            } else {
+                intA[i] = intA[m];
+                m--;
+            }
+        }
+        for (int i = 0; i < length; i++) {
+            System.out.print(intA[i] + " ");
+        }
+  }
