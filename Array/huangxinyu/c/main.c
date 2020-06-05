@@ -5,6 +5,5 @@
 #include "alo.h"
 
 int main() {
-    printf("%d",strStr("abcd", "bc"));
     return 1;
 }
