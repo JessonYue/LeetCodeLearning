@@ -1,0 +1,31 @@
+package com.example.array;
+
+public class day3 {
+    public static int strStr(String haystack, String needle) {
+        if (needle == null || needle.isEmpty()) {
+            return 0;
+        }
+        if (haystack == null || haystack.isEmpty()) {
+            return -1;
+        }
+
+        int i = 0, j = 0;
+        while (i < haystack.length() && j < needle.length()) {
+            if (haystack.charAt(i) == needle.charAt(j)) {
+                i++;
+                j++;
+            } else {
+                i = i - j + 1;
+                j = 0;
+            }
+        }
+
+        if (j == needle.length()) return i - j;
+        return -1;
+    }
+
+    public static void main(String args[]) {
+       int i = strStr("aaaaa","bba");
+       System.out.println(i);
+    }
+}
