@@ -178,6 +178,80 @@ void merge(int *A, int ASize, int m, int *B, int BSize, int n) {
     }
 }
 
+struct ListNode {
+    int val;
+    struct ListNode *next;
+};
+
+/**
+ * 面试题 02.07. 链表相交
+ *
+ * 给定两个（单向）链表，判定它们是否相交并返回交点。请注意相交的定义基于节点的引用，而不是基于节点的值。
+ * 换句话说，如果一个链表的第k个节点与另一个链表的第j个节点是同一节点（引用完全相同），则这两个链表相交。
+ *
+ * 学习网上别人的思路
+ */
+struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB) {
+    //首先判断链表是不是为空
+    if (!headA || !headB) {
+        return NULL;
+    }
+
+    if (headA == headB) {
+        return headA;
+    }
+
+    //获取两个链表的长度
+    int lengthA = 1, lengthB = 1;
+    struct ListNode *a = headA, *b = headB;
+
+
+    while (a->next) {
+        a = a->next;
+        lengthA++;
+    }
+    while (b->next) {
+        b = b->next;
+        lengthB++;
+    }
+    //如果最后的值不相等说明没有相交
+    if (a->val != b->val) return NULL;
+    //让长的链表先走差值
+    int difference = lengthA - lengthB;
+    a = headA;
+    b = headB;
+    while (difference != 0) {
+        if (difference > 0) {
+            a = a->next;
+            //过程中再判断是不是相交
+            if (a == b) {
+                return a;
+            }
+            difference--;
+        }
+        if (difference < 0) {
+            b = b->next;
+            //过程中再判断是不是相交
+            if (a == b) {
+                return a;
+            }
+            difference++;
+        }
+    }
+    //找出相交的节点
+    while (a && b) {
+        if (a == b) {
+            break;
+        }
+        a = a->next;
+        b = b->next;
+    }
+
+    return a;
+}
+
+
+
 int main() {
     char *haystack = "mississippi";
     char *needle = "pi";
