@@ -1,0 +1,68 @@
+@Test
+    public void testC() {
+        Node nodeA = new Node("A");
+        Node nodeB = new Node("B");
+        Node nodeC = new Node("C");
+        Node nodeD = new Node("D");
+        Node nodeE = new Node("E");
+        Node nodeF = new Node("F");
+        Node nodeG = new Node("G");
+        Node nodeH = new Node("H");
+        nodeA.next = nodeB;
+        nodeB.next = nodeC;
+        nodeC.next = nodeG;
+        nodeG.next = nodeH;
+        nodeD.next = nodeE;
+        nodeE.next = nodeF;
+        nodeF.next = nodeG;
+        Node node = findNode(nodeC, nodeD);
+        if (node == null) {
+            System.out.println("Node is null。");
+        } else {
+            System.out.println("node:" + node.name);
+        }
+    }
+
+    private Node findNode(Node headA, Node headB) {
+        if (headA == null || headB == null) {
+            return null;
+        }
+        Node nodeA = headA;
+        Node nodeB = headB;
+        boolean isFirstLoopA = true;
+        boolean isFirstLoopB = true;
+        while (nodeA != nodeB) {
+            if (nodeA == null) {
+                if (isFirstLoopA) {
+                    isFirstLoopA = false;
+                    nodeA = headB;
+                } else {
+                    return null;
+                }
+            } else {
+                nodeA = nodeA.next;
+            }
+
+            if (nodeB == null) {
+                if (isFirstLoopB) {
+                    isFirstLoopB = false;
+                    nodeB = headA;
+                } else {
+                    return null;
+                }
+            } else {
+                nodeB = nodeB.next;
+            }
+        }
+        return nodeA;
+
+    }
+
+    private static class Node {
+        Node(String name) {
+            this.name = name;
+        }
+
+        String name;
+        Node next;
+    }
