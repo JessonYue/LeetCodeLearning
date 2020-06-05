@@ -3,7 +3,7 @@
 //
 #include <stdio.h>
 
-// 面试题10.01，合并排序数组
+// 合并排序数组，LeetCode面试题10.01，
 void homework_004_1001(void) {
     void mergeArray(int *arrayA, int *arrayB, int countA, int countB);
     int m = 3, n = 3;

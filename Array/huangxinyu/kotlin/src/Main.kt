@@ -1,5 +1,8 @@
 package com.ryujin.algorithm
 
 fun main() {
-    MergeSortedArray.test1()
+    var o = Object()
+    var a = o;
+    o = Object()
+    print(a==o)
 }
