@@ -49,4 +49,102 @@ public class Homework_003 {
         }
         return -1;
     }
+
+    // 两数相加，LeetCode第2题
+    // 输入：(2 -> 4 -> 3) + (5 -> 6 -> 4)
+    // 输出：7 -> 0 -> 8
+    void homework_003_002() {
+        Scanner scanner = new Scanner(System.in);
+        int num1, num2;
+        System.out.print("请输入第一个正整数：");
+        num1 = scanner.nextInt();
+        System.out.print("请输入第二个正整数：");
+        num2 = scanner.nextInt();
+        System.out.println(String.format("输入的表达式为：%d + %d = %d", num1, num2, num1 + num2));
+        System.out.println("倒叙的表达式为：");
+        ListNode list1 = reversalNum(num1);
+        ListNode list2 = reversalNum(num2);
+        System.out.print("(");
+        displayList(list1);
+        System.out.print(") + (");
+        displayList(list2);
+        System.out.println(")");
+        ListNode list = addTwoNumbers(list1, list2);
+        displayList(list);
+        System.out.print("\n");
+    }
+
+    public static class ListNode {
+      int val;
+      ListNode next;
+
+      public ListNode(int x) { val = x; }
+    }
+    // 987999 + 876 = 7641
+    private ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode mergeList = new ListNode((l1.val + l2.val) % 10), list1 = l1.next, list2 = l2.next, prior = mergeList, next = null;
+        int sum = l1.val + l2.val, bit = 10;
+        while (list1 != null && list2 != null) {
+            sum += (list1.val + list2.val) * bit;
+            next = new ListNode((sum / bit) % 10);
+            prior.next = next;
+            prior = next;
+            bit *= 10;
+            list1 = list1.next;
+            list2 = list2.next;
+        }
+        while (list1 != null) {
+            sum += list1.val * bit;
+            next = new ListNode((sum / bit) % 10);
+            prior.next = next;
+            prior = next;
+
+            bit *= 10;
+            list1 = list1.next;
+        }
+        while (list2 != null) {
+            sum += list2.val * bit;
+            next = new ListNode((sum / bit) % 10);
+            prior.next = next;
+            prior = next;
+
+            bit *= 10;
+            list2 = list2.next;
+        }
+        if (sum / bit != 0) {   // 最后一位有进位
+            next = new ListNode(sum / bit);
+            prior.next = next;
+            prior = next;
+        }
+        return mergeList;
+    }
+
+    // 将数据反转
+    private ListNode reversalNum(int num) {
+        ListNode head;
+        if (num < 10) {
+            head = new ListNode(num);
+        } else {
+            int result = num / 10;
+            head = new ListNode(num % 10);  // 取最后一位
+            ListNode prior = head, next;
+            while (result != 0) {
+                next = new ListNode(result % 10);   // 取最后一位
+                prior.next = next;
+                prior = next;
+                result /= 10;   // 去除最后一位
+            }
+        }
+        return head;
+    }
+
+    // 打印信息，格式为：1 —> 2 —> 3 —> 4
+    private void displayList(ListNode list) {
+        ListNode temp = list;
+        while (temp.next != null) {
+            System.out.print(temp.val + " —> ");
+            temp = temp.next;
+        }
+        System.out.print(temp.val);
+    }
 }

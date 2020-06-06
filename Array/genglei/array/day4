@@ -1,0 +1,54 @@
+package com.example.array;
+
+public class day4 {
+
+    public static void merge(int[] nums1, int m, int[] nums2, int n) {
+        int p = m-- + n-- - 1;
+
+        System.out.println(p);
+        System.out.println(m);
+        while (m >= 0 && n >= 0) {
+
+            nums1[p--] = nums1[m] > nums2[n] ? nums1[m--] : nums2[n--];
+        }
+
+        while (n >= 0) {
+            nums1[p--] = nums2[n--];
+        }
+        for (int i = 0; i < nums1.length; i++) {
+            System.out.print(nums1[i]);
+        }
+    }
+//一开始自己想的是从正向插入的，然后确实考虑了数组移动的问题，看完leetCode以后，发现倒放是省事的
+
+    public static void combine(int[] nums1, int m, int[] nums2, int n) {
+        int p = m + n - 1;//数组下标
+        m -= 1;//下标转换
+        n -= 1;//下标转换
+        while (m >= 0 && n >= 0) {//倒着来，不再需要移动数组
+
+            if (nums1[m] > nums2[n]) {
+                nums1[p] = nums1[m];
+                m--;
+            } else {
+                nums1[p] = nums2[n];
+                n--;
+            }
+            p--;
+        }
+
+        //如果m生下了不需要要动，本身就在A 数组里；如果n有剩下的，则证明剩下的B 数组都小，倒着放进去就行
+        while (n > 0) {
+            nums1[p--] = nums2[n--];
+        }
+        for (int i = 0; i < nums1.length; i++) {
+            System.out.print(nums1[i]);
+        }
+    }
+
+    public static void main(String args[]) {
+        int[] m = {1, 2, 3, 0, 0, 0};
+        int[] n = {2, 5, 6};
+        combine(m, 3, n, 3);
+    }
+}
