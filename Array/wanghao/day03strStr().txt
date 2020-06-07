@@ -21,6 +21,10 @@
 //自己理解的方式，类似于标准方法第一种
 class Solution {
     public int strStr(String haystack, String needle) {
+	    if(needle == null){
+            return 0;
+        }
+		
         if(needle.length() == 0){
             return 0;
         }
