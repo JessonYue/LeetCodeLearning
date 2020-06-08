@@ -5,5 +5,7 @@
 #include "alo.h"
 
 int main() {
+    char * c;
+    printf(" sizeOf char* = %d", sizeof(char*));
     return 1;
 }

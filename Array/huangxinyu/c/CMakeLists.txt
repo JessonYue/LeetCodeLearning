@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(leetcode C)
 
-set(CMAKE_C_STANDARD 99)
+set(CMAKE_CXX_STANDARD 11)
 
-add_executable(leetcode towSum.c upstairs.c main.c alo.h strStr.c mergeSortedArray.c getIntersectionNode.c)
+add_executable(leetcode towSum.c upstairs.c main.c alo.h strStr.c mergeSortedArray.c getIntersectionNode.c reverseList.c)
