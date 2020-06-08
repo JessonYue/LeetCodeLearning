@@ -69,6 +69,23 @@ void append(LinkedList_* linkedList, int data){
     linkedList->length += 1;
 }
 
+void reverse(LinkedList_* list){
+    assert(list != NULL);
+    Node_* pre = list->head;
+    Node_* current = list->head->next;
+    while(current != NULL){
+        //保存当前结点的下一个结点，以免链表断裂 
+        Node_* tmp = current->next;
+        current->next = pre;
+        pre = current;
+        current = tmp;
+    }
+    Node_* node = list->head;
+    list->head = list->tail;
+    list->tail = node;
+}
+
+
 void list_test(){
     LinkedList_* list = create();
     print(list);

@@ -34,5 +34,9 @@ LinkedList_* create();
 //append,也可以想象是尾部插入
 void append(LinkedList_* linkedList, int data);
 
+
+//链表反转
+void reverse(LinkedList_* list);
+
 //工具类
 void print(LinkedList_* list);
