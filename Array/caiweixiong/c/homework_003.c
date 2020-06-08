@@ -9,11 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-struct ListNode {
-    int val;
-    struct ListNode *next;
-};
+#include "list_node.h"
 
 // 实现 strStr() 函数，LeetCode第28题
 void homework_003_028(void) {
@@ -157,6 +153,7 @@ void destroyList(struct ListNode **list) {
         next = prior->next;
     }
     free(prior);
+    prior = NULL;
 }
 
 // 插入数据元素

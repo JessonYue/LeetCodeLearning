@@ -74,12 +74,6 @@ public class Homework_003 {
         System.out.print("\n");
     }
 
-    public static class ListNode {
-      int val;
-      ListNode next;
-
-      public ListNode(int x) { val = x; }
-    }
     // 987999 + 876 = 7641
     private ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode mergeList = new ListNode((l1.val + l2.val) % 10), list1 = l1.next, list2 = l2.next, prior = mergeList, next = null;

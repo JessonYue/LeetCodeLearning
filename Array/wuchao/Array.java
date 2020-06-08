@@ -83,4 +83,33 @@ class Solution {
         nums[a] = nums[b];
         nums[b] = temp;
     }
+
+    //三步问题
+    //这道题我先用递归法求解，但有两个弊端，1.执行时间超时2.容易栈溢出
+    //所以得要转换成动态规划的方式，根据之前的状态（n-1...1阶台阶多少种上楼的方式），来推导出当前的状态（n阶台阶有多少种上楼方式）
+    //f(n) = f(n-1) + f(n-2) + f(n-3)即动态规划状态转移方程
+    //加法产生的值可能溢出，导致结果可能出现负数，所以需要在加法运算之后做取模操作
+    public int waysToStep(int n) {
+        if(n==1){
+            return 1;
+        }
+        if(n==2){
+            return 2;
+        }
+        if(n==3){
+            return 4;
+        }
+        // return waysToStep(n-1)+waysToStep(n-2)+waysToStep(n-3);
+        int status1 = 1;
+        int status2 = 2;
+        int status3 = 4;
+        int status = 0;
+        for(int i=4;i<n+1;i++){
+            status = ((status3 + status2)%1000000007 + status1)%1000000007;
+            status1 = status2;
+            status2 = status3;
+            status3 = status;
+        }
+        return status;
+    }
 }
