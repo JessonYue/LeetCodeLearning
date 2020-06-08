@@ -2,13 +2,13 @@ public class Homework_005 {
 
     // 相交链表，LeetCode第160题
     public void homework_005_160() {
-        Homework_003.ListNode list1, list2, temp, node;
-        list1 = new Homework_003.ListNode(0);
+        ListNode list1, list2, temp, node;
+        list1 = new ListNode(0);
         listInsert(list1, 9);
         listInsert(list1, 1);
         listInsert(list1, 2);
         listInsert(list1, 4);
-        list2 = new Homework_003.ListNode(3);
+        list2 = new ListNode(3);
         temp = list1;
         while (temp != null && temp.val != 2) {
             temp = temp.next;
@@ -24,18 +24,22 @@ public class Homework_005 {
     }
 
     // 插入数据元素
-    void listInsert(Homework_003.ListNode list, int e) {
-        Homework_003.ListNode prior = list, next;
+    void listInsert(ListNode list, int e) {
+        ListNode prior = list, next;
         // 找到目标位置的前一个位置
         while (prior.next != null)
             prior = prior.next;
-        next = new Homework_003.ListNode(e);
+        next = new ListNode(e);
         next.next = prior.next;
         prior.next = next;
     }
 
-    Homework_003.ListNode getIntersectionNode(Homework_003.ListNode headA, Homework_003.ListNode headB) {
-        Homework_003.ListNode listA = headA, listB = headB, lastNode = null;
+    ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode listA = headA, listB = headB, lastNode = null;
+        if (headA == null || headB == null)
+            return null;
+        if (listA == listB)
+            return listA;
         while (listA != listB) {
             // 过滤链表A
             if (listA.next != null)

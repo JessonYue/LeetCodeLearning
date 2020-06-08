@@ -1,0 +1,29 @@
+class Solution {
+    public void merge(int[] A, int m, int[] B, int n) {
+        if(A.length==(m+n)){
+            //先把B装进A去
+            for(int i=m,j=0;i<A.length;i++,j++){
+                A[i]=B[j];
+            }
+            //再排序
+            
+        for(int k =0 ; k<A.length-1 ; k++) { 
+           
+            for(int l=0 ; l<A.length-1-k ; l++) {  
+ 
+                if(A[l]>A[l+1]) {
+                    int temp = A[l];
+                     
+                    A[l]=A[l+1];
+                     
+                    A[l+1]=temp;
+            }
+            }    
+        }
+        }
+    }
+}
+    
+
+这里 我自己想到的是最为直观也是最简单的一种,就是先将B数组装进A数组,然后再对A进行排序
+当然还有其他优秀的解,利用A和B已经排好序的条件,可以做一个指针,每次都将A和B的第一位进行比较,看谁的比较大,然后依次放入一个新的数组,最后输出数组。
