@@ -65,12 +65,12 @@ public class Homework_003 {
         ListNode list1 = reversalNum(num1);
         ListNode list2 = reversalNum(num2);
         System.out.print("(");
-        displayList(list1);
+        list1.displayList(list1);
         System.out.print(") + (");
-        displayList(list2);
+        list2.displayList(list2);
         System.out.println(")");
         ListNode list = addTwoNumbers(list1, list2);
-        displayList(list);
+        list.displayList(list);
         System.out.print("\n");
     }
 
@@ -130,15 +130,5 @@ public class Homework_003 {
             }
         }
         return head;
-    }
-
-    // 打印信息，格式为：1 —> 2 —> 3 —> 4
-    private void displayList(ListNode list) {
-        ListNode temp = list;
-        while (temp.next != null) {
-            System.out.print(temp.val + " —> ");
-            temp = temp.next;
-        }
-        System.out.print(temp.val);
     }
 }
