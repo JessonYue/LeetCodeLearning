@@ -7,25 +7,20 @@
  */
 
 
-struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2){
-    if(!l1) return l2;
-    if(!l2) return l1;
-    struct ListNode* head = (struct ListNode*)malloc(sizeof(struct ListNode));
-    struct ListNode* temp = head;
-    while(l1 && l2) {
-        if(l1->val > l2->val) {
-            temp->next = l2;
-            l2 = l2->next;
-        } else {
-            temp->next = l1;
-            l1 = l1->next;
+struct ListNode* removeNthFromEnd(struct ListNode* head, int n){
+    if(!head) return NULL;
+    struct ListNode* first = head;// 先走的指针
+    struct ListNode* last = head;// 后走的指针
+    while(first) {
+        if(n < 0) {
+            last = last->next;
         }
-        temp = temp->next;
+        n--;
+        first = first->next;
     }
-    if(l1) {
-        temp->next = l1;
-    } else if(l2) {
-        temp->next = l2;
+    if(n == 0) { // 要删除的节点是头节点
+        return head->next;
     }
-    return head->next;
+    last->next = last->next->next;
+    return head;
 }
