@@ -140,29 +140,92 @@ struct ListNode *mergeTwoLists(struct ListNode *l1, struct ListNode *l2) {
     return head;
 }
 
-void main() {
-    struct ListNode * l1 = malloc(sizeof(struct ListNode));
-    l1->val = 1;
-    struct ListNode * l2 = malloc(sizeof(struct ListNode));
-    l1->next = l2;
-    l2->val =2;
-    struct ListNode * l3 = malloc(sizeof(struct ListNode));
-    l2->next = l3;
-    l3->val =4;
-    l3->next = NULL;
 
-    struct ListNode * l11 = malloc(sizeof(struct ListNode));
+
+
+/**
+ * 19. 删除链表的倒数第N个节点
+ * 给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
+ */
+//力扣给成出的最佳答案，写法更简洁，更优秀
+//struct ListNode* removeNthFromEnd(struct ListNode* head, int n){
+//    struct ListNode *p = head, *q = head;
+//    while(p){
+//        if(n < 0){
+//             q = q -> next;
+//        }
+//        n--;
+//        p = p -> next;
+//    }
+//    if(n == 0){ return head -> next; }
+//    q -> next = q -> next -> next;
+//    return head;
+//}
+struct ListNode *removeNthFromEnd(struct ListNode *head, int n) {
+    if (head == NULL) {
+        return NULL;
+    }
+
+    if (n <= 0) {
+        return NULL;
+    }
+
+    struct ListNode *tmp1 = head;
+    struct ListNode *tmp2 = head;
+    int i = 0;
+    //再让指针移动n个位置，然后两个再同时递增，
+    while (tmp1 != NULL && i < n) {
+        tmp1 = tmp1->next;
+        i++;
+    }
+    //如果i跟n相等并且tmp1为null说明，倒数为链表的头，需要删除头节点
+    if (tmp1 == NULL && i == n) {
+        struct ListNode *newHead = head->next;
+        free(head);
+        return newHead;
+    }
+
+    if (tmp1 == NULL) {
+        return NULL;
+    }
+//    //先走一步
+    tmp1 = tmp1->next;
+//先走的到尾节点，后一个是n的前一个节点
+    while (tmp1 != NULL) {
+        tmp1 = tmp1->next;
+        tmp2 = tmp2->next;
+    }
+    struct ListNode *delete = tmp2->next;
+    tmp2->next = tmp2->next->next;
+    //释放删除的节点资源
+    free(delete);
+
+    return head;
+}
+
+void main() {
+    struct ListNode *l1 = malloc(sizeof(struct ListNode));
+    l1->val = 1;
+    struct ListNode *l2 = malloc(sizeof(struct ListNode));
+    l1->next = l2;
+    l2->val = 2;
+    l2->next = NULL;
+//    struct ListNode *l3 = malloc(sizeof(struct ListNode));
+//    l2->next = l3;
+//    l3->val = 4;
+//    l3->next = NULL;
+
+    struct ListNode *l11 = malloc(sizeof(struct ListNode));
     l11->val = 1;
-    struct ListNode * l12 = malloc(sizeof(struct ListNode));
+    struct ListNode *l12 = malloc(sizeof(struct ListNode));
     l11->next = l12;
-    l12->val =3;
-    struct ListNode * l13 = malloc(sizeof(struct ListNode));
+    l12->val = 3;
+    struct ListNode *l13 = malloc(sizeof(struct ListNode));
     l12->next = l13;
-    l13->val =4;
+    l13->val = 4;
     l13->next = NULL;
 
-    struct ListNode * head = mergeTwoLists(l1, l11);
-
+    struct ListNode *head = removeNthFromEnd(l1, 2);
     while (head != NULL) {
         printf("%d->", head->val);
         head = head->next;
