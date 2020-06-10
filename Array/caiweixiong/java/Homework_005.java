@@ -4,10 +4,10 @@ public class Homework_005 {
     public void homework_005_160() {
         ListNode list1, list2, temp, node;
         list1 = new ListNode(0);
-        listInsert(list1, 9);
-        listInsert(list1, 1);
-        listInsert(list1, 2);
-        listInsert(list1, 4);
+        list1.listInsert(list1, 9);
+        list1.listInsert(list1, 1);
+        list1.listInsert(list1, 2);
+        list1.listInsert(list1, 4);
         list2 = new ListNode(3);
         temp = list1;
         while (temp != null && temp.val != 2) {
@@ -21,17 +21,6 @@ public class Homework_005 {
             System.out.println("链表 list1 与 list2 无相交点");
         else
             System.out.println(String.format("相交节点的值域为：%d", node.val));
-    }
-
-    // 插入数据元素
-    void listInsert(ListNode list, int e) {
-        ListNode prior = list, next;
-        // 找到目标位置的前一个位置
-        while (prior.next != null)
-            prior = prior.next;
-        next = new ListNode(e);
-        next.next = prior.next;
-        prior.next = next;
     }
 
     ListNode getIntersectionNode(ListNode headA, ListNode headB) {
