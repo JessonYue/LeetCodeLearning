@@ -15,7 +15,7 @@ public class Main {
         Node headNode = nodeList.head;
         printNode(headNode);
 
-        Node preNode = removeNthFromEnd(headNode, 2);
+        Node preNode = delNodeNOnce(headNode, 2);
         printNode(preNode);
     }
 
@@ -53,7 +53,7 @@ public class Main {
     }
 
     //一次遍历算法
-    private static Node removeNthFromEnd(Node node, int n){
+    private static Node delNodeNOnce(Node node, int n){
         if(n <= 0){
             System.out.print("n不能为0，");
             return node;
