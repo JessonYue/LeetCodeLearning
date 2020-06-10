@@ -196,3 +196,125 @@ public:
         return p;
     }
 };
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if(!l1){
+            return l2;
+        }
+        if(!l2){
+            return l1;
+        }
+               
+        ListNode* res = NULL;
+        if(l1->val >= l2->val){
+            res = l2;
+            l2 = l2->next;
+        }else{
+            res = l1;
+            l1 = l1->next;
+        }
+        ListNode* r = res;
+
+        while(l2||l1){
+            if(!l1){
+                res->next = l2;
+                l2 = l2->next;
+                res  = res->next;
+                continue;
+            }
+            if(!l2){
+                res->next = l1;
+                l1 = l1->next;
+                res  = res->next;
+                continue;
+            }
+
+
+            if((l1->val >= l2->val)){
+                res->next = l2;
+                l2 = l2->next;
+            }else{
+                res->next = l1;
+                l1 = l1->next;
+            }
+            res  = res->next;
+        }
+        return r;
+
+        
+    }
+};
+
+
+
+
+
+
+
+
+/**
+
+/**删除链表的倒数第N个节点
+给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
+
+示例：
+
+给定一个链表: 1->2->3->4->5, 和 n = 2.
+
+当删除了倒数第二个节点后，链表变为 1->2->3->5.
+https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+
+        ListNode* p1 = head;
+
+        ListNode* p2 = head;
+
+        while(n+1){
+            p2 = p2->next;
+            n--;
+        }
+
+        if(!p2){
+            return head->ne
+        }
+
+        while(p2){
+            p2 = p2->next;
+            p1 = p1->next;
+        }
+        p1.next = p1.next.next;
+        return head;
+        
+    }
+};
+
+
+
+
+
+
+
+
+
