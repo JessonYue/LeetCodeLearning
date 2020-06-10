@@ -24,4 +24,5 @@ ListNode *getIntersectionNode(ListNode *headA, ListNode *headB);
 
 ListNode *reverseList(ListNode *head);
 
+ListNode *mergeTwoLists(ListNode *l1, ListNode *l2);
 #endif; //LEETCODE_ALO_H
