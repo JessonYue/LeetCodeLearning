@@ -1,12 +1,9 @@
 //
 // Created by hasee on 2020/6/5.
 //
-struct ListNode {
-    int val;
-    struct ListNode *next;
-};
+#include "alo.h"
 
-struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB){
+ListNode *getIntersectionNode( ListNode *headA,  ListNode *headB){
     struct ListNode *pa = headA;
     struct ListNode *pb = headB;
     while (pa != pb) {
