@@ -1,5 +1,6 @@
 import com.ryujin.algorithm.ListNode
 
+
 class Solution {
     /**
      * 删除倒数第n个节点
@@ -21,6 +22,7 @@ class Solution {
         p2!!.next = p2.next!!.next
         return preHead.next
     }
+
     /**
      * 合并两个有序链表
      */
@@ -33,7 +35,7 @@ class Solution {
             if (l11!!.value <= l22!!.value) {
                 pre.next = l11
                 l22 = l2.next
-            }else{
+            } else {
                 pre.next = l22
                 l11 = l11.next
             }
@@ -41,5 +43,23 @@ class Solution {
         }
         pre.next = l11 ?: l22;
         return preHead.next
+    }
+
+    fun oddEvenList(head: ListNode?): ListNode? {
+        if (head == null) {
+            return null
+        }
+
+        var l1 = head
+        var l2 = head.next
+        val l2Head = l2 //用于之后接到奇数链表末尾
+        while (l2?.next != null) {
+            l1?.next = l2.next
+            l1 = l1?.next
+            l2.next = l1?.next
+            l2 = l2.next
+        }
+        l2?.next = l2Head;
+        return head;
     }
 }
