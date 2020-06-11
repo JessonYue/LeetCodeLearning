@@ -69,6 +69,24 @@ void append(LinkedList_* linkedList, int data){
     linkedList->length += 1;
 }
 
+void deleteLastNth(LinkedList_* list, int n){
+    assert(list != NULL);
+    Node_* fast = list->head;
+    Node_* slow = list->head;
+    int count = 0;
+    //删除倒数第n个，因为有head和tail，所以是n+1
+    while(count != n + 1){
+        fast = fast->next;
+        count++;
+    }
+
+    while(fast != list->tail){
+        fast = fast->next;
+        slow = slow->next;
+    }
+    slow->next = slow->next->next;
+}
+
 void reverse(LinkedList_* list){
     assert(list != NULL);
     Node_* pre = list->head;
