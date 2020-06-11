@@ -3,7 +3,7 @@
 //
 #include "alo.h"
 
-ListNode *reverseList(ListNode *head) {
+ListNode *reverseList(ListNode *head, int i) {
     ListNode *pre = NULL;
     ListNode *cur = head;
     while (cur) {
