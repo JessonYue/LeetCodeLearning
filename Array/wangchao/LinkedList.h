@@ -40,3 +40,6 @@ void reverse(LinkedList_* list);
 
 //工具类
 void print(LinkedList_* list);
+
+//删除倒数第n个结点
+void deleteLastNth(LinkedList_* list, int n);

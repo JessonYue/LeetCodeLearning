@@ -30,6 +30,8 @@ void print(LinkedList_ *list);
 
 Node_ *get(LinkedList_ *list, int index);
 
+Node_ *removeReciprocal(LinkedList_ *list, int index);
+
 //创建node
 Node_ *make(int data) {
     Node_ *node = static_cast<Node_ *>(malloc(sizeof(Node)));
@@ -100,7 +102,7 @@ Node_ *get(LinkedList_ *list, int index) {
 }
 
 /**
- * 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
+ * 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
  * 解题思路
  * 1、首先创建一个链表
  * 2、将A链表加入 新链表
@@ -123,14 +125,36 @@ LinkedList_ *combination(LinkedList_ *list, LinkedList_ *list2) {
         for (int j = 0; j < newList->length - 1; j++) {
             int current = get(newList, j)->data;
             int next = get(newList, j + 1)->data;
-            if (current> next) {
+            if (current > next) {
                 get(newList, j)->data = next;
-                get(newList, j+1)->data = current;
+                get(newList, j + 1)->data = current;
             }
         }
     }
     return newList;
 
+}
+/**
+ * 实现思路
+ * 1、获取正向node 的位置
+ * 2、根据循环 获取需要删除的节点与 此节点之前的节点
+ * 3、做断链操作，将删除节点与 删除节点之前的节点进行断链，并将删除节点的next 接入 删除节点之前的节点
+ * 4、返回删除的节点
+ */
+Node_ *removeReciprocal(LinkedList_ *list, int index) {
+    if (index > list->length) {
+        return NULL;
+    }
+    int positive = (list->length) - index;
+    Node_ *p = NULL;
+    Node_ *current = list->head->next;
+    for (int i = 0; i < positive; i++) {
+        p = current;
+        current = current->next;
+
+    }
+    p->next = current->next;
+    return current;
 }
 
 void print(LinkedList_ *list) {
@@ -151,13 +175,16 @@ int main() {
     append(list, 1);
     append(list, 2);
     append(list, 4);
-//    print(list);
-    LinkedList_ *list2 = create();
-    append(list2, 1);
-    append(list2, 3);
-    append(list2, 4);
+    append(list, 6);
+    append(list, 3);
+    append(list, 9);
+
+    removeReciprocal(list, 3);
+    print(list);
 //    print(list2);
-    LinkedList_ *list3 = combination(list, list2);
-    print(list3);
+//    print(list);
+//    LinkedList_ *list2 = create();
+//    LinkedList_ *list3 = combination(list, list2);
+//    print(list3);
     return 0;
 }

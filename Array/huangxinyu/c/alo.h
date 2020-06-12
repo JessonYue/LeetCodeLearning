@@ -22,7 +22,11 @@ void merge(int *A, int ASize, int m, int *B, int BSize, int n);
 
 ListNode *getIntersectionNode(ListNode *headA, ListNode *headB);
 
-ListNode *reverseList(ListNode *head);
+ListNode *reverseList(ListNode *head, int i);
 
 ListNode *mergeTwoLists(ListNode *l1, ListNode *l2);
+
+ListNode *removeNthFromEnd(ListNode *head, int n);
+
+ListNode* oddEvenList(ListNode* head);
 #endif; //LEETCODE_ALO_H
