@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
+#include <stdbool.h>
 
 typedef struct ListNode {
     int val;
@@ -25,5 +26,11 @@ ListNode *getIntersectionNode(ListNode *headA, ListNode *headB);
 ListNode *reverseList(ListNode *head, int i);
 
 ListNode *mergeTwoLists(ListNode *l1, ListNode *l2);
-ListNode* removeNthFromEnd(ListNode* head, int n)
+
+ListNode *removeNthFromEnd(ListNode *head, int n);
+
+ListNode* oddEvenList(ListNode* head);
+
+bool isPalindrome(ListNode *head);
+
 #endif; //LEETCODE_ALO_H
