@@ -1,0 +1,37 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+
+
+ //c语言没有list，太难搞了，用了java做
+ /**
+  *  请判断一个链表是否为回文链表。
+  */
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if(head == null || head.next == null){
+            return true;
+        }
+        List<Integer> list = new ArrayList<>();
+        while(head != null){
+            list.add(head.val);
+            head = head.next;
+        }
+        final int size = list.size();
+        int order = 0;
+        while(order <= size/2){
+            if(!list.get(order).equals(list.get(size-1-order))){
+                return false;
+            }
+            order ++ ;
+        }
+        return true;
+
+
+    }
+}
