@@ -12,7 +12,7 @@
  */
 void StackByQueue::push(int x) {
     queue.push(x);
-    while (queue.size() > 1) {
+    for (int i = 0; i < queue.size() - 1; ++i) {
         queue.push(queue.front());
         queue.pop();
     }
@@ -26,6 +26,6 @@ int StackByQueue::top() {
     return queue.front();
 }
 
-int StackByQueue::empty() {
+bool StackByQueue::empty() {
     return queue.empty();
 }

@@ -21,7 +21,7 @@ public:
 
     int top();
 
-    int empty();
+    bool empty();
 
 private:
     queue<int> queue;
