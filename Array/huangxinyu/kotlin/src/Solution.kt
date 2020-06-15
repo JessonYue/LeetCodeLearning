@@ -62,4 +62,49 @@ class Solution {
         l2?.next = l2Head;
         return head;
     }
+
+
+    /**
+     *判断单链表是否是回文链表
+     * 使用快慢指针，快指针一次走两步，慢指针走一步，当快指针走到最后时，慢指针
+     * 就走到中间位置（注意奇偶数），然后将慢指针作为链表头结点进行反转，再和原始链表
+     * 从头结点开始比较，比较完后全部相同就是回文。时间复杂度是n+0.5n
+     */
+    fun isPalindrome(head: ListNode?): Boolean {
+        var fast = head
+        var slow = head
+        while (fast?.next != null) {
+            fast = fast.next!!.next
+            slow = slow!!.next
+        }
+        if (fast != null) {
+            //奇数个
+            slow = slow!!.next
+        }
+        slow = reverse(slow)
+        fast = head
+        while (slow != null) {
+            if (slow.value != fast!!.value) {
+                return false
+            }
+            slow = slow.next
+            fast = fast.next
+        }
+        return true
+    }
+
+    /**
+     * 反转链表
+     */
+    private fun reverse(head: ListNode?): ListNode? {
+        var head = head
+        var pre: ListNode? = null
+        while (head != null) {
+            val next = head.next
+            head.next = pre
+            pre = head
+            head = next
+        }
+        return pre
+    }
 }
