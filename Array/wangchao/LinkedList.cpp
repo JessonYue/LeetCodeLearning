@@ -87,6 +87,25 @@ void deleteLastNth(LinkedList_* list, int n){
     slow->next = slow->next->next;
 }
 
+/**
+ * 思路：将奇数链表放在一个链表里面，偶数放在另外一个里面，偶数连接到奇数列表后面
+ * */
+void oddEvenList(LinkedList_* list){
+    assert(list != NULL);
+    Node_ * odd = list->head;
+    Node_* even = list->head->next;
+    Node_* even_head = even;//奇数链表
+
+    while (even != NULL && even->next != NULL){
+        odd->next = odd->next->next;
+        odd = odd->next;
+        even->next = odd->next;
+        even = even->next;
+    }
+
+    odd->next = even_head;
+}
+
 void reverse(LinkedList_* list){
     assert(list != NULL);
     Node_* pre = list->head;

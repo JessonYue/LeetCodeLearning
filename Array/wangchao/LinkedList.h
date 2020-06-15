@@ -43,3 +43,7 @@ void print(LinkedList_* list);
 
 //删除倒数第n个结点
 void deleteLastNth(LinkedList_* list, int n);
+
+
+//奇偶链表
+void oddEvenList(LinkedList_* list);
