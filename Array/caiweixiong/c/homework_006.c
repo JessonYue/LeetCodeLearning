@@ -31,7 +31,7 @@ struct ListNode *reverseList(struct ListNode *head) {
     struct ListNode *next = head->next, *temp = NULL;
     // 切断原链
     head->next = NULL;
-    while (next != NULL) {
+    while (next) {
         temp = next->next;
         next->next = head;
         head = next;
