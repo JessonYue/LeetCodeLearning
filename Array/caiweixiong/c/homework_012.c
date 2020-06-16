@@ -69,6 +69,8 @@ int isValid_(char *s) {
         if (*str == '(' || *str == '{' || *str == '[') {
             brackets[++index] = *str;
         }
+        if (index == -1)            // 第一个元素不是左括号，不匹配
+            return 0;
         if (*str == ')') {
             if (brackets[index] == '(')
                 brackets[index--] = '\0';
