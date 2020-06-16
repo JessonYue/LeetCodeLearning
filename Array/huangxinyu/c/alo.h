@@ -29,8 +29,10 @@ ListNode *mergeTwoLists(ListNode *l1, ListNode *l2);
 
 ListNode *removeNthFromEnd(ListNode *head, int n);
 
-ListNode* oddEvenList(ListNode* head);
+ListNode *oddEvenList(ListNode *head);
 
 bool isPalindrome(ListNode *head);
+
+bool isValidBrackets(const char *s);
 
 #endif; //LEETCODE_ALO_H
