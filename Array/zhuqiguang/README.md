@@ -68,3 +68,7 @@ cur指针指向后继节点，原cur节点作为pre,一直遍历到cur为空
 ## [225. 用队列实现栈](https://leetcode-cn.com/problems/implement-stack-using-queues/)
 首先理解什么是栈，栈是一种操作受限的链表，只能从一头操作数据，这头叫做栈顶
 本题可以用两个链表linkedList，一个作为输入，一个作为输出，然后组成栈
+
+## [20. 有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
+遍历字符串，如果是左括号，则将对应的右括号入栈，如果是右括号，则出栈并与当前的字符比对，
+如果不相同，则没有对应括号，因为总是成对出现，所以遍历后，如果栈为空，则证明有对应括号
