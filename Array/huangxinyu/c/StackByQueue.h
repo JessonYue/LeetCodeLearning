@@ -6,7 +6,6 @@
 #define C_STACKBYQUEUE_H
 
 #include <queue>
-
 using namespace std;
 
 class StackByQueue {
