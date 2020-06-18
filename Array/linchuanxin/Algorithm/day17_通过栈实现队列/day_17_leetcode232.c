@@ -5,82 +5,77 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <malloc.h>
-#define MAX_SIZE 10
+#define MAX_SIZE 5
 
-typedef struct{
-    int DATA[MAX_SIZE];
-    int TOP;
+typedef struct {
+    int Data[MAX_SIZE];
+    int top;
 }MyStack;
 
 
 typedef struct {
-    MyStack mystack1;
-    MyStack mystack2;
+    MyStack myStack1;
+    MyStack myStack2;
 } MyQueue;
 
 /** Initialize your data structure here. */
 
 MyQueue* myQueueCreate() {
-    MyQueue* TempQueue=(MyQueue*)malloc(sizeof(MyQueue));
-    TempQueue->mystack1.TOP=-1;
-    TempQueue->mystack2.TOP=-1;
-    return TempQueue;
-
+    MyQueue *queue = (MyQueue*)malloc(sizeof(MyQueue));
+    queue->myStack1.top = -1;
+    queue->myStack2.top = -1;
+    return queue;
 }
 
 /** Push element x to the back of queue. */
 void myQueuePush(MyQueue* obj, int x) {
-//    if(obj->mystack1.TOP < MAX_SIZE){
-//        while (obj->mystack1.TOP == -1){
-//            obj->mystack2.DATA[++(obj->mystack2.TOP)] = obj->mystack1.DATA[--(obj->mystack1.TOP)];
-//        }
-//        obj->mystack1.DATA[++(obj->mystack1.TOP)] = x;
-//    }
-
-    if(obj->mystack1.TOP<MAX_SIZE){ //栈是否满
-        while(obj->mystack1.TOP!=-1){
-            obj->mystack2.DATA[++(obj->mystack2.TOP)]=obj->mystack1.DATA[(obj->mystack1.TOP)--];
-        }
-        obj->mystack1.DATA[++(obj->mystack1.TOP)]=x;
-        while(obj->mystack2.TOP!=-1){
-            obj->mystack1.DATA[++(obj->mystack1.TOP)]=obj->mystack2.DATA[(obj->mystack2.TOP)--];
-        }
+    if(obj->myStack1.top < MAX_SIZE-1){
+        obj->myStack1.Data[++obj->myStack1.top] = x;
+    }else{
+        printf("the stack if full");
+        return;
     }
 }
 
 /** Removes the element from in front of queue and returns that element. */
 int myQueuePop(MyQueue* obj) {
-//    if(obj->mystack2.TOP == -1){
-//        while (obj->mystack1.TOP= -1){
-//            obj->mystack2.DATA[++(obj->mystack2.TOP)] = obj->mystack1.DATA[--(obj->mystack1.TOP)];
-//        }
-//        return obj->mystack2.DATA[(obj->mystack2.TOP--)];
-//    }
-if(obj->mystack1.TOP!=-1)
-        return obj->mystack1.DATA[(obj->mystack1.TOP)--];
-    return NULL;
-
+    if(obj->myStack2.top == -1){
+        if(obj->myStack1.top != -1){   //
+            while (obj->myStack1.top != -1)
+            {
+                obj->myStack2.Data[++obj->myStack2.top] = obj->myStack1.Data[obj->myStack1.top--];
+            }
+            return obj->myStack2.Data[obj->myStack2.top--];
+        }
+        else{
+            return -1;
+        }
+    }else{
+        return obj->myStack2.Data[obj->myStack2.top--];
+    }
 }
 
 /** Get the front element. */
 int myQueuePeek(MyQueue* obj) {
-//    if(obj->mystack2.TOP == -1){
-//        while (obj->mystack1.TOP= -1){
-//            obj->mystack2.DATA[++(obj->mystack2.TOP)] = obj->mystack1.DATA[--(obj->mystack1.TOP)];
-//        }
-//        return obj->mystack2.DATA[(obj->mystack2.TOP)];
-//    }
-if(obj->mystack1.TOP!=-1)
-        return obj->mystack1.DATA[obj->mystack1.TOP];
-    return NULL;
-
+    if(obj->myStack2.top == -1){
+        if(obj->myStack1.top != -1){   //
+            while (obj->myStack1.top != -1)
+            {
+                obj->myStack2.Data[++obj->myStack2.top] = obj->myStack1.Data[obj->myStack1.top--];
+            }
+            return obj->myStack2.Data[obj->myStack2.top];
+        }
+        else{
+            return -1;
+        }
+    }else{
+        return obj->myStack2.Data[obj->myStack2.top];
+    }
 }
 
 /** Returns whether the queue is empty. */
 bool myQueueEmpty(MyQueue* obj) {
-     if(obj->mystack1.TOP==-1)
-            return true;
-        return false;
+    return obj->myStack1.top == -1 && obj->myStack2.top == -1;
 }
 
 void myQueueFree(MyQueue* obj) {
@@ -88,11 +83,30 @@ void myQueueFree(MyQueue* obj) {
 }
 
 
-
-
-
 int main()
 {
-    printf("hello");
+    MyQueue *myQueue = myQueueCreate();
+    myQueuePush(myQueue,1);
+    myQueuePush(myQueue,2);
+    myQueuePush(myQueue,3);
+    myQueuePush(myQueue,4);
+    myQueuePush(myQueue,5);
+    if(myQueueEmpty(myQueue)){
+        printf("kong1\n");
+    }else{
+        printf("fei1\n");
+    }
+    printf("queue = %d\n",myQueuePop(myQueue));
+    printf("queue = %d\n",myQueuePop(myQueue));
+    printf("queue = %d\n",myQueuePop(myQueue));
+    printf("queue = %d\n",myQueuePop(myQueue));
+    printf("queue = %d\n",myQueuePeek(myQueue));
+    printf("queue = %d\n",myQueuePop(myQueue));
+    if(myQueueEmpty(myQueue)){
+        printf("kong2\n");
+    }else{
+        printf("fei2\n");
+    }
     return 0;
 }
+
