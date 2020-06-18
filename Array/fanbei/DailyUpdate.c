@@ -1,4 +1,4 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdlib.h>
 
 //编译C/C++的环境还没配置好，没跑测试,后面会把缺失东西都补回来
@@ -83,4 +83,33 @@ int get(int total)
         return 2;
     }
     return get(total - 1) + get(total - 2);
+}
+
+// 2020.06.10
+//Definition for singly-linked list.
+struct ListNode {
+    int val;
+    struct ListNode *next;
+};
+struct ListNode* removeNthFromEnd1(struct ListNode* head, int n){
+    struct ListNode* p = head;
+    struct ListNode* q = head;
+    struct ListNode* preQ = NULL;
+    while(p){
+        n--;
+        p = p->next;
+        if(n<0){
+            preQ = q;
+            q = q->next;
+        }
+    }
+    if(q == head){
+        head = head->next;
+    }else{
+        preQ->next = q->next;
+    }
+    q->next = NULL;
+    free(q);
+    return head;
+
 }

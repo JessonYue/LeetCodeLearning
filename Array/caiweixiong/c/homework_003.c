@@ -137,11 +137,12 @@ struct ListNode *addTwoNumbers(struct ListNode *l1, struct ListNode *l2) {
 
 // 输出线性表
 void displayList(struct ListNode *list) {
-    while (list->next != NULL) {
-        printf("%d -> ", list->val);
-        list = list->next;
+    struct ListNode *temp = list;
+    while (temp->next != NULL) {
+        printf("%d -> ", temp->val);
+        temp = temp->next;
     }
-    printf("%d\n", list->val);
+    printf("%d\n", temp->val);
 }
 
 // 销毁单链表
@@ -165,7 +166,7 @@ void listInsert(struct ListNode **list, int e) {
         (*list)->next = NULL;
     } else {
         // 找到目标位置的前一个位置
-        while (prior->next != NULL)
+        while (prior->next)
             prior = prior->next;
         next = malloc(sizeof(struct ListNode));
         next->val = e;
