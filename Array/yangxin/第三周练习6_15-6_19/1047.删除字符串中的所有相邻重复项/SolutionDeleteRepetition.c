@@ -42,7 +42,8 @@ char *removeDuplicates(char *S) {
  * 在 S 上反复执行重复项删除操作，直到无法继续删除。
  * 在完成所有重复项删除操作后返回最终的字符串。答案保证唯一。
  *
- * 在字符串自身上进行操作,这种写法在clion编译器上报错，S[++top] = S[i];
+ * 在字符串自身上进行操作,这种写法在clion编译器上报错，S[++top] = S[i],原因是传递的参数如果是字符串常量const char *,
+ * 就不能在原值上进行修改。如果传的是char[] 就可以正常运行
  */
 char *removeDuplicates2(char *S) {
     if (S == NULL || S[0] == 0) {
@@ -66,6 +67,7 @@ char *removeDuplicates2(char *S) {
 
 void main() {
     char *s = "abbaca";
-    printf("%s", removeDuplicates2(s));
+    char s1[] = {'a','b','b','a','c','a'};
+    printf("%s", removeDuplicates2(s1));
     return;
 }
