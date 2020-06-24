@@ -35,4 +35,4 @@ bool isPalindrome(ListNode *head);
 
 bool isValidBrackets(const char *s);
 
-#endif; //LEETCODE_ALO_H
+#endif //LEETCODE_ALO_H
