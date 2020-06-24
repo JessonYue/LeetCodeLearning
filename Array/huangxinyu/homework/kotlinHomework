@@ -1,0 +1,66 @@
+   lateinit var onGranted: ((Int, ArrayList<String>) -> Unit)
+    lateinit var onDenied: ((Int, ArrayList<String>) -> Unit)
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun requestPermission(
+        activity: Activity,
+        requestCode: Int,
+        perms: Array<String>,
+        onGranted: ((requestCode: Int, perms: ArrayList<String>) -> Unit)?,
+        onDenied: ((requestCode: Int, perms: ArrayList<String>) -> Unit)?
+    ) {
+        if (onGranted != null) {
+            this.onGranted = onGranted
+        }
+        if (onDenied != null) {
+            this.onDenied = onDenied
+        }
+        activity.requestPermissions(perms, requestCode)
+    }
+
+    /**
+     * 在Activity onRequestPermissionResult中调用,后续可以使用一个无页面的fragment来获取请求结果
+     */
+    fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        val granted: ArrayList<String> = ArrayList()
+        val denied: ArrayList<String> = ArrayList()
+        for (i in permissions.indices) {
+            val perm = permissions[i]
+            if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                granted.add(perm)
+            } else {
+                denied.add(perm)
+            }
+        }
+        if (granted.isNotEmpty()) {
+            onGranted(requestCode, granted)
+        }
+        if (denied.isNotEmpty()) {
+            onDenied(requestCode, denied)
+        }
+    }
+
+    fun hasPermissions(
+        context: Context,
+        vararg perms: String
+    ): Boolean {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return true
+        }
+        for (perm in perms) {
+            if (ContextCompat.checkSelfPermission(
+                    context,
+                    perm
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return false
+            }
+        }
+        return true
+    }
+
+}
