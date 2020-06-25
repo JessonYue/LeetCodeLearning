@@ -30,7 +30,7 @@ public class Homework_015 {
         else {
             char[] newStr = new char[top + 1];
             System.arraycopy(chars, 0, newStr, 0, newStr.length);
-            return new String(newStr);
+            return new String(newStr).toString();
         }
     }
 }

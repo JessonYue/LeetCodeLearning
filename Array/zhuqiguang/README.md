@@ -83,3 +83,6 @@ cur指针指向后继节点，原cur节点作为pre,一直遍历到cur为空
 
 ## [565. 数组嵌套](https://leetcode-cn.com/problems/array-nesting/)
 遍历数组，将出现过的数据置为-1,并作为循环的终止条件
+
+## [1295. 统计位数为偶数的数字](https://leetcode-cn.com/problems/find-numbers-with-even-number-of-digits/)
+遍历数组，统计每个数字位数，为2则为偶数
