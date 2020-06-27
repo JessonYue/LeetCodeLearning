@@ -3,4 +3,4 @@ project(Cpp)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Cpp main.cpp)
+add_executable(Cpp main.cpp L206/Solution.cpp ListNode.h)
