@@ -2,8 +2,6 @@ package L234;
 
 import DataStructure.ListNode;
 
-import java.lang.management.LockInfo;
-import java.util.List;
 
 /**
  * https://leetcode.com/problems/palindrome-linked-list/

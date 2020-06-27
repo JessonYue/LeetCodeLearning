@@ -1,8 +1,11 @@
-public class Solution70{
+package L70;
 
 
- /**
-     * 方案1 递归法
+
+public class Solution {
+
+    /**
+     * 方案二——递归法
      *
      * 一个人一次可以迈过一节楼梯, 或者两节楼梯
      * 问 N节楼梯有多少种走法?
@@ -17,10 +20,8 @@ public class Solution70{
         if (n == 2) {
             return 2;
         }
-        return climbStairs(n - 1) + climbStairs(n - 2);
+        return climbStairs1(n - 1) + climbStairs1(n - 2);
     }
-
-
     /**
      * 方案二
      *
@@ -52,11 +53,12 @@ public class Solution70{
         return result;
     }
 
+
     public static void main(String[] args) {
-        int n = 5;
-        int ways1 = climbStairs1(n);
-        int ways2 = climbStairs2(n);
-        System.out.println(n + " 阶台阶共有:" + ways1 + "种走发");
-              System.out.println(n + " 阶台阶共有:" + ways2 + "种走发");
+        int n = 45;
+        int sum1 = climbStairs1(n);
+        int sum2 = climbStairs2(n);
+        System.out.println(n + " 阶台阶共有:" + sum1 + "种走发");
+        System.out.println(n + " 阶台阶共有:" + sum2 + "种走发");
     }
 }

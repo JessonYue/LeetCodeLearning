@@ -1,6 +1,7 @@
 package LInterview02_07
 
-import test.ListNode
+import DataStructure.ListNode
+
 
 fun getIntersectionNode1(headA: ListNode?, headB: ListNode?): ListNode? {
     var t1 = headA

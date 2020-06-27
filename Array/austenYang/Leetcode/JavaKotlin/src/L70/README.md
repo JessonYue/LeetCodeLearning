@@ -1,4 +1,4 @@
-<img src="https://note-austen-1256667106.cos.ap-beijing.myqcloud.com/2020-06-02-165602.png" alt="image-20200603005558608" style="zoom:40%;" align="left" />
+<img src="https://note-austen-1256667106.cos.ap-beijing.myqcloud.com/2020-06-02-160334.png" alt="image-20200603000331595" style="zoom:50%;" />
 
 思路一：递归
 

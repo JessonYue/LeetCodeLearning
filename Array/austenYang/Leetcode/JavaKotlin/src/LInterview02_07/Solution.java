@@ -1,10 +1,8 @@
 package LInterview02_07;
 
-import test.ListNode;
+import DataStructure.ListNode;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 
 public class Solution {
 
@@ -86,6 +84,49 @@ public class Solution {
         return null;
     }
 
+    public static ListNode getIntersectionNode4(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) {
+            return null;
+        }
+
+        int ALength = 0;
+        int BLength = 0;
+
+        ListNode p = headA;
+        ListNode q = headB;
+
+        while (p != null) {
+            ALength++;
+            p = p.next;
+        }
+        while (q != null) {
+            BLength++;
+            q = q.next;
+        }
+        int distance ;
+        if (ALength > BLength) {
+            p = headA;
+            q = headB;
+            distance = ALength - BLength;
+        } else {
+            p = headB;
+            q = headA;
+            distance = BLength - ALength;
+        }
+
+        for (int i = 0; i < distance; i++) {
+            p = p.next;
+        }
+        while (p != null && q != null) {
+            if (p == q) {
+                return p;
+            }
+            p = p.next;
+            q = q.next;
+        }
+        return null;
+    }
+
     // listA = [4,1,8,4,5],
     // listB = [5,0,1,8,4,5]
     public static void main(String[] args) {
@@ -110,8 +151,10 @@ public class Solution {
         ListNode intersectionNode1 = getIntersectionNode1(listNode1, listNode6);
         ListNode intersectionNode2 = getIntersectionNode2(listNode1, listNode6);
         ListNode intersectionNode3 = getIntersectionNode3(listNode1, listNode6);
-        System.out.println(intersectionNode1.value);
-        System.out.println(intersectionNode2.value);
-        System.out.println(intersectionNode3.value);
+        ListNode intersectionNode4 = getIntersectionNode4(listNode1, listNode6);
+        System.out.println(intersectionNode1.val);
+        System.out.println(intersectionNode2.val);
+        System.out.println(intersectionNode3.val);
+        System.out.println(intersectionNode4.val);
     }
 }
