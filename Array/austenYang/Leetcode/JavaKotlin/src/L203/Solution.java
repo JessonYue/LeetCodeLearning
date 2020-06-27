@@ -5,7 +5,7 @@ import DataStructure.ListNode;
 public class Solution {
 
 
-    public ListNode removeElements1(ListNode head, int val) {
+    public static ListNode removeElements1(ListNode head, int val) {
         ListNode header = head;
         ListNode cur = head;
         ListNode pre = null;
@@ -27,7 +27,7 @@ public class Solution {
         return header;
     }
 
-    public ListNode removeElements2(ListNode head, int val) {
+    public static ListNode removeElements2(ListNode head, int val) {
         ListNode dummyHead = new ListNode(-1);
         dummyHead.next = head;
         ListNode pre = dummyHead;
@@ -42,4 +42,34 @@ public class Solution {
         }
         return dummyHead.next;
     }
+
+    public static ListNode removeElements3(ListNode head, int val) {
+        if (head == null) {
+            return null;
+        }
+        ListNode result = removeElements3(head.next, val);
+        if (head.val == val) {
+            return result;
+        } else {
+            head.next = result;
+            return head;
+        }
+    }
+
+    public static ListNode removeElements4(ListNode head, int val) {
+        if (head == null) {
+            return null;
+        }
+        head.next = removeElements3(head.next, val);
+        return head.val == val ? head.next : head;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(removeElements1(new ListNode(new int[]{1, 2, 6, 3, 4, 5, 6}), 6));
+        System.out.println(removeElements2(new ListNode(new int[]{1, 2, 6, 3, 4, 5, 6}), 6));
+        System.out.println(removeElements3(new ListNode(new int[]{1, 2, 6, 3, 4, 5, 6}), 6));
+        System.out.println(removeElements4(new ListNode(new int[]{1, 2, 6, 3, 4, 5, 6}), 6));
+    }
+
+
 }
