@@ -77,3 +77,12 @@ cur指针指向后继节点，原cur节点作为pre,一直遍历到cur为空
 首先要明白栈和队列各自的特点，同一段序列存到栈和队列里，输出的顺序是相反的，所以，可以
 用两个栈，一个作为输入，一个作为输出，输入的栈先存入数据，然后pop到输出栈中，就可以实现
 队列的出对和入队的操作
+
+## [1047. 删除字符串中的所有相邻重复项](https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/)
+可以将字符串存到栈中，然后通过当前字符和栈顶比对，如果相等则出栈
+
+## [565. 数组嵌套](https://leetcode-cn.com/problems/array-nesting/)
+遍历数组，将出现过的数据置为-1,并作为循环的终止条件
+
+## [1295. 统计位数为偶数的数字](https://leetcode-cn.com/problems/find-numbers-with-even-number-of-digits/)
+遍历数组，统计每个数字位数，为2则为偶数

@@ -28,7 +28,7 @@ MaxQueue *maxQueueCreate() {
     memset(maxQueue->data, 0, MAX_ARRAY_SIZE); // 初始化队列
     maxQueue->front = maxQueue->rear = -1;          // 队头与队尾
     maxQueue->maxValue = -1;                        // 最大值
-    return maxQueue;
+    return maxQueue;    // gcc -shared -fpic -o libxxx.so xxx.c     // objdump-dx xxx.o
 }
 
 int maxQueueMax_value(MaxQueue *obj) {
