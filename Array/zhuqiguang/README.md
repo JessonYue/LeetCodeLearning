@@ -80,3 +80,19 @@ cur指针指向后继节点，原cur节点作为pre,一直遍历到cur为空
 
 ## [1047. 删除字符串中的所有相邻重复项](https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/)
 可以将字符串存到栈中，然后通过当前字符和栈顶比对，如果相等则出栈
+
+## [565. 数组嵌套](https://leetcode-cn.com/problems/array-nesting/)
+遍历数组，将出现过的数据置为-1,并作为循环的终止条件
+
+## [1295. 统计位数为偶数的数字](https://leetcode-cn.com/problems/find-numbers-with-even-number-of-digits/)
+遍历数组，统计每个数字位数，为2则为偶数
+
+## [141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
+快指针走两步，慢指针走一步，如果有环，相当于环形跑道，快慢指针会相遇
+
+## [面试题 02.08. 环路检测](https://leetcode-cn.com/problems/linked-list-cycle-lcci/)
+暂时不会，先跳过
+
+## [237. 删除链表中的节点](https://leetcode-cn.com/problems/delete-node-in-a-linked-list/)
+可以将删除节点之前节点的指针指向删除节点之后之后的节点，但这个问题的难点在于不知道删除节点的之前节点，
+所以可以通过将删除节点赋值为之后节点的值，然后删除之后的节点
