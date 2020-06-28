@@ -15,6 +15,7 @@ HashTable* hash_table_init(){
         return NULL;
     memset(hashTable,0,sizeof(hashTable));
 
+    //分配内存完成后需要初始化一下，不然会有异常数据
     for (int i = 0; i <Len ; ++i) {
         *(hashTable->hashKey + i) = NULL;
     }
@@ -24,7 +25,7 @@ HashTable* hash_table_init(){
 /*Hash函数*/
 int getHashAddress(int key)
 {
-    return key *3 % Len;
+    return key *3 % 7;
 }
 
 bool hash_addKey(HashTable* ht,int data){
@@ -42,12 +43,14 @@ bool hash_addKey(HashTable* ht,int data){
         ht->hashKey[getHashAddress(data)] = hashNode;
     } else {
         HashNode* tmp =  ht->hashKey[getHashAddress(data)];
-
-        while (NULL != tmp->next){
+        HashNode* tmpPre = NULL;
+        while (tmp != NULL){
+            tmpPre = tmp;
+            cout<<"key:"<< tmpPre->data << "  hash value:"<< tmpPre->next << endl;
             tmp = tmp->next;
         }
 
-        tmp->next = hashNode;
+        tmpPre->next = hashNode;
     }
 
     return true;
