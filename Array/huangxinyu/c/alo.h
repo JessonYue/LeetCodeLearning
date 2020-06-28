@@ -35,4 +35,6 @@ bool isPalindrome(ListNode *head);
 
 bool isValidBrackets(const char *s);
 
+int numOfSubarrays(vector<int> &arr, int k, int threshold);
+
 #endif //LEETCODE_ALO_H
