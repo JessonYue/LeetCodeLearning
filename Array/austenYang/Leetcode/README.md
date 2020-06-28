@@ -21,6 +21,7 @@
 | [565](https://leetcode-cn.com/problems/array-nesting/)       | [数组嵌套 Array Nesting](https://github.com/JessonYue/LeetCodeLearning/tree/master/Array/austenYang/Leetcode/JavaKotlin/src/L565) | [java](https://github.com/JessonYue/LeetCodeLearning/blob/master/Array/austenYang/Leetcode/JavaKotlin/src/L565/Solution.java) [kotlin](https://github.com/JessonYue/LeetCodeLearning/blob/master/Array/austenYang/Leetcode/JavaKotlin/src/L565/KSolution.kt) | Array        |
 | [1047](https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/) | [删除字符串中的所有相邻重复项 Remove All Adjacent Duplicates In String](https://github.com/JessonYue/LeetCodeLearning/tree/master/Array/austenYang/Leetcode/JavaKotlin/src/L1047) | [java](https://github.com/JessonYue/LeetCodeLearning/blob/master/Array/austenYang/Leetcode/JavaKotlin/src/L1047/Solution.java) [kotlin](https://github.com/JessonYue/LeetCodeLearning/blob/master/Array/austenYang/Leetcode/JavaKotlin/src/L1047/KSolution.kt) | Stack/String |
 | [1295](https://leetcode-cn.com/problems/find-numbers-with-even-number-of-digits/) | [统计位数为偶数的数字](https://github.com/JessonYue/LeetCodeLearning/tree/master/Array/austenYang/Leetcode/JavaKotlin/src/L1295) | [java](https://github.com/JessonYue/LeetCodeLearning/blob/master/Array/austenYang/Leetcode/JavaKotlin/src/L1295/Solution.java) [kotlin](https://github.com/JessonYue/LeetCodeLearning/blob/master/Array/austenYang/Leetcode/JavaKotlin/src/L1295/KSolution.kt) | Array        |
+| [1343](https://leetcode-cn.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/) | [大小为 K 且平均值大于等于阈值的子数组数目](https://github.com/JessonYue/LeetCodeLearning/tree/master/Array/austenYang/Leetcode/JavaKotlin/src/L1343) | [java](https://github.com/JessonYue/LeetCodeLearning/blob/master/Array/austenYang/Leetcode/JavaKotlin/src/L1343/Solution.java) [kotlin](https://github.com/JessonYue/LeetCodeLearning/blob/master/Array/austenYang/Leetcode/JavaKotlin/src/L1343/KSolution.kt) | Array        |
 | [面试题 02.07](https://leetcode-cn.com/problems/intersection-of-two-linked-lists-lcci/) | [链表相交 Intersection of Two Linked Lists LCCI](https://github.com/JessonYue/LeetCodeLearning/tree/master/Array/austenYang/Leetcode/JavaKotlin/src/LInterview02_07) | [java](https://github.com/JessonYue/LeetCodeLearning/blob/master/Array/austenYang/Leetcode/JavaKotlin/src/LInterview02_07/Solution.java) [kotlin](https://github.com/JessonYue/LeetCodeLearning/blob/master/Array/austenYang/Leetcode/JavaKotlin/src/LInterview02_07/KSolution.kt) |              |
 | [面试题 02.08](https://leetcode-cn.com/problems/linked-list-cycle-lcci/) | [环路检测 Linked List Cycle LCCI](https://github.com/JessonYue/LeetCodeLearning/tree/master/Array/austenYang/Leetcode/JavaKotlin/src/LInterview02_08) | [java](https://github.com/JessonYue/LeetCodeLearning/blob/master/Array/austenYang/Leetcode/JavaKotlin/src/LInterview02_08/Solution.java) [kotlin](https://github.com/JessonYue/LeetCodeLearning/blob/master/Array/austenYang/Leetcode/JavaKotlin/src/LInterview02_08/KSolution.kt) |              |
 | [面试题 03.04](https://leetcode-cn.com/problems/implement-queue-using-stacks-lcci/) | [化栈为队 Implement Queue using Stacks LCCI](https://github.com/JessonYue/LeetCodeLearning/tree/master/Array/austenYang/Leetcode/JavaKotlin/src/LInterview03_04) | [java](https://github.com/JessonYue/LeetCodeLearning/blob/master/Array/austenYang/Leetcode/JavaKotlin/src/LInterview03_04/MyQueue.java) [kotin](https://github.com/JessonYue/LeetCodeLearning/blob/master/Array/austenYang/Leetcode/JavaKotlin/src/LInterview03_04/KMyQueue.kt) |              |
@@ -29,8 +30,10 @@
 
 总结的重要解题思路
 
-* 链表
+* 滑动窗口
 
-链表的天然递归性
+* 链表天然递归
+
+
 
 ![image-20200627162246999](https://note-austen-1256667106.cos.ap-beijing.myqcloud.com/2020-06-27-082250.png)
