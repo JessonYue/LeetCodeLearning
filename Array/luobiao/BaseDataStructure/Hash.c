@@ -39,13 +39,15 @@ int insert(DataType key)
 {
     int address = getHashAddress(key);
     //没有发生冲突
-    if(hashTable[address].isNull == True)
+    if(hashTable[address].isNull == True || hashTable[address].data == key)
     {
         hashTable[address].data = key;
         hashTable[address].isNull = 0;
+        printf("insert1   key:%d\t address:%d\n", key,address);
     }
     else    //当发生冲突的时候
     {
+
         while(hashTable[address].isNull == 0 && address<Len)
         {
             address++;          //采用线性探测法，步长为1
@@ -54,6 +56,7 @@ int insert(DataType key)
             return -1;
         hashTable[address].data = key;
         hashTable[address].isNull = 0;
+        printf("insert2   key:%d\t address:%d\n", key,address);
     }
 
     return 0;
@@ -78,16 +81,17 @@ int find(DataType key)
 
 int main(int argc, char *argv[])
 {
-    int key[]={7,8,30,11,18,9,14};
+    int key[]={7,8,30,11,18,9,14,7};
     int i;
     initHashTable();
 
-    for(i = 0; i<7; i++)
+    for(i = 0; i<8; i++)
     {
-        insert(key[i]);
+        int success = insert(key[i]);
+        printf("key:%d\t success:%d\n", key[i],success);
     }
 
-    for(i = 0; i<7; i++)
+    for(i = 0; i<8; i++)
     {
         int address;
         address = find(key[i]);
