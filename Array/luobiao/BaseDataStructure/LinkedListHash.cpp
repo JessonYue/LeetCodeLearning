@@ -10,7 +10,7 @@
 using namespace std;
 
 HashTable* hash_table_init(){
-    HashTable* hashTable = static_cast<HashTable *>(malloc(sizeof(HashNode)));
+    HashTable* hashTable = static_cast<HashTable *>(malloc(sizeof(HashTable)));
     if(hashTable == nullptr)
         return NULL;
     memset(hashTable,0,sizeof(hashTable));
@@ -25,7 +25,7 @@ HashTable* hash_table_init(){
 /*Hash函数*/
 int getHashAddress(int key)
 {
-    return key *3 % 7;
+    return key % Len;
 }
 
 bool hash_addKey(HashTable* ht,int data){
@@ -46,7 +46,6 @@ bool hash_addKey(HashTable* ht,int data){
         HashNode* tmpPre = NULL;
         while (tmp != NULL){
             tmpPre = tmp;
-            cout<<"key:"<< tmpPre->data << "  hash value:"<< tmpPre->next << endl;
             tmp = tmp->next;
         }
 
@@ -56,6 +55,12 @@ bool hash_addKey(HashTable* ht,int data){
     return true;
 }
 
+/**
+ * 删除节点
+ * @param ht
+ * @param data
+ * @return
+ */
 bool hash_deleteKey(HashTable* ht,int data){
     if (ht == NULL) {
         return false;
@@ -86,6 +91,13 @@ bool hash_deleteKey(HashTable* ht,int data){
     return false;
 }
 
+/**
+ * 切换两个节点
+ * @param ht
+ * @param olddata
+ * @param newdata
+ * @return
+ */
 bool hash_modify_key(HashTable* ht,int olddata,int newdata){
     if (ht == NULL) {
         return false;
@@ -106,6 +118,7 @@ bool hash_modify_key(HashTable* ht,int olddata,int newdata){
         tmpStartOld = tmpStartOld->next;
     }
 
+
     while (tmpStartNew != NULL) {
         if(tmpStartNew->data == newdata) {
             break;
@@ -115,14 +128,34 @@ bool hash_modify_key(HashTable* ht,int olddata,int newdata){
         tmpStartNew = tmpStartNew->next;
     }
 
+    /**
+     * 替换数值方式
+     */
+//    if (tmpStartNew != nullptr &&  tmpStartOld != nullptr) {
+//        int tmpData = tmpStartNew->data;
+//        tmpStartNew->data = tmpStartOld->data;
+//        tmpStartOld->data = tmpData;
+//    } else {
+//        cout<<"====No found olddata or newdata value========="<< endl;
+//    }
+
+
+    /**
+     * 节点切换方式
+     */
     if(tmpStartOldPre != nullptr) {
         tmpStartOldPre->next = tmpStartNew;
+    } else {
+        ht->hashKey[getHashAddress(olddata)] = tmpStartNew;
     }
 
     if(tmpStartNewPre != nullptr) {
         tmpStartNewPre->next = tmpStartOld;
+    } else {
+        ht->hashKey[getHashAddress(newdata)] = tmpStartOld;
     }
-    HashNode* tmp = tmpStartNew->next;
+
+    HashNode * tmp = tmpStartNew->next;
     tmpStartNew->next = tmpStartOld->next;
     tmpStartOld->next = tmp;
 
@@ -168,38 +201,27 @@ void printf_hashList(HashTable* ht) {
 
 int main()
 {
-    int key[]={7,8,30,11,18,9,14};
+    int key[]={7,8,30,11,18,9,14,58,37,19,90,100,112,134,156};
     int i;
     HashTable* ht = hash_table_init();
 
-    for(i = 0; i<7; i++)
+    for(i = 0; i<15; i++)
     {
         hash_addKey(ht, key[i]);
     }
 
+    cout<<"All LikeListHash Data"<< endl;
     printf_hashList(ht);
-    cout<<"====main==endl========="<< endl;
 
-//    for(i = 0; i<7; i++)
-//    {
-//        HashNode* tmp = hash_Lookup(ht, key[i]);
-//        printf("key:%d\t HashNode:%d\n", key[i],tmp->data);
-//    }
-//
     hash_modify_key(ht, 30, 9);
-//    for(i = 0; i<7; i++)
-//    {
-//        HashNode* tmp = hash_Lookup(ht, key[i]);
-//        printf("replace key:%d\t HashNode:%d\n", key[i],tmp->data);
-//    }
-//
+
+    cout<<"Switch between 30 and 9 Node"<< endl;
+    printf_hashList(ht);
+
     hash_deleteKey(ht, 14);
-//
-//    for(i = 0; i<7; i++)
-//    {
-//        HashNode* tmp = hash_Lookup(ht, key[i]);
-//        printf("delete key:%d\t HashNode:%d\n", key[i],tmp->data);
-//    }
+
+    cout<<"Remove 14 nodes"<< endl;
+    printf_hashList(ht);
 
     return 0;
 }
