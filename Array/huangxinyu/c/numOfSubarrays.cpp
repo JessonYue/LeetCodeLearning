@@ -31,6 +31,5 @@ int numOfSubarrays(vector<int> &arr, int k, int threshold) {
 }
 
 int main() {
-
     return 1;
 }
