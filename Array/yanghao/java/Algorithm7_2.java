@@ -26,3 +26,9 @@ public class Algorithm7_2 {
 	        return slow;  
 	 }
 }
+
+class ListNode {
+     int val;
+    ListNode next;
+    ListNode(int x) { val = x; }
+ }
