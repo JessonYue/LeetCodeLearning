@@ -96,3 +96,13 @@ cur指针指向后继节点，原cur节点作为pre,一直遍历到cur为空
 ## [237. 删除链表中的节点](https://leetcode-cn.com/problems/delete-node-in-a-linked-list/)
 可以将删除节点之前节点的指针指向删除节点之后之后的节点，但这个问题的难点在于不知道删除节点的之前节点，
 所以可以通过将删除节点赋值为之后节点的值，然后删除之后的节点
+
+## [1343. 大小为 K 且平均值大于等于阈值的子数组数目](https://leetcode-cn.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/)
+此题掌握关键解法**滑动窗口法**
+
+1.先取前k个数,大于k*threshold则+1
+
+2.然后以k个数为单位不断后移，减去前一个数并加上后一个数，结果大于k*threshold则+1
+
+## [123. 买卖股票的最佳时机 III](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)
+动态规划？先跳过
