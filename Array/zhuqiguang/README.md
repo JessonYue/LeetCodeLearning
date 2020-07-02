@@ -106,3 +106,11 @@ cur指针指向后继节点，原cur节点作为pre,一直遍历到cur为空
 
 ## [123. 买卖股票的最佳时机 III](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)
 动态规划？先跳过
+
+## [面试题 02.02. 返回倒数第 k 个节点](https://leetcode-cn.com/problems/kth-node-from-end-of-list-lcci/)
+看了思路没看实现，自己做出来了，哈哈哈
+貌似链表问题的通用思路就是**快慢指针**
+
+1. 将cur先走k步
+
+2. 然后head和cur同步走，cur走到空的时候，head正好走到k
