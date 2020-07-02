@@ -107,4 +107,20 @@ class Solution {
         }
         return pre
     }
+
+    fun arrayNesting(nums: IntArray): Int {
+        var ret = 0
+        for (i in nums.indices) {
+            var count = 0
+            var next = i
+            while (nums[next] != -1) {
+                val temp = next
+                next = nums[next]
+                nums[temp] = -1
+                count++
+            }
+            ret = ret.coerceAtLeast(count)
+        }
+        return ret
+    }
 }

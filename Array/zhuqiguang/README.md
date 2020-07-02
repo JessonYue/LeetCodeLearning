@@ -64,3 +64,45 @@ cur指针指向后继节点，原cur节点作为pre,一直遍历到cur为空
 1.将链表放到数组里
 
 2.利用首尾两个指针往中间遍历，如果不相等就意味着不是回文
+
+## [225. 用队列实现栈](https://leetcode-cn.com/problems/implement-stack-using-queues/)
+首先理解什么是栈，栈是一种操作受限的链表，只能从一头操作数据，这头叫做栈顶
+本题可以用两个链表linkedList，一个作为输入，一个作为输出，然后组成栈
+
+## [20. 有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
+遍历字符串，如果是左括号，则将对应的右括号入栈，如果是右括号，则出栈并与当前的字符比对，
+如果不相同，则没有对应括号，因为总是成对出现，所以遍历后，如果栈为空，则证明有对应括号
+
+## [面试题 03.04. 化栈为队](https://leetcode-cn.com/problems/implement-queue-using-stacks-lcci/)
+首先要明白栈和队列各自的特点，同一段序列存到栈和队列里，输出的顺序是相反的，所以，可以
+用两个栈，一个作为输入，一个作为输出，输入的栈先存入数据，然后pop到输出栈中，就可以实现
+队列的出对和入队的操作
+
+## [1047. 删除字符串中的所有相邻重复项](https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/)
+可以将字符串存到栈中，然后通过当前字符和栈顶比对，如果相等则出栈
+
+## [565. 数组嵌套](https://leetcode-cn.com/problems/array-nesting/)
+遍历数组，将出现过的数据置为-1,并作为循环的终止条件
+
+## [1295. 统计位数为偶数的数字](https://leetcode-cn.com/problems/find-numbers-with-even-number-of-digits/)
+遍历数组，统计每个数字位数，为2则为偶数
+
+## [141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
+快指针走两步，慢指针走一步，如果有环，相当于环形跑道，快慢指针会相遇
+
+## [面试题 02.08. 环路检测](https://leetcode-cn.com/problems/linked-list-cycle-lcci/)
+暂时不会，先跳过
+
+## [237. 删除链表中的节点](https://leetcode-cn.com/problems/delete-node-in-a-linked-list/)
+可以将删除节点之前节点的指针指向删除节点之后之后的节点，但这个问题的难点在于不知道删除节点的之前节点，
+所以可以通过将删除节点赋值为之后节点的值，然后删除之后的节点
+
+## [1343. 大小为 K 且平均值大于等于阈值的子数组数目](https://leetcode-cn.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/)
+此题掌握关键解法**滑动窗口法**
+
+1.先取前k个数,大于k*threshold则+1
+
+2.然后以k个数为单位不断后移，减去前一个数并加上后一个数，结果大于k*threshold则+1
+
+## [123. 买卖股票的最佳时机 III](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)
+动态规划？先跳过

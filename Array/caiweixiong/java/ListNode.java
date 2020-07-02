@@ -24,6 +24,32 @@ class ListNode {
             System.out.print(temp.val + " —> ");
             temp = temp.next;
         }
-        System.out.print(temp.val);
+        System.out.println(temp.val);
+    }
+
+    public ListNode reverseList(ListNode head) {
+        if (head == null)
+            return null;
+        ListNode next = head.next, temp = null;
+        head.next = null;
+        while (next != null) {
+            temp = next.next;
+            next.next = head;
+            head = next;
+            next = temp;
+        }
+        return head;
+    }
+
+    // 递归反转
+    public ListNode reverseList_(ListNode head) {
+        if (head == null)
+            return null;
+        if (head.next == null)
+            return head;
+        ListNode newHead = reverseList_(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
     }
 }
