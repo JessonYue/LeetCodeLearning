@@ -27,4 +27,14 @@ typedef struct {
     int front;
     int rear;
 } MaxQueue;
+
+struct TreeNode {
+    int val;
+    struct TreeNode *left;
+    struct TreeNode *right;
+};
+// 打印树的节点信息
+void displayTree(struct TreeNode *tree);
+// 销毁树
+void destroyTree(struct TreeNode *tree);
 #endif //C_LIST_NODE_H
