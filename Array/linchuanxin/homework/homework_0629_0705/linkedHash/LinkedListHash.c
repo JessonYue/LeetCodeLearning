@@ -39,28 +39,6 @@ bool hash_addKey(HashTable* hashTable,DataType data)
     }
     tmp->next = hashNode;
     return true;
-
-//    HashNode *hashNode;
-//    if (ht == NULL)
-//        return false;
-//    hashNode = (HashNode *)malloc(sizeof(HashNode));
-//    if (hashNode == NULL)
-//        return false;
-//    memset(hashNode, 0, sizeof(HashNode));
-//    hashNode->data = data;
-//    hashNode->next = NULL;
-//
-//    if (NULL == ht->hashKey[data % 6]) {
-//        HashNode *head = (HashNode *)malloc(sizeof(HashNode));
-//        memset(head, 0, sizeof(HashNode));
-//        ht->hashKey[data % 6] = head;
-//    }
-//    HashNode *tmp = ht->hashKey[data % 6];
-//    while (NULL != tmp->next) {
-//        tmp = tmp->next;
-//    }
-//    tmp->next = hashNode;
-//    return true;
 }
 //删除
 bool hash_deleteKey(HashTable* hashTable,DataType data)
