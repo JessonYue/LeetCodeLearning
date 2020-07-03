@@ -8,12 +8,12 @@
 
 typedef int data;
 //这里定义的链表的节点Node
-struct Node_{
+typedef struct Node_{
     int data;
     Node_* next;
 }Node;
 //这里定义的是链表
-struct LinkedList_{
+typedef struct LinkedList_{
     int length;
     Node_* head;
     Node_* tail;
