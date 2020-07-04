@@ -459,24 +459,21 @@ typedef struct {
 
 /* Legal values for sh_flags (section flags).  */
 
-#define SHF_WRITE         (1 << 0)    /* Writable */
-#define SHF_ALLOC         (1 << 1)    /* Occupies memory during execution */
-#define SHF_EXECINSTR         (1 << 2)    /* Executable */
-#define SHF_MERGE         (1 << 4)    /* Might be merged */
-#define SHF_STRINGS         (1 << 5)    /* Contains nul-terminated strings */
-#define SHF_INFO_LINK         (1 << 6)    /* `sh_info' contains SHT index */
-#define SHF_LINK_ORDER         (1 << 7)    /* Preserve order after combining */
-#define SHF_OS_NONCONFORMING (1 << 8)    /* Non-standard OS specific handling
-					   required */
-#define SHF_GROUP         (1 << 9)    /* Section is member of a group.  */
-#define SHF_TLS             (1 << 10)    /* Section hold thread-local data.  */
-#define SHF_COMPRESSED         (1 << 11)    /* Section with compressed data. */
-#define SHF_MASKOS         0x0ff00000    /* OS-specific.  */
-#define SHF_MASKPROC         0xf0000000    /* Processor-specific */
-#define SHF_ORDERED         (1 << 30)    /* Special ordering requirement
-					   (Solaris).  */
-#define SHF_EXCLUDE         (1U << 31)    /* Section is excluded unless
-					   referenced or allocated (Solaris).*/
+#define SHF_WRITE               (1 << 0)    /* Writable */
+#define SHF_ALLOC               (1 << 1)    /* Occupies memory during execution */
+#define SHF_EXECINSTR           (1 << 2)    /* Executable */
+#define SHF_MERGE               (1 << 4)    /* Might be merged */
+#define SHF_STRINGS             (1 << 5)    /* Contains nul-terminated strings */
+#define SHF_INFO_LINK           (1 << 6)    /* `sh_info' contains SHT index */
+#define SHF_LINK_ORDER          (1 << 7)    /* Preserve order after combining */
+#define SHF_OS_NONCONFORMING    (1 << 8)    /* Non-standard OS specific handling required */
+#define SHF_GROUP               (1 << 9)    /* Section is member of a group.  */
+#define SHF_TLS                 (1 << 10)   /* Section hold thread-local data.  */
+#define SHF_COMPRESSED          (1 << 11)   /* Section with compressed data. */
+#define SHF_MASKOS              0x0ff00000  /* OS-specific.  */
+#define SHF_MASKPROC            0xf0000000  /* Processor-specific */
+#define SHF_ORDERED             (1 << 30)   /* Special ordering requirement (Solaris).  */
+#define SHF_EXCLUDE             (1U << 31)  /* Section is excluded unless referenced or allocated (Solaris).*/
 
 /* Section compression header.  Used when SHF_COMPRESSED is set.  */
 
@@ -687,96 +684,90 @@ typedef struct {
 
 /* Legal values for p_type (segment type).  */
 
-#define    PT_NULL        0        /* Program header table entry unused */
+#define PT_NULL        0        /* Program header table entry unused */
 #define PT_LOAD        1        /* Loadable program segment */
-#define PT_DYNAMIC    2        /* Dynamic linking information */
-#define PT_INTERP    3        /* Program interpreter */
+#define PT_DYNAMIC     2        /* Dynamic linking information */
+#define PT_INTERP      3        /* Program interpreter */
 #define PT_NOTE        4        /* Auxiliary information */
-#define PT_SHLIB    5        /* Reserved */
+#define PT_SHLIB       5        /* Reserved */
 #define PT_PHDR        6        /* Entry for header table itself */
-#define PT_TLS        7        /* Thread-local storage segment */
-#define    PT_NUM        8        /* Number of defined types */
-#define PT_LOOS        0x60000000    /* Start of OS-specific */
-#define PT_GNU_EH_FRAME    0x6474e550    /* GCC .eh_frame_hdr segment */
+#define PT_TLS         7        /* Thread-local storage segment */
+#define PT_NUM         8        /* Number of defined types */
+#define PT_LOOS         0x60000000    /* Start of OS-specific */
+#define PT_GNU_EH_FRAME 0x6474e550    /* GCC .eh_frame_hdr segment */
 #define PT_GNU_STACK    0x6474e551    /* Indicates stack executability */
 #define PT_GNU_RELRO    0x6474e552    /* Read-only after relocation */
-#define PT_LOSUNW    0x6ffffffa
-#define PT_SUNWBSS    0x6ffffffa    /* Sun Specific segment */
+#define PT_LOSUNW       0x6ffffffa
+#define PT_SUNWBSS      0x6ffffffa    /* Sun Specific segment */
 #define PT_SUNWSTACK    0x6ffffffb    /* Stack segment */
-#define PT_HISUNW    0x6fffffff
-#define PT_HIOS        0x6fffffff    /* End of OS-specific */
-#define PT_LOPROC    0x70000000    /* Start of processor-specific */
-#define PT_HIPROC    0x7fffffff    /* End of processor-specific */
+#define PT_HISUNW       0x6fffffff
+#define PT_HIOS         0x6fffffff    /* End of OS-specific */
+#define PT_LOPROC       0x70000000    /* Start of processor-specific */
+#define PT_HIPROC       0x7fffffff    /* End of processor-specific */
 
 /* Legal values for p_flags (segment flags).  */
 
-#define PF_X        (1 << 0)    /* Segment is executable */
-#define PF_W        (1 << 1)    /* Segment is writable */
-#define PF_R        (1 << 2)    /* Segment is readable */
-#define PF_MASKOS    0x0ff00000    /* OS-specific */
-#define PF_MASKPROC    0xf0000000    /* Processor-specific */
+#define PF_X        (1 << 0)        /* Segment is executable */
+#define PF_W        (1 << 1)        /* Segment is writable */
+#define PF_R        (1 << 2)        /* Segment is readable */
+#define PF_MASKOS    0x0ff00000     /* OS-specific */
+#define PF_MASKPROC    0xf0000000   /* Processor-specific */
 
 /* Legal values for note segment descriptor types for core files. */
 
 #define NT_PRSTATUS    1        /* Contains copy of prstatus struct */
 #define NT_FPREGSET    2        /* Contains copy of fpregset struct */
 #define NT_PRPSINFO    3        /* Contains copy of prpsinfo struct */
-#define NT_PRXREG    4        /* Contains copy of prxregset struct */
-#define NT_TASKSTRUCT    4        /* Contains copy of task structure */
+#define NT_PRXREG      4        /* Contains copy of prxregset struct */
+#define NT_TASKSTRUCT  4        /* Contains copy of task structure */
 #define NT_PLATFORM    5        /* String from sysinfo(SI_PLATFORM) */
 #define NT_AUXV        6        /* Contains copy of auxv array */
 #define NT_GWINDOWS    7        /* Contains copy of gwindows struct */
 #define NT_ASRS        8        /* Contains copy of asrset struct */
 #define NT_PSTATUS    10        /* Contains copy of pstatus struct */
-#define NT_PSINFO    13        /* Contains copy of psinfo struct */
-#define NT_PRCRED    14        /* Contains copy of prcred struct */
+#define NT_PSINFO     13        /* Contains copy of psinfo struct */
+#define NT_PRCRED     14        /* Contains copy of prcred struct */
 #define NT_UTSNAME    15        /* Contains copy of utsname struct */
-#define NT_LWPSTATUS    16        /* Contains copy of lwpstatus struct */
-#define NT_LWPSINFO    17        /* Contains copy of lwpinfo struct */
-#define NT_PRFPXREG    20        /* Contains copy of fprxregset struct */
-#define NT_SIGINFO    0x53494749    /* Contains copy of siginfo_t,
-					   size might increase */
-#define NT_FILE        0x46494c45    /* Contains information about mapped
-					   files */
-#define NT_PRXFPREG    0x46e62b7f    /* Contains copy of user_fxsr_struct */
+#define NT_LWPSTATUS  16        /* Contains copy of lwpstatus struct */
+#define NT_LWPSINFO   17        /* Contains copy of lwpinfo struct */
+#define NT_PRFPXREG   20        /* Contains copy of fprxregset struct */
+#define NT_SIGINFO   0x53494749    /* Contains copy of siginfo_t,size might increase */
+#define NT_FILE      0x46494c45    /* Contains information about mapped files */
+#define NT_PRXFPREG  0x46e62b7f    /* Contains copy of user_fxsr_struct */
 #define NT_PPC_VMX    0x100        /* PowerPC Altivec/VMX registers */
 #define NT_PPC_SPE    0x101        /* PowerPC SPE/EVR registers */
 #define NT_PPC_VSX    0x102        /* PowerPC VSX registers */
 #define NT_PPC_TAR    0x103        /* Target Address Register */
 #define NT_PPC_PPR    0x104        /* Program Priority Register */
-#define NT_PPC_DSCR    0x105        /* Data Stream Control Register */
+#define NT_PPC_DSCR   0x105        /* Data Stream Control Register */
 #define NT_PPC_EBB    0x106        /* Event Based Branch Registers */
 #define NT_PPC_PMU    0x107        /* Performance Monitor Registers */
 #define NT_PPC_TM_CGPR    0x108        /* TM checkpointed GPR Registers */
 #define NT_PPC_TM_CFPR    0x109        /* TM checkpointed FPR Registers */
 #define NT_PPC_TM_CVMX    0x10a        /* TM checkpointed VMX Registers */
 #define NT_PPC_TM_CVSX    0x10b        /* TM checkpointed VSX Registers */
-#define NT_PPC_TM_SPR    0x10c        /* TM Special Purpose Registers */
-#define NT_PPC_TM_CTAR    0x10d        /* TM checkpointed Target Address
-					   Register */
-#define NT_PPC_TM_CPPR    0x10e        /* TM checkpointed Program Priority
-					   Register */
-#define NT_PPC_TM_CDSCR    0x10f        /* TM checkpointed Data Stream Control
-					   Register */
-#define NT_386_TLS    0x200        /* i386 TLS slots (struct user_desc) */
-#define NT_386_IOPERM    0x201        /* x86 io permission bitmap (1=deny) */
-#define NT_X86_XSTATE    0x202        /* x86 extended state using xsave */
-#define NT_S390_HIGH_GPRS    0x300    /* s390 upper register halves */
-#define NT_S390_TIMER    0x301        /* s390 timer register */
+#define NT_PPC_TM_SPR     0x10c        /* TM Special Purpose Registers */
+#define NT_PPC_TM_CTAR    0x10d        /* TM checkpointed Target Address Register */
+#define NT_PPC_TM_CPPR    0x10e        /* TM checkpointed Program Priority Register */
+#define NT_PPC_TM_CDSCR   0x10f        /* TM checkpointed Data Stream Control Register */
+#define NT_386_TLS        0x200        /* i386 TLS slots (struct user_desc) */
+#define NT_386_IOPERM     0x201        /* x86 io permission bitmap (1=deny) */
+#define NT_X86_XSTATE     0x202        /* x86 extended state using xsave */
+#define NT_S390_HIGH_GPRS     0x300    /* s390 upper register halves */
+#define NT_S390_TIMER     0x301        /* s390 timer register */
 #define NT_S390_TODCMP    0x302        /* s390 TOD clock comparator register */
-#define NT_S390_TODPREG    0x303        /* s390 TOD programmable register */
-#define NT_S390_CTRS    0x304        /* s390 control registers */
+#define NT_S390_TODPREG   0x303        /* s390 TOD programmable register */
+#define NT_S390_CTRS      0x304        /* s390 control registers */
 #define NT_S390_PREFIX    0x305        /* s390 prefix register */
 #define NT_S390_LAST_BREAK    0x306    /* s390 breaking event address */
-#define NT_S390_SYSTEM_CALL    0x307    /* s390 system call restart data */
-#define NT_S390_TDB    0x308        /* s390 transaction diagnostic block */
-#define NT_ARM_VFP    0x400        /* ARM VFP/NEON registers */
-#define NT_ARM_TLS    0x401        /* ARM TLS register */
-#define NT_ARM_HW_BREAK    0x402        /* ARM hardware breakpoint registers */
-#define NT_ARM_HW_WATCH    0x403        /* ARM hardware watchpoint registers */
+#define NT_S390_SYSTEM_CALL   0x307    /* s390 system call restart data */
+#define NT_S390_TDB       0x308        /* s390 transaction diagnostic block */
+#define NT_ARM_VFP        0x400        /* ARM VFP/NEON registers */
+#define NT_ARM_TLS        0x401        /* ARM TLS register */
+#define NT_ARM_HW_BREAK   0x402        /* ARM hardware breakpoint registers */
+#define NT_ARM_HW_WATCH   0x403        /* ARM hardware watchpoint registers */
 #define NT_ARM_SYSTEM_CALL    0x404    /* ARM system call number */
-#define NT_ARM_SVE    0x405        /* ARM Scalable Vector Extension
-					   registers */
+#define NT_ARM_SVE        0x405        /* ARM Scalable Vector Extension registers */
 
 /* Legal values for the note segment descriptor types for object files.  */
 

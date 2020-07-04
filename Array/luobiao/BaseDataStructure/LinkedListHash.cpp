@@ -195,7 +195,7 @@ void printf_hashList(HashTable* ht) {
         }
 
     }
-
+    hash_Lookup
 }
 
 
