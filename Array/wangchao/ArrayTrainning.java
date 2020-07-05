@@ -42,4 +42,20 @@ public class ArrayTrainning {
     }
 
 
+    //股票最佳卖出时机 动态规划思想 维持两个变量
+    public static int maxPrice(int[] a){
+        int minPrice = Integer.MAX_VALUE; //保存当前买入的最小值
+        int maxProfit = 0;// 保存当前最大利润
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] < minPrice){
+                minPrice = a[i];
+            }else {
+                maxProfit = Math.max(maxProfit, a[i] - minPrice);
+            }
+        }
+        System.out.print("股票最大利润-->>> " + maxProfit);
+        return maxProfit;
+    }
+
+
 }
