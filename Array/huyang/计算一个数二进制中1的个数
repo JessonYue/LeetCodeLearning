@@ -1,0 +1,36 @@
+
+
+/**
+每次n和n-1按位与，n = 10100(二进制），则(n-1) = 10011 ==》n&(n-1) = 10000
+二进制原本最低位为1的那位变为0。二进制1的个数减一，最终值为0时，没有1存在，
+count值就为1的个数。
+*/
+class Solution {
+public:
+    int hammingWeight(uint32_t n) {
+        int re = 0;
+        while(n!=0){
+            re++;
+            n &= n-1;
+        }
+        return re;
+    }
+};
+
+
+//右移操作
+    class Solution {
+public:
+    int hammingWeight(uint32_t n) {
+
+
+int ret = 0 ;
+    while(n>0){
+        if((n & 1) == 1){
+            ret++;
+        }
+        n = n>>1;
+    }
+    return ret;
+    }
+};
