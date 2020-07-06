@@ -2,6 +2,7 @@ package SwordOffer59;
 
 import LInterview03_04.MyQueue;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -42,5 +43,7 @@ public class MaxQueue {
         System.out.println(myQueue.pop_front());
 
         System.out.println(myQueue.max_value());
+        HashMap<String, String> stringStringHashMap = new HashMap<>();
+        stringStringHashMap.put("austenyang","100");
     }
 }

@@ -1,0 +1,27 @@
+struct TreeNode* sortedListToBST(struct ListNode* head){
+	if(!head){
+		return NULL;
+	}
+	struct ListNode *pre = head, *slow = head, *fast = head;
+
+	while(fast->next && fast->next->next){
+		fast = fast->next->next;
+		pre = slow;
+		slow = slow->next;
+	}
+
+	struct TreeNode* root = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+	root->val = slow->val;
+
+	if(pre == slow){
+		root->left = NULL;
+	}else{
+		pre->next = NULL;
+		root->left = sortedListToBST(head);
+		pre->next = slow;
+	}
+
+	root->right = sortedListToBST(slow->next);
+	return root;
+
+}
