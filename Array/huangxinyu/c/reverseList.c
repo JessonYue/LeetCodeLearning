@@ -14,3 +14,14 @@ ListNode *reverseList(ListNode *head, int i) {
     }
     return pre;
 }
+
+ListNode *reverseList1(ListNode *head, int i) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+    ListNode *pNode = reverseList(head->next, i);
+    head->next->next = head;
+    head->next = NULL;
+    return pNode;
+
+}

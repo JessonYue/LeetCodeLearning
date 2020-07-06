@@ -96,3 +96,28 @@ cur指针指向后继节点，原cur节点作为pre,一直遍历到cur为空
 ## [237. 删除链表中的节点](https://leetcode-cn.com/problems/delete-node-in-a-linked-list/)
 可以将删除节点之前节点的指针指向删除节点之后之后的节点，但这个问题的难点在于不知道删除节点的之前节点，
 所以可以通过将删除节点赋值为之后节点的值，然后删除之后的节点
+
+## [1343. 大小为 K 且平均值大于等于阈值的子数组数目](https://leetcode-cn.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/)
+此题掌握关键解法**滑动窗口法**
+
+1.先取前k个数,大于k*threshold则+1
+
+2.然后以k个数为单位不断后移，减去前一个数并加上后一个数，结果大于k*threshold则+1
+
+## [123. 买卖股票的最佳时机 III](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)
+动态规划？先跳过
+
+## [面试题 02.02. 返回倒数第 k 个节点](https://leetcode-cn.com/problems/kth-node-from-end-of-list-lcci/)
+看了思路没看实现，自己做出来了，哈哈哈
+貌似链表问题的通用思路就是**快慢指针**
+
+1. 将cur先走k步
+
+2. 然后head和cur同步走，cur走到空的时候，head正好走到k
+
+## [109. 有序链表转换二叉搜索树](https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/)
+二叉搜索树也叫二叉排序树，规则是每个节点都大于其左子树节点，都小于其右子树节点
+
+1. 对链表使用快慢指针，快指针走两步，慢指针走一步，快指针走到尾节点的时候，慢指针指向中间节点，即可作为二次搜索树
+的根节点，此时注意将左链表断开
+2. 将原头节点作为左子树，将mid.next作为右子树，递归构建

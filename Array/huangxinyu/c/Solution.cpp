@@ -54,3 +54,7 @@ bool isValidBrackets(const char *s) {
     return st.empty();
 }
 
+int numOfSubarrays(vector<int>& arr, int k, int threshold) {
+
+}
+

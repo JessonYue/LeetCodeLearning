@@ -11,7 +11,7 @@ public class Homework_006 {
         System.out.print("链表反转前的元素为：");
         list.displayList(list);
         System.out.print("\n");
-        list = list.reverseList(list);
+        list = list.reverseList_(list);
         System.out.print("链表反转后的元素为：");
         list.displayList(list);
         System.out.print("\n");

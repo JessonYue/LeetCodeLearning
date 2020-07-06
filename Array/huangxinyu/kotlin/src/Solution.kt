@@ -123,4 +123,27 @@ class Solution {
         }
         return ret
     }
+
+    fun numOfSubarrays(arr: IntArray, k: Int, threshold: Int): Int {
+        var ret = 0
+        if (arr.size < k) {
+            return ret
+        }
+        var i = 0
+        val sumThreshld = k * threshold;
+        var sum = 0
+        while (i < k) {
+            sum += arr[i]
+            ++i
+        }
+        var delta = sum - sumThreshld
+        while (i < arr.size) {
+            delta += (arr[i] - arr[i - k])
+            if (delta > 0) {
+                ret++
+            }
+            i++
+        }
+        return ret
+    }
 }
