@@ -1,0 +1,3 @@
+gcc -c a.c b.c 
+gcc -shared -fPIC c.c -l c.so
+gcc a.o b.o c.so -o abc
