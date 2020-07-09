@@ -3,4 +3,4 @@ project(Cpp)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Cpp main.cpp L206/Solution.cpp ListNode.h)
+add_executable(Cpp main.cpp L206/Solution.cpp ListNode.h L206/reverseString.cpp)
