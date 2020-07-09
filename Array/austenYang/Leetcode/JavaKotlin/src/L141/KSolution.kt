@@ -1,6 +1,7 @@
 package L141
 
 import DataStructure.ListNode
+import java.util.*
 
 fun hasCycle1(head: ListNode?): Boolean {
     var h = head
