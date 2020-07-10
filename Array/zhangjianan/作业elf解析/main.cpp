@@ -16,35 +16,206 @@ void readElfHeader(Elf64_Ehdr *file);
 
 Elf64_Ehdr readElf();
 
-void parseElf(Elf64_Ehdr hdr);
+void parseElf();
 
 char *getMachine(Elf64_Half machine);
+char *getSectionTypeNameByType(uint64_t type) {
+    // 注意，这里不可以直接：name = "NULL"这样进行赋值，只能通过strcpy这个函数或者自己逐个字符读写
+    switch (type) {
+        case SHT_NULL:
+            return "NULL";
+        case SHT_PROGBITS:
+            return "PROGBITS";
+        case SHT_SYMTAB:
+            return "SYMTAB";
+        case SHT_STRTAB:
+            return "STRTAB";
+        case SHT_RELA:
+            return "RELA";
+        case SHT_HASH:
+            return "HASH";
+        case SHT_DYNAMIC:
+            return "DYNAMIC";
+        case SHT_NOTE:
+            return "NOTE";
+        case SHT_NOBITS:
+            return "NOBITS";
+        case SHT_REL:
+            return "REL";
+        case SHT_SHLIB:
+            return "SHLIB";
+        case SHT_DYNSYM:
+            return "DYNSYM";
+        case SHT_INIT_ARRAY:
+            return "INIT_ARRAY";
+        case SHT_FINI_ARRAY:
+            return "FINI_ARRAY";
+        case SHT_PREINIT_ARRAY:
+            return "PREINIT_ARRAY";
+        case SHT_GROUP:
+            return "GROUP";
+        case SHT_SYMTAB_SHNDX:
+            return "SYMTAB_SHNDX";
+        case SHT_NUM:
+            return "NUM";
+        case SHT_LOOS:
+            return "LOOS";
+        case SHT_GNU_ATTRIBUTES:
+            return "GNU_ATTRIBUTES";
+        case SHT_GNU_HASH:
+            return "GNU_HASH";
+        case SHT_GNU_LIBLIST:
+            return "GNU_LIBLIST";
 
-Elf64_Ehdr readElf() {
-    FILE *fp;
-    if ((fp = fopen("../sub.so", "r")) == NULL) {//打开文件
-        printf("file open file");
-        exit(0);
+        case SHT_CHECKSUM:
+            return "CHECKSUM";
+
+        case SHT_LOSUNW:
+            return "LOSUNW";
+
+        case SHT_SUNW_COMDAT:
+            return "SUNW_COMDAT";
+
+        case SHT_SUNW_syminfo:
+            return "SUNW_syminfo";
+
+        case SHT_GNU_verdef:
+            return "GNU_verdef";
+
+        case SHT_GNU_verneed:
+            return "GNU_verneed";
+
+        case SHT_GNU_versym:
+            return "GNU_versym";
+
+        case SHT_LOPROC:
+            return "LOPROC";
+
+        case SHT_HIPROC:
+            return "HIPROC";
+
+        case SHT_LOUSER:
+            return "LOUSER";
+
+        case SHT_HIUSER:
+            return "HIUSER";
+
+        default:
+            return "NULL";
     }
-    Elf64_Ehdr buff;
-    fread(&buff, sizeof(Elf64_Ehdr), 1, fp);
-    return buff;
 }
 
-
+void getSectionFlagNameByFlags(uint64_t flags, char flag[]) {
+    memset(flag, '\0', 12);
+    char temp[12];
+    memset(temp, '\0', 12);
+    int index = 0;
+    uint64_t result = 0;
+    result |= flags;
+    if (result & SHF_WRITE)
+        temp[index++] = 'W';
+    if (result & SHF_ALLOC)
+        temp[index++] = 'A';
+    if (result & SHF_EXECINSTR)
+        temp[index++] = 'X';
+    if (result & SHF_MERGE)
+        temp[index++] = 'M';
+    if (result & SHF_STRINGS)
+        temp[index++] = 'S';
+    if (result & SHF_INFO_LINK)
+        temp[index++] = 'I';
+    if (result & SHF_LINK_ORDER)
+        temp[index++] = 'L';
+    if (result & SHF_GROUP)
+        temp[index++] = 'G';
+    if (result & SHF_MASKOS)
+        temp[index++] = 'o';
+    if ((result & SHF_MASKPROC) == SHF_MASKPROC)
+        temp[index++] = 'p';
+    if ((result & SHF_TLS) || (result & SHF_COMPRESSED) || (result & SHF_OS_NONCONFORMING))
+        temp[index] = 'x';
+    strcpy(flag, temp);
+//W #define SHF_WRITE               (1 << 0)    /* Writable */
+//A #define SHF_ALLOC               (1 << 1)    /* Occupies memory during execution */
+//X #define SHF_EXECINSTR           (1 << 2)    /* Executable */
+//M #define SHF_MERGE               (1 << 4)    /* Might be merged */
+//S #define SHF_STRINGS             (1 << 5)    /* Contains nul-terminated strings */
+//I #define SHF_INFO_LINK           (1 << 6)    /* `sh_info' contains SHT index */
+//L #define SHF_LINK_ORDER          (1 << 7)    /* Preserve order after combining */
+//#define SHF_OS_NONCONFORMING    (1 << 8)    /* Non-standard OS specific handling required */
+//G #define SHF_GROUP               (1 << 9)    /* Section is member of a group.  */
+//#define SHF_TLS                 (1 << 10)   /* Section hold thread-local data.  */
+//#define SHF_COMPRESSED          (1 << 11)   /* Section with compressed data. */
+//o #define SHF_MASKOS              0x0ff00000  /* OS-specific.  */
+//p #define SHF_MASKPROC            0xf0000000  /* Processor-specific */
+//p #define SHF_ORDERED             (1 << 30)   /* Special ordering requirement (Solaris).  */
+//p #define SHF_EXCLUDE             (1U << 31)  /* Section is excluded unless referenced or allocated (Solaris).*/
+}
+void printElf64_Shdr(int index, Elf64_Shdr elf64Shdr, char strtab[]) {
+    printf("[%2d]\t", index);
+    char name[20];
+    memset(name, '\0', 20);//添加字符串结尾
+    name[0] = strtab[elf64Shdr.sh_name];//利用表明偏移量取出第一个字符
+    int i = 1;
+    while (strtab[elf64Shdr.sh_name + i]  != 0) {//取出偏移量起始  0结束的所有字符
+        name[i] = strtab[elf64Shdr.sh_name + i];
+        i++;
+    }
+    printf("%-20s", name);
+    printf("%-16s", getSectionTypeNameByType(elf64Shdr.sh_type));
+    char flag[12];
+    getSectionFlagNameByFlags(elf64Shdr.sh_flags, flag);
+    printf("%-12s", flag);
+    printf("0x%x \t", elf64Shdr.sh_addr);
+    printf("0x%x \t", elf64Shdr.sh_offset);
+    printf("0x%x \t", elf64Shdr.sh_size);
+    printf("0x%x \t", elf64Shdr.sh_link);
+    printf("0x%x \t", elf64Shdr.sh_info);
+    printf("0x%x \t", elf64Shdr.sh_addralign);
+    printf("0x%x \t", elf64Shdr.sh_entsize);
+    printf("\n");
+}
 int main() {
-    Elf64_Ehdr elf = readElf();
-    parseElf(elf);
-//    Elf64_Ehdr file = loadFile();
-//    readElfHeader(&file);
+    parseElf();
     return 0;
+}
+void printfElf32_PhdrMessage(FILE *elf, int offset, int e_phnum) {
+    // int fseek(FILE *stream, long int offset, int whence) 设置流 stream 的文件位置为给定的偏移 offset，参数 offset 意味着从给定的 whence 位置查找的字节数。
+    // fseek(elf, 0, SEEK_SET);
+    // 将文件位置标识移动到程序头部位置
+    fseek(elf, offset, SEEK_SET);
+    // long int ftell(FILE *stream) 返回给定流 stream 的当前文件位置
+    printf("Program header from %ld bytes\n", ftell(elf));
+    printf("The Program Header Message:\n");
+    Elf64_Phdr *phdr = static_cast<Elf64_Phdr *>(malloc(e_phnum * sizeof(Elf64_Phdr)));
+    if (e_phnum == fread(phdr, sizeof(Elf64_Phdr), e_phnum, elf)) {
+        Elf64_Phdr *p = phdr;
+        printf("Type\t\tOffset\t\tVirtAddr\tPhysAddr\tFileSiz\t\tMemSiz\t\tFlg\tAl\n");
+        for (int i = 0; i < e_phnum; ++i, p++) {
+            printf("%-10x\t%-#6x\t\t%-#6x\t\t%-#6x\t\t%-#5x\t\t%-#5x\t\t%-#x\t%-2d\n", \
+                p->p_type, p->p_offset, \
+                p->p_vaddr, p->p_paddr, \
+                p->p_filesz, p->p_memsz, \
+                p->p_flags, p->p_align);
+        }
+    } else
+        printf("Read program header fail\n");
+    free(phdr);
+    phdr = NULL;
 }
 
 /**
  *解析头部
  * @param hdr
  */
-void parseElf(Elf64_Ehdr hdr) {
+void parseElf() {
+    FILE *pIobuf;
+    if ((pIobuf = fopen("../sub.so", "r")) == NULL) {//打开文件
+        printf("file open file");
+        exit(0);
+    }
+    Elf64_Ehdr hdr;
+    fread(&hdr, sizeof(Elf64_Ehdr), 1, pIobuf);//读取头部信息
     printf("Magic:     ");//ELF魔数 16个字节 程序员自我修养》72页
     for (int i = 0; i < EI_NIDENT; ++i) {
         printf("%02x ", hdr.e_ident[i]);
@@ -119,7 +290,27 @@ void parseElf(Elf64_Ehdr hdr) {
     printf("e_shnum:    %d\n", hdr.e_shnum);
     // 节头部字符串表的索引
     printf("e_shstrndx:    %d\n", hdr.e_shstrndx);
+    /**section header**/
+    int sechnum = 0;
+     sechnum = hdr.e_shnum;
+    Elf64_Shdr section_header[sechnum] ;
+    fseek(pIobuf,hdr.e_shoff,SEEK_SET);
+    printf("\n/*****section header table****/\n");
 
+    fread(section_header,sizeof( Elf64_Shdr),sechnum,pIobuf);
+    printf("[Nr] Name          Type          Addr         Off      Size     ES Flg  Al \n");
+    Elf64_Shdr str_shdr = section_header[hdr.e_shstrndx];
+    char strtab[str_shdr.sh_size];
+    //读取字符表
+    fseek(pIobuf, str_shdr.sh_offset, SEEK_SET);
+    fread(strtab, str_shdr.sh_size, 1, pIobuf);
+
+    for(int i=0; i<sechnum; i++) {
+        printElf64_Shdr(i, section_header[i], strtab);
+
+    }
+    printf("======Program header table Size %d======\n", hdr.e_phnum);
+    printfElf32_PhdrMessage(pIobuf, hdr.e_phoff, hdr.e_phnum);
 }
 
 char *getMachine(Elf64_Half machine) {
@@ -238,109 +429,5 @@ char *getMachine(Elf64_Half machine) {
     return nullptr;
 }
 
-void readElfHeader(Elf64_Ehdr file) {
 
-    /*  printf("\nClass:     ");
-      //Magic最开始4个字节是所有ELF文件必须相同的表示码，0x7f 0x45 0x4c 0x46 ---《程序员自我修养》73页 0x45 0x4c 0x46(ELF的ASCII码)
-      //Class  ELF文件类型 0x01是32位，ox02是64位
-      switch (file[4]) {
-          case 1:
-              printf("Elf32\n");
-              break;
 
-          case 2:
-              printf("Elf64\n");
-              break;
-
-      }
-      //Data   大小端
-      printf("Data:      ");
-      switch(file[5])
-      {
-          case 1:
-              printf("2's complement, little endian\n");
-              break;
-          case 2:
-              printf("2's complement, big endian\n");
-              break;
-      }
-      //Version  默认版本为1
-      printf( "Version:   ");
-      printf("%d(current)\n", file[6]);
-      //os version
-      printf("OS/ABI:    UNIX - System V\n");
-
-      //ABI Version
-      printf( "ABI Version:   0\n");
-      //文件类型
-      printf( "Type:    ");
-      file+=16;
-      switch (*(unsigned short int*)file) {
-          case 1://ET_REL可重定位文件，一般位.o文件
-              printf("Relocatable file\n");
-              break;
-          case 2://ET_EXEC可执行文件
-              printf("Executable file\n");
-              break;
-          case 3://ET_DYN共享目标文件，一般为so文件
-              printf("Shared object file\n");
-              break;
-      }
-      //Machine
-      printf( "Machine:    ");
-
-      file += sizeof(unsigned short int);
-      switch(*(unsigned short int*)file)
-      {
-          case 1:
-              printf(" Intel 80386\n");
-              break;
-          case 2:
-              printf(" ARM\n");
-              break;
-          case 3:
-              printf(" AMD X86-64 arrchitecture\n");
-              break;
-          case 4:
-              printf(" AARCH64\n");
-              break;
-          case 5:
-              printf(" AARCH64\n");
-              break;
-          case 6:
-              printf(" AARCH64\n");
-              break;
-      }*/
-}
-
-Elf64_Ehdr loadFile() {
-//    char *pathname = "../libget.so";
-    FILE *fp;
-    if ((fp = fopen("../sub.so", "r")) == NULL) {//打开文件
-        printf("file open file");
-        exit(0);
-    }
-    struct stat *_Stat = (struct stat *) malloc(sizeof(struct stat *));
-//    int s = stat(pathname, _Stat);
-//    int filesize = _Stat->st_size;
-    //求得文件的大小
-    fseek(fp, 0L, SEEK_END);//
-    long inputFileLength = ftell(fp);//返回给定流 stream 的当前文件位置。
-    rewind(fp);//设置文件位置为给定流 stream 的文件的开头。
-//    char *buff = (char *) malloc(sizeof(char) * inputFileLength);
-    Elf64_Ehdr buff;
-    fread(&buff, sizeof(Elf64_Ehdr), 1, fp);
-//    int size = fread(buff, 1, inputFileLength, fp);
-//    int size = fread(&buff, 1, inputFileLength, fp);
-//    for (int i = 0; i < size; ++i) {
-//        printf("%02x ",buff[i]);
-//        if ((i+1)%16==0) {
-//            printf("\n ");
-//        }
-//    }
-    printf("Magic:     ");//ELF魔数 16个字节 程序员自我修养》72页
-    for (int i = 0; i < EI_NIDENT; ++i) {
-        printf("%02x ", buff.e_ident[i]);
-    }
-    return buff;
-}
