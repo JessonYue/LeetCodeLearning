@@ -34,4 +34,10 @@ void getSectionTypeNameByType(uint32_t type, char name[]);
 // 获取节中的标记名称
 void getSectionFlagNameByFlags(uint32_t flags, char flag[]);
 
+// 获取段中的类型名称
+void getSegmentTypeNameByType(uint32_t type, char name[]);
+
+// 获取段中的标记名称
+void getSegmentFlagNameByFlags(uint32_t flags, char flag[]);
+
 #endif //C_ELF_UTILS_H

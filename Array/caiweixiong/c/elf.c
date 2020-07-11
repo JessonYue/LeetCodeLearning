@@ -9,7 +9,7 @@
 
 void runElfParse(void) {
     FILE *file = NULL;
-    file = fopen("E:\\workspace\\c\\libtest.so", "rb");
+    file = fopen("/Users/mac/My/Study/C/libtest.so", "rb");
     if (!file) {
         printf("Open file fail\n");
         return;
@@ -768,18 +768,111 @@ void printfElf32_PhdrMessage(FILE *elf, int offset, int count) {
     Elf32_Phdr *phdr = malloc(count * sizeof(Elf32_Phdr));
     if (count == fread(phdr, sizeof(Elf32_Phdr), count, elf)) {
         Elf32_Phdr *p = phdr;
-        printf("Type\t\tOffset\t\tVirtAddr\tPhysAddr\tFileSiz\t\tMemSiz\t\tFlg\tAl\n");
+        char typeName[16];
+        char flag[12];
+        printf("%-16s%-8s%-10s%-10s%-10s%-10s%-10s%-6s\n",
+               "Type", "Offset", "VirtAddr", "PhysAddr", "FileSize", "MemSize", "Flg", "Al");
         for (int i = 0; i < count; ++i, p++) {
-            printf("%-10x\t%-#6x\t\t%-#6x\t\t%-#6x\t\t%-#5x\t\t%-#5x\t\t%-#x\t%-2d\n", \
-                p->p_type, p->p_offset, \
+            getSegmentTypeNameByType(p->p_type, typeName);
+            getSegmentFlagNameByFlags(p->p_flags, flag);
+            printf("%-16s%-#8x%-#10x%-#10x%-#10x%-#10x%-10s%-6d\n", \
+                typeName, p->p_offset, \
                 p->p_vaddr, p->p_paddr, \
                 p->p_filesz, p->p_memsz, \
-                p->p_flags, p->p_align);
+                flag, p->p_align);
         }
     } else
         printf("Read program header fail\n");
     free(phdr);
     phdr = NULL;
+}
+
+void getSegmentTypeNameByType(uint32_t type, char name[]) {
+    memset(name, '\0', 16);
+    // 注意，这里不可以直接：name = "NULL"这样进行赋值，只能通过strcpy这个函数或者自己逐个字符读写
+    switch (type) {
+        case PT_NULL:
+            strcpy(name, "NULL");
+            break;
+        case PT_LOAD:
+            strcpy(name, "LOAD");
+            break;
+        case PT_DYNAMIC:
+            strcpy(name, "DYNAMIC");
+            break;
+        case PT_INTERP:
+            strcpy(name, "INTERP");
+            break;
+        case PT_NOTE:
+            strcpy(name, "NOTE");
+            break;
+        case PT_SHLIB:
+            strcpy(name, "SHLIB");
+            break;
+        case PT_PHDR:
+            strcpy(name, "PHDR");
+            break;
+        case PT_TLS:
+            strcpy(name, "TLS");
+            break;
+        case PT_NUM:
+            strcpy(name, "NUM");
+            break;
+        case PT_LOOS:
+            strcpy(name, "LOOS");
+            break;
+        case PT_GNU_EH_FRAME:
+            strcpy(name, "GNU_EH_FRAME");
+            break;
+        case PT_GNU_STACK:
+            strcpy(name, "GNU_STACK");
+            break;
+        case PT_GNU_RELRO:
+            strcpy(name, "GNU_RELRO");
+            break;
+        case PT_SUNWBSS:
+            strcpy(name, "SUNWBSS");
+            break;
+        case PT_SUNWSTACK:
+            strcpy(name, "SUNWSTACK");
+            break;
+        case PT_HIOS:
+            strcpy(name, "HIOS");
+            break;
+        case PT_LOPROC:
+            strcpy(name, "LOPROC");
+            break;
+        case PT_HIPROC:
+            strcpy(name, "HIPROC");
+            break;
+        default:
+            strcpy(name, "NULL");
+    }
+}
+
+void getSegmentFlagNameByFlags(uint32_t flags, char flag[]) {
+    memset(flag, '\0', 12);
+    char temp[12];
+    memset(temp, '\0', 12);
+    int index = 0;
+    uint32_t result = 0;
+    result |= flags;
+    if (result & PF_X)
+        temp[index++] = 'X';
+    if (result & PF_W)
+        temp[index++] = 'W';
+    if (result & PF_R)
+        temp[index++] = 'R';
+    if (result & PF_MASKOS)
+        temp[index++] = 'S';
+    if (result & PF_MASKPROC)
+        temp[index++] = 'C';
+    strcpy(flag, temp);
+//#define PF_X        (1 << 0)        /* Segment is executable */
+//#define PF_W        (1 << 1)        /* Segment is writable */
+//#define PF_R        (1 << 2)        /* Segment is readable */
+//#define PF_MASKOS    0x0ff00000     /* OS-specific */
+//#define PF_MASKPROC    0xf0000000   /* Processor-specific */
 }
 
 void printfElf32_ShdrMessage(FILE *elf, int offset, int count, uint16_t shstrndx) {
@@ -798,7 +891,8 @@ void printfElf32_ShdrMessage(FILE *elf, int offset, int count, uint16_t shstrndx
         fseek(elf, shstr.sh_offset, SEEK_SET);      // 将文件偏移到节表字符串表的位置
         fread(srcName, shstr.sh_size, 1, elf);  // 读取劫镖字符串表
 
-        printf("\t[Nr]\tName\t\t\tType\t\tAddr\t\tOff\tSize\tES\tFlg\tLk\tInf\tAl\n");
+        printf("\t[%2s]\t%-24s%-12s\t%-8s\t%-6s\t%-6s\t%2s\t%3s\t%2s\t%3s\t%2s\n",
+                "Nr", "Name", "Type", "Addr", "Off", "Size", "ES", "Flg", "Lk", "Inf", "Al");
         for (int i = 0; i < count; ++i, s++) {
             getSectionNameByName(s->sh_name, srcName, destName);
             getSectionTypeNameByType(s->sh_type, typeName);

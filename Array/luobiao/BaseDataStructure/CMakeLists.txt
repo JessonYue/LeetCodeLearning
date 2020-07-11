@@ -12,6 +12,7 @@ add_executable(BinaryTree BinaryTree.cpp Test.c )
 add_executable(BST BST.cpp)
 add_executable(Hash Hash.c)
 add_executable(LinkedListHash LinkedListHash.cpp LinkedListHash.h)
+add_executable(ELFParse ELFParse.cpp ELFParse.h)
 
 #ELF.cpp
 
