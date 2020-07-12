@@ -1,6 +1,6 @@
 package L160;
 
-import DataStructure.ListNode;
+import Base.ListNode;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -8,6 +8,7 @@ public class BST<E extends Comparable<E>> {
     private class Node {
         public E e;
         public Node left, right;
+        public int N;
 
         public Node(E e) {
             this.e = e;
@@ -50,7 +51,24 @@ public class BST<E extends Comparable<E>> {
         else if (e.compareTo(node.e) > 0) {
             node.right = add(node.right, e);
         }
+        node.N = size(node.left) + size(node.right) + 1;
         return node;
+    }
+
+    public int size() {
+        return size(root);
+    }
+
+    /**
+     * 返回 node 节点上个节点个数
+     *
+     * @param node
+     * @return
+     */
+    private int size(Node node) {
+        if (node == null) {
+            return 0;
+        } else return node.N;
     }
 
     /**
@@ -298,6 +316,117 @@ public class BST<E extends Comparable<E>> {
             return successor;
         }
     }
+
+    /**
+     * 删除以 Node 为根二分搜索树上的 e 节点
+     * 删除后返回 根节点
+     *
+     * @param node
+     * @param e
+     * @return
+     */
+    public Node removePre(Node node, E e) {
+        if (node == null) {
+            return null;
+        }
+        int compare = e.compareTo(node.e);
+
+        if (compare > 0) {
+            node.right = removePre(node.right, e);
+            return node;
+        } else if (compare < 0) {
+            node.left = removePre(node.left, e);
+            return node;
+        } else {
+            if (node.left == null) return node.right;
+            if (node.right == null) return node.left;
+            Node t = node;
+            node = maximum(node);
+            node.left = removeMax(node);
+            node.right = t.right;
+
+            return node;
+
+        }
+    }
+
+    /**
+     * 获取 树 中小于等于 e 节点的的 Node
+     *
+     * @param
+     * @return
+     */
+    public E floor(E e) {
+        Node floor = floor(root, e);
+        if (floor == null) return null;
+        return floor.e;
+    }
+
+    /**
+     * 在以 Node 为根的节点上 查找 小于等于 e 的节点
+     * 并返回
+     *
+     * @param node
+     * @param e
+     * @return
+     */
+    private Node floor(Node node, E e) {
+        if (node == null) {
+            return null;
+        }
+
+        int compare = e.compareTo(node.e);
+        if (compare == 0) {
+            return node;
+        }
+        if (compare < 0) {
+            return floor(node.left, e);
+        } else {
+            Node floor = floor(node.right, e);
+            if (floor == null) return node;
+            else return floor;
+        }
+    }
+
+
+    public E ceiling(E e) {
+        Node ceiling = ceiling(root, e);
+        if (ceiling == null) return null;
+        return ceiling.e;
+    }
+
+    private Node ceiling(Node node, E e) {
+        if (node == null)
+            return null;
+        int compare = e.compareTo(node.e);
+        if (compare == 0) {
+            return node;
+        }
+        if (compare > 0) {
+            return ceiling(node.right, e);
+        } else {
+            Node ceiling = ceiling(node.left, e);
+            if (ceiling == null) return node;
+            else return ceiling;
+        }
+
+    }
+
+    public Iterable<E> keys(E lo,E hi){
+        Queue<E> queue = new LinkedList<>();
+        keys(root,queue,lo,hi);
+        return queue;
+    }
+    private void keys(Node node,Queue<E> queue,E lo,E hi){
+        if (node == null){
+            return;
+        }
+        int loCompare = lo.compareTo(node.e);
+        int hiCompare = hi.compareTo(node.e);
+
+
+    }
+
 
     @Override
     public String toString() {

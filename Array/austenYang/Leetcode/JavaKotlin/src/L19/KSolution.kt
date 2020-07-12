@@ -1,6 +1,6 @@
 package L19
 
-import DataStructure.ListNode
+import Base.ListNode
 
 /**
  *

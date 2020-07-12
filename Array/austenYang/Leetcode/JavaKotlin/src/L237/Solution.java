@@ -1,6 +1,6 @@
 package L237;
 
-import DataStructure.ListNode;
+import Base.ListNode;
 
 public class Solution {
     public static void deleteNode(ListNode node) {

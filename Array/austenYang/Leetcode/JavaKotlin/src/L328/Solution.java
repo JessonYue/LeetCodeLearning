@@ -1,7 +1,6 @@
 package L328;
 
-import DataStructure.ListNode;
-
+import Base.ListNode;
 
 
 /**

@@ -1,7 +1,7 @@
 package L109;
 
-import DataStructure.ListNode;
-import DataStructure.TreeNode;
+import Base.ListNode;
+import Base.TreeNode;
 
 
 public class Solution {
