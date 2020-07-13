@@ -1,6 +1,6 @@
 package LInterview02_02
 
-import DataStructure.ListNode
+import Base.ListNode
 
 var K = 1
 fun kthToLast(head: ListNode, k: Int): Int {

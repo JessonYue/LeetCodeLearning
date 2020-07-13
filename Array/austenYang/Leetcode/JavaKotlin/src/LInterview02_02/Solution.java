@@ -1,6 +1,6 @@
 package LInterview02_02;
 
-import DataStructure.ListNode;
+import Base.ListNode;
 
 public class Solution {
 

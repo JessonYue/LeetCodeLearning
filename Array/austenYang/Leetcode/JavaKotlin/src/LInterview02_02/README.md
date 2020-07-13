@@ -22,7 +22,7 @@
 
 ```java
 private int step = 1; 
-public int kthToLast(ListNode head, int k) {
+public int kthToLast(Base.ListNode head, int k) {
 		if(head.next == null) head.val;
    	int val = kthToLast(head.next,k);
   	// 大于 = k 就是在倒序的时候第几次访问 ，那么就是要找的书

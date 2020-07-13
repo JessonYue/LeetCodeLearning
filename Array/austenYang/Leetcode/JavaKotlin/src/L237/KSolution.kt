@@ -1,6 +1,6 @@
 package L237
 
-import DataStructure.ListNode
+import Base.ListNode
 
 fun deleteNode(node: ListNode) {
     node.`val` = node.next.`val`
