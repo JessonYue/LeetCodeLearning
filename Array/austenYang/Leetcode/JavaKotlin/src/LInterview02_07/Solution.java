@@ -1,6 +1,6 @@
 package LInterview02_07;
 
-import DataStructure.ListNode;
+import Base.ListNode;
 
 import java.util.HashSet;
 

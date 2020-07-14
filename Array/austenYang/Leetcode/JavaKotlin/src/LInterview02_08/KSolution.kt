@@ -1,6 +1,6 @@
 package LInterview02_08
 
-import DataStructure.ListNode
+import Base.ListNode
 
 
 fun detectCycle1(head: ListNode?): ListNode? {

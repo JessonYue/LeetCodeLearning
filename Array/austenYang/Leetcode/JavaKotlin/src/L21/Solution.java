@@ -1,6 +1,6 @@
 package L21;
 
-import DataStructure.ListNode;
+import Base.ListNode;
 
 public class Solution {
 

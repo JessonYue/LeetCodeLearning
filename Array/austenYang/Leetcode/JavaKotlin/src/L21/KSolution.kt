@@ -1,6 +1,6 @@
 package L21
 
-import DataStructure.ListNode
+import Base.ListNode
 
 fun mergeTwoLists(l1: ListNode, l2: ListNode): ListNode? {
     var l11: ListNode? = l1
