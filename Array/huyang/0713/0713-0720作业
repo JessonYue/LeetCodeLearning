@@ -1,0 +1,22 @@
+1、回顾第一周的ELF作业，参考我给出的代码和别的组的代码完成复盘，继续增强ELF文件协议的解析，做好能搞清楚偏移和相关Section的解析原理，为后面的知识做铺垫。
+2、自行学习Android动态加载SO的源码，掌握SO动态加载API，结合https://github.com/duqian291902259/DQ-Android-Labs开源库，掌握SO动态下发的核心和关键点，为高手班插件化学习做准备。
+3、完成二插搜索树的创建、插入、遍历、删除、销毁的C代码实践。
+4、假如数据库中有如下记录：
+       43 peter
+       21 Linda
+       90 Jesson
+       77 Donald
+       ......
+编写代码完成：1）从文件中读取Person对象2）讲Person写入一个新文件3）对Person根据姓名排序4）释放内存5）关闭文件流
+5、C语言实现strcpy（字符串复制）、strcat（字符串链接）、strstr（字符串包含）、strchr（字符出现位置）、memcpy（拷贝）。主要熟悉指针高级用法。
+6、熟悉信号量的理论，完成简单信号量的代码编写，可以用多线程解决同步。
+7、复习堆和堆排序，完成代码编写。重点是Shift Up/Down的编写。
+8、https://leetcode-cn.com/problems/first-unique-character-in-a-string/
+9、https://leetcode-cn.com/problems/convert-a-number-to-hexadecimal/
+10、https://leetcode-cn.com/problems/move-zeroes/
+11、https://leetcode-cn.com/problems/backspace-string-compare/
+12、https://leetcode-cn.com/problems/intersection-of-two-linked-lists/
+13、自己设计一个Hash散列函数，用C实现散列基础的数据结构。阅读HashTable的源码。
+14、动手实践，动态开辟内存多次，然后free其中部分内存，观看进程maps结构，掌握进程的内存映射知识。
+15、https://github.com/Meituan-Dianping/Logan/blob/master/Logan/Clogan/mmap_util.c 阅读这个文件，熟悉基本的语法，不会的先自己学起来。
+16、预习进程通信之消息队列。能写简单的API完成2个进程的交互，可以写2个C文件，完成数据传递。
