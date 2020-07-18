@@ -4,7 +4,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 
 /*
 给你两个数组，arr1 和 arr2，
