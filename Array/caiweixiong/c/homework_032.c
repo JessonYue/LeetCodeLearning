@@ -31,7 +31,7 @@ char getHexChar(int value);
 
 // 数字转换为十六进制数，LeetCode第405题
 void homework_032_405(void) {
-    char *hexStr = toHex(-1);
+    char *hexStr = toHex(935);
     printf("the hex string is : %s\n", hexStr);
     free(hexStr);
 }
@@ -55,7 +55,7 @@ char *toHex(int num) {
     char *hexStr = malloc(size), *p = hexStr;
     hexStr[size - 1] = '\0';
     // 将实际有用的数据存到动态开辟的数组内
-    for (int i = index + 1; i < length; *p = temp[i], ++i, p++);
+    for (int i = index + 1; i < length; *p++ = temp[i], ++i);
     return hexStr;
 }
 
