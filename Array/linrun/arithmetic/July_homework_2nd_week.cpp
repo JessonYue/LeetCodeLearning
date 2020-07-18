@@ -19,7 +19,7 @@ int firstUniqChar(char * s){
     while(s[comp]){
         if(s[comp] == s[start]){
             start++;
-            if(!s[comp]){
+            if(!s[comp+1]){
                 lastRep = true;
             }
             comp = 0;
