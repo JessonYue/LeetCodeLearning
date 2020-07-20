@@ -24,24 +24,18 @@ int main() {
     // 释放部分资源
     Person *person = (Person *) getObjectIndexAt(array, 10);
     printf("the person name : %s, age : %d\n", getStringValue(person->name), getIntegerValue(person->age));
-    // Person内的String与Integer也是malloc出来的，所以也要进行计数减少并释放
-    OBJ_RELEASE((Object) person->name);
-    OBJ_RELEASE((Object) person->age);
-    // 由于Add与Inset的时候进行了retain，所以这里应该要手动减少1次计数，不然无法释放
-    OBJ_RELEASE((Object) person);
+    // 回收对象
+    personRelease(person);
     removeIndexAt(array, 10);
     printArray(array);
-
+    
     // 释放剩余的资源
     for (int i = array->length - 1; i >= 0; --i) {
-        Person *p = (Person *) getObjectIndexAt(array, i);
-        OBJ_RELEASE((Object) p->name);
-        OBJ_RELEASE((Object) p->age);
-        OBJ_RELEASE((Object) p);
+        personRelease((Person *) getObjectIndexAt(array, i));
         removeIndexAt(array, i);
     }
-
+    
     destroyArray(array);
-
+    
     return 0;
 }

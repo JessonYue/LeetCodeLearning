@@ -23,3 +23,11 @@ String *getName(Person *person) {
 Integer *getAge(Person *person) {
     return person->age;
 }
+
+void personRelease(Person *person) {
+    // Person内的String与Integer也是malloc出来的，所以也要进行计数减少并释放
+    OBJ_RELEASE((JavaObject *) person->name);
+    OBJ_RELEASE((JavaObject *) person->age);
+    // 由于Add与Inset的时候进行了retain，所以这里应该要手动减少1次计数，不然无法释放
+    OBJ_RELEASE((JavaObject *) person);
+}
