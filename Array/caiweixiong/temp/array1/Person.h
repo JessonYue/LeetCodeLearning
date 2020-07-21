@@ -1,12 +1,12 @@
 //
-// Created by Vashon on 2020/7/20.
+// Created by Vashon on 2020/7/21.
 //
 
 #ifndef BASEDATASTRUCT_PERSON_H
 #define BASEDATASTRUCT_PERSON_H
 
-#include "String.h"
 #include "Integer.h"
+#include "String.h"
 
 typedef struct Person {
     int retainCount;
@@ -16,13 +16,12 @@ typedef struct Person {
 
 Person *newPerson(String *name, Integer *age);
 
-String *getName(Person *person);
+String *getPersonName(Person *person);
 
-Integer *getAge(Person *person);
+Integer *getPersonAge(Person *person);
 
 void printPerson(Person *person);
 
-void personRelease(Person *person);
-
+void releasePerson(Person *person);
 
 #endif //BASEDATASTRUCT_PERSON_H
