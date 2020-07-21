@@ -6,6 +6,7 @@
 #define C_ELF_UTILS_H
 
 #include <stdio.h>
+#include "elf.h"
 
 // 运行Elf文件解析
 void runElfParse(void);

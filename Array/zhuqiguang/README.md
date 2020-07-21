@@ -122,10 +122,56 @@ cur指针指向后继节点，原cur节点作为pre,一直遍历到cur为空
 的根节点，此时注意将左链表断开
 2. 将原头节点作为左子树，将mid.next作为右子树，递归构建
 
-## 计算二进制中1的个数
-二进制右移高位补0，相当于除以2，利用此特性，可以遍历二进制数，
-不断右移，如果与1“或”为1，则count+1,直到二进制数为0
+## [61. 旋转链表](https://leetcode-cn.com/problems/rotate-list/)
 
-## 字符串反转（利用指针）
-定义两个指针，first指针指向字符串的首地址，end指针指向字符串的尾地址，
-两指针不断往中间移动，并交换对应的值，直到first地址>end地址
+1. 将原尾指向原头，组成环
+2. 找到n-k%n-1为新尾，n-k%n为新头
+3. 断开新尾和新头的指针
+
+## [203. 移除链表元素](https://leetcode-cn.com/problems/remove-linked-list-elements/)
+如果删除结点为中间结点，则可以直接将pre指向删除结点的下一个结点，但是如果删除的是头结点呢？
+所以需要一个哨兵结点，哨兵结点是空值，只为了便于操作链表
+
+* 从哨兵结点开始不断遍历链表，
+    * 如果比对是删除的结点，则pre->next=cur->next;
+    * 否则pre=cur;
+* 返回哨兵结点->next
+> 注意C语言中如何创建对象，其实就是开辟空间，通过malloc(sizeof(需要创建对象的类型))
+
+## [94. 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+中序遍历指的是先遍历左子树，再遍历根结点，再遍历右子树，即左根右
+* 中序遍历二叉搜索树的结果是排序后的结果
+### 如何中序遍历
+递归是最简单的方法，
+
+```
+public  void inorder(TreeNode root) {
+    inorder(root.left);
+    print(root.val);
+    inorder(root.right);
+} 
+```
+但递归是操作系统帮我们自动完成了函数的栈操作，所以尝试非递归方式,
+从根结点开始入栈，不断找左子树，直到找到左子树，然后出栈，然后再找右子树
+
+```java
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        while(stack.size() > 0 || root != null) {
+            if(root != null) {
+                stack.push(root);
+                root = root.left;
+            }else {
+                TreeNode tmp = stack.pop();
+                list.add(tmp.val);
+                root = tmp.right;
+            }
+        }
+        return list;
+    }
+}
+```
+
+
