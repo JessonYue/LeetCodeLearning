@@ -7,7 +7,7 @@
 
 #include "Object.h"
 
-#define DEFAULT_CAPACITY 32 // 默认的容量大小
+#define DEFAULT_CAPACITY 8  // 默认的容量大小
 #define ADD_ELEM(array, object) addElement(array, (Object *)object)
 
 typedef struct Array {
