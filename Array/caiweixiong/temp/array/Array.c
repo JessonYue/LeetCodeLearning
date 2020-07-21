@@ -42,7 +42,7 @@ Array *removeIndexAt(Array *array, int index) {
     assert(index >= 0 && index < length);
     OBJ_RELEASE(array->value[index]);
     length = --array->length;
-    for (int i = index; i < length; array->value[index] = array->value[index + 1], ++i);
+    for (int i = index; i < length; array->value[i] = array->value[i + 1], ++i);
     return array;
 }
 
