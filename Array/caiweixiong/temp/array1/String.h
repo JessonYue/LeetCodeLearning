@@ -6,6 +6,7 @@
 #define BASEDATASTRUCT_STRING_H
 
 #include "Object.h"
+#include <string.h>
 
 typedef struct String {
     int retainCount;
@@ -17,5 +18,8 @@ String *newString(char *value);
 
 // 获取对象内的值
 char *getStringValue(String *string);
+
+// 回收字符串对象
+void releaseString(String *string);
 
 #endif //BASEDATASTRUCT_STRING_H

@@ -18,7 +18,11 @@ Person *newPerson(String *name, Integer *age);
 
 String *getPersonName(Person *person);
 
+char *getPersonNameValue(Person *person);
+
 Integer *getPersonAge(Person *person);
+
+int getPersonAgeValue(Person *person);
 
 void printPerson(Person *person);
 
