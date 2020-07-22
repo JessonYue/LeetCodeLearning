@@ -4,9 +4,7 @@
 
 #include <stdlib.h>
 #include <assert.h>
-#include <stdio.h>
 #include "Array.h"
-#include "Person.h"
 
 // 分配空间
 static Object *allocMemoryByCapacity(Array *array) {
@@ -44,7 +42,7 @@ Array *removeIndexAt(Array *array, int index) {
     assert(index >= 0 && index < length);
     OBJ_RELEASE(array->value[index]);
     length = --array->length;
-    for (int i = index; i < length; array->value[index] = array->value[index + 1], ++i);
+    for (int i = index; i < length; array->value[i] = array->value[i + 1], ++i);
     return array;
 }
 
@@ -75,16 +73,4 @@ int getArrayLength(Array *array) {
 void destroyArray(Array *array) {
     free(array->value);
     free(array);
-}
-
-void printArray(Array *array) {
-    int length = array->length;
-    if (length) {
-        for (int i = 0; i < length; ++i) {
-            Person *person = (Person *) array->value[i];
-            printf("index : %d, name : %s, age : %d\n", i, getStringValue(person->name), getIntegerValue(person->age));
-        }
-    } else {
-        printf("Array element is empty\n");
-    }
 }

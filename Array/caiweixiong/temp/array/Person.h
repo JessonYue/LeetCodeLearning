@@ -20,6 +20,9 @@ String *getName(Person *person);
 
 Integer *getAge(Person *person);
 
+void printPerson(Person *person);
+
 void personRelease(Person *person);
+
 
 #endif //BASEDATASTRUCT_PERSON_H

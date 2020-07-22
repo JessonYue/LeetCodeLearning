@@ -8,6 +8,7 @@
 #include "JavaObject.h"
 
 #define DEFAULT_CAPACITY 32
+#define ADD_ELEM(array, obj) addElement(array, (Object)obj)
 
 typedef JavaObject *Object;
 
@@ -16,6 +17,7 @@ typedef struct Array {
     int capacity;
     Object *value;
 } Array;
+
 
 Array *newArray();
 
@@ -30,7 +32,5 @@ Object getObjectIndexAt(Array *array, int index);
 int getArrayLength(Array *array);
 
 void destroyArray(Array *array);
-
-void printArray(Array *array);
 
 #endif //BASEDATASTRUCT_ARRAY_H
