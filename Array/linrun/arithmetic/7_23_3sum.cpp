@@ -88,7 +88,7 @@ void mergeOnce(int* array, int start, int end, int mid){
     for(int m=0; m<formerSize; m++){
         former[m] = array[start+m];
     }
-    for(int n=0; n<formerSize; n++){
+    for(int n=0; n<latterSize; n++){
         latter[n] = array[mid+1+n];
     }
     int i=0;
