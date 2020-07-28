@@ -11,26 +11,32 @@ class Solution {
 public:
     string frequencySort(string s) {
         unordered_map<char, int> ump;
-        for (const auto &c :s) {
+        for (const auto &c : s) {
             ++ump[c];
         }
-        priority_queue<pair<int, char>> pq;
+
+        vector<string> vec(s.size() + 1);
+        string res;
         for (const auto &m : ump) {
-            pq.push({m.second, m.first});
+            vec[m.second].append(m.second, m.first);
         }
-        string ret;
-        while (!pq.empty()) {
-            auto t = pq.top();
-            pq.pop();
-            ret.append(t.first, t.second);
+        for (int i = s.size(); i > 0; --i) {
+            if (!vec[i].empty()) {
+                res.append(vec[i]);
+            }
         }
-        return ret;
+        return res;
     }
 };
 
 int main() {
+
+//    int x ;
+//    auto y = 0.0f;
+//    cout << sizeof(y) << endl;
     Solution solution;
     string s = solution.frequencySort("tree");
     cout << s << endl;
+
     return 0;
 }

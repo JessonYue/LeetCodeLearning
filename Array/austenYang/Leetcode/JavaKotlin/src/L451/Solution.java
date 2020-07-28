@@ -41,35 +41,9 @@ public class Solution {
         return sb.toString();
     }
 
-    //"tree"
-    public static String frequencySort2(String s) {
-        char[] chars = s.toCharArray();
-        int length = chars.length;
-        HashMap<Character, Integer> map = new HashMap<>();
-        for (char aChar : chars) {
-            Integer count = map.get(aChar);
-            if (count == null) {
-                map.put(aChar, 1);
-            } else {
-                map.put(aChar, ++count);
-            }
-        }
-        char[] indexCountChars = new char[length];
-
-        for (Map.Entry<Character, Integer> keyValue :
-                map.entrySet()) {
-            indexCountChars[keyValue.getValue()] = keyValue.getKey();
-        }
-
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < indexCountChars.length; i++) {
-            System.out.println("--"+indexCountChars[i]);
-        }
-        return sb.toString();
-    }
 
     public static void main(String[] args) {
         System.out.println(frequencySort1("tree"));
-        System.out.println(frequencySort2("tree"));
+
     }
 }

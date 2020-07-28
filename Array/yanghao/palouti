@@ -1,0 +1,15 @@
+public int up(int target){
+    return up(0,target);
+}
+
+public int up(int i,int n){
+    if(i > n){
+      return 0;
+    }
+    
+    if(i==n){
+      return 1;
+    }
+    
+    return up(i+1,n)+up(i+2,n);
+}
