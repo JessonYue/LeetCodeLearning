@@ -12,7 +12,7 @@ int max(int x, int y) {
 
 void convolution(int *input1, int *input2, int *output, int inlen1, int inlen2) {
     int size = inlen1 + inlen2 - 1;
-    int *tmp = (int *) calloc(0, sizeof(int) * size);
+    int *tmp = (int *) calloc(size, sizeof(int));
     if (tmp == NULL)return;
     for (int i = 0; i < size; ++i) {
         //以位数最少的卷积作为卷积次数
@@ -22,7 +22,7 @@ void convolution(int *input1, int *input2, int *output, int inlen1, int inlen2) 
                 if (i - j >= 0 && i - j < max(inlen1, inlen2)) {
                     tmp[i] += input1[j] * input2[i - j];
                 }
-            } else{
+            } else {
                 if (i - j >= 0 && i - j < max(inlen1, inlen2)) {
                     tmp[i] += input2[j] * input1[i - j];
                 }
@@ -35,15 +35,14 @@ void convolution(int *input1, int *input2, int *output, int inlen1, int inlen2) 
     free(tmp);
 }
 
-int main(){
-    int input1[] = {1,2,3,4};
-    int input2[] = {1,2,3,4};
+int main() {
+    int input1[] = {1, 2, 3, 4};
+    int input2[] = {1, 2, 3, 4};
     int size = 7;
     int *out = (int *) calloc(0, sizeof(int) * size);
-    convolution(input1, input2, out, 4,4);
+    convolution(input1, input2, out, 4, 4);
     printf("卷积结果\n");
-    for (int i = 0; i <size; i++)
-    {
+    for (int i = 0; i < size; i++) {
         printf("%d ", out[i]);
     }
     return 0;
