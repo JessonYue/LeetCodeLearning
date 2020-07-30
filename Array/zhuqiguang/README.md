@@ -1,6 +1,9 @@
 # Algorithm
 数据结构和算法练习
 
+## 收藏的一些github库，参考思路用
+* [小浩算法](https://www.geekxh.com/0.0.%E5%AD%A6%E4%B9%A0%E9%A1%BB%E7%9F%A5/01.html)
+
 ## 70.爬楼梯
 典型的递归问题，解决递归问题的关键
 * 1.找到递归的公式
@@ -173,9 +176,45 @@ class Solution {
     }
 }
 ```
+## [1122. 数组的相对排序](https://leetcode-cn.com/problems/relative-sort-array/)
+可以用计数排序，搞不太懂，先跳过
+
+## [387. 字符串中的第一个唯一字符](https://leetcode-cn.com/problems/first-unique-character-in-a-string/)
+字符“唯一”，保证字符唯一的数据结构想到散列表
+1. 将每个字符put进散列表中作为key,出现的次数作为value
+2. 重新遍历字符串，字符出现次数为1即表示唯一
+
 
 ## [283. 移动零](https://leetcode-cn.com/problems/move-zeroes/submissions/)
 1. 通过指针j来遍历数组，将非0的值移到数组的左边，第一次遍历完后，指针j指向最后一个非0元素
 2. 第二次遍历，将指针右边的非0元素全部置为0
+
+## [844. 比较含退格的字符串](https://leetcode-cn.com/problems/backspace-string-compare/)
+因为遇到“#”则退回一个字符，很符合栈的弹栈操作，所以此处重构字符串，可以将非“#”的字符入栈，如果是“#”则出栈
+
+## [160. 相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
+利用双指针，从各自链表head开始遍历，如果到tail,则指向对方head开始遍历，如果有相交肯定会相遇
+
+```c
+struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB) {
+    struct ListNode *aP = headA;
+    struct ListNode *bP = headB;
+    while(aP != bP) {
+        aP = aP == NULL?headB:aP->next;
+        bP = bP == NULL?headA:bP->next;
+    }
+    return aP;
+}
+```
+
+## [146. LRU缓存机制](https://leetcode-cn.com/problems/lru-cache/)
+LRU,最近最少使用算法，即如果超出链表的容量，则会将最近最少使用的元素删除，然后插入新元素
+java中的实现是LinkedHashMap,实现原理是双向链表，关键方法是
+```
+protected boolean removeEldestEntry(Map.Entry<K,V> eldest) {
+        return false;
+    }
+```
+该方法表示删除缓存策略
 
 
