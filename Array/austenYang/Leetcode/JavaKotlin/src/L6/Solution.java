@@ -4,11 +4,12 @@ package L6;
 
 public class Solution {
     /**
-     * 
+     *
      * @param s
      * @param numRows
      * @return
      */
+
     public static String convert(String s, int numRows) {
         char[] charArray = s.toCharArray();
         int length = charArray.length;
