@@ -2,45 +2,13 @@
 // Created by Vashon on 2020/7/15.
 //
 
-#include <stdio.h>
-#include <stdlib.h>
 
-/*
-给定一个整数，编写一个算法将这个数转换为十六进制数。对于负整数，我们通常使用 补码运算 方法。
+#include "homework_032.h"
 
-注意:
-十六进制中所有字母(a-f)都必须是小写。
-十六进制字符串中不能包含多余的前导零。如果要转化的数为0，那么以单个字符'0'来表示；对于其他情况，十六进制字符串中的第一个字符将不会是0字符。 
-给定的数确保在32位有符号整数范围内。
-不能使用任何由库提供的将数字直接转换或格式化为十六进制的方法。
-
-示例 1：
-输入: 输出:
-26   "1a"
-
-示例 2：
-输入: 输出:
--1   "ffffffff"
-*/
-
-// 整数转换为十六进制数
-char *toHex(int num);
-
-// 获取数值对应的ascii码表的十六进制字符的值
-char getHexChar(int value);
-
-// 数字转换为十六进制数，LeetCode第405题
-void homework_032_405(void) {
-    char *hexStr = toHex(935);
-    printf("the hex string is : %s\n", hexStr);
-    free(hexStr);
-}
-
-char *toHex(int num) {
-    if (num == 0)
-        return "0\0";
-    // 一个十六进制数由 4 位二级制数组成，而一个字节有 8 位，所以最大需要开辟的空间就是数据类型字节数的两倍
-    const int length = 2 * sizeof(int);
+char *toHex_1(int num) {
+    if (num == 0) return "0\0";
+    // 一个十六进制数由 4 位二级制数组成，而一个字节有 8 位，所以最大需要开辟的空间就是数据类型字节数的两倍(一字节可以表示2个十六进制数)
+    const int length = sizeof(int) << 1;
     int index = length - 1;
     char temp[length];
     unsigned int quotient = num; // 除以 16 得到的值，这里强制转成无符号数，可以避免负数的判断
@@ -62,40 +30,68 @@ char *toHex(int num) {
 char getHexChar(int value) {
     switch (value) {
         case 0:
-            return 48;
+            return 48;  // 0
         case 1:
-            return 49;
+            return 49;  // 1
         case 2:
-            return 50;
+            return 50;  // 2
         case 3:
-            return 51;
+            return 51;  // 3
         case 4:
-            return 52;
+            return 52;  // 4
         case 5:
-            return 53;
+            return 53;  // 5
         case 6:
-            return 54;
+            return 54;  // 6
         case 7:
-            return 55;
+            return 55;  // 7
         case 8:
-            return 56;
+            return 56;  // 8
         case 9:
-            return 57;
+            return 57;  // 9
         case 10:
-            return 97;
+            return 97;  // a
         case 11:
-            return 98;
+            return 98;  // b
         case 12:
-            return 99;
+            return 99;  // c
         case 13:
-            return 100;
+            return 100; // d
         case 14:
-            return 101;
+            return 101; // e
         case 15:
-            return 102;
+            return 102; // f
         default:
             return 0;
     }
+}
+
+char *toHex_2(int num) {
+    if (num == 0) return "0\0";
+    // 一个十六进制数由 4 位二级制数组成，而一个字节有 8 位，所以最大需要开辟的空间就是数据类型字节数的两倍(一字节可以表示2个十六进制数)
+    unsigned int eleSize = sizeof(int), strIndex = 0, moveBit = (eleSize << 3) - 4;
+    unsigned int value = 0, mod = 0xfu << moveBit; // 二进制为：1111 后面接数据类型总位数 - 4 个 0
+    char *hexStr = calloc((eleSize << 1) + 1, sizeof(char));
+    while (mod) {
+        value = (num & mod) >> moveBit;
+        if (strIndex) {
+            hexStr[strIndex++] = value >= 10 ? value + 87 : value + 48;
+        } else {
+            if (value)
+                hexStr[strIndex++] = value >= 10 ? value + 87 : value + 48;
+        }
+        mod >>= 4;
+        moveBit -= 4;
+    }
+    hexStr[strIndex++] = '\0';
+    hexStr = realloc(hexStr, strIndex);
+    return hexStr;
+}
+
+void homework_032_405(void) {
+    char *hexStr = toHex_2(-1);
+    printf("the hex string is : %s\n", hexStr);
+    free(hexStr);
 }
 
 

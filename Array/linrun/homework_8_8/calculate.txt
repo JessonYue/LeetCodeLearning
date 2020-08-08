@@ -1,0 +1,155 @@
+//https://leetcode-cn.com/problems/convert-a-number-to-hexadecimal/
+//405. 数字转换为十六进制数
+//给定一个整数，编写一个算法将这个数转换为十六进制数。对于负整数，我们通常使用 补码运算 方法。
+
+//注意:
+
+//十六进制中所有字母(a-f)都必须是小写。
+//十六进制字符串中不能包含多余的前导零。如果要转化的数为0，那么以单个字符'0'来表示；对于其他情况，十六进制字符串中的第一个字符将不会是0字符。 
+//给定的数确保在32位有符号整数范围内。
+//不能使用任何由库提供的将数字直接转换或格式化为十六进制的方法。
+//示例 1：
+
+//输入:
+//26
+
+//输出:
+//"1a"
+
+char * toHex(int num){
+    char table[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+    char* res = (char*)malloc(9*sizeof(char));
+    if(!num){
+        res[7] = table[0];
+        res[8] = '\0';
+        return &res[7];
+    }
+    int validIndex = 0;
+    for(int i=0;i<8&&num;i++){
+        validIndex = 7-i;
+        res[validIndex]=table[num & 0xf];
+        num>>=4;   
+    }
+    res[8] = '\0';
+    return &res[validIndex];
+}
+
+//https://leetcode-cn.com/problems/insert-into-bits-lcci/
+//面试题 05.01. 插入
+//插入。给定两个32位的整数N与M，以及表示比特位置的i与j。编写一种方法，将M插入N，使得M从N的第j位开始，到第i位结束。
+
+//示例1:
+
+// 输入：N = 10000000000, M = 10011, i = 2, j = 6
+ //输出：N = 10001001100
+
+int insertBits(int N, int M, int i, int j){
+    int a = 1 << i;
+    int count = j-i;
+    while(count--){
+        a |= a << 1;
+    }
+    a = ~a;
+    N &= a;
+    return N+(M<<i);
+}
+
+
+//https://leetcode-cn.com/problems/binary-number-with-alternating-bits/
+//693. 交替位二进制数
+//给定一个正整数，检查他是否为交替位二进制数：换句话说，就是他的二进制数相邻的两个位数永不相等。
+
+//示例 1:
+
+//输入: 5
+//输出: True
+//解释:
+//5的二进制数是: 101
+
+bool hasAlternatingBits(int n){
+    int count = 1;
+    while(n >> count){
+        count++;
+    }
+    return (1<<count) == (((n>>1)^n) +1);
+
+}
+
+
+//https://leetcode-cn.com/problems/contains-duplicate/
+
+//217. 存在重复元素
+//给定一个整数数组，判断是否存在重复元素。
+//如果任意一值在数组中出现至少两次，函数返回 true 。如果数组中每个元素都不相同，则返回 false 。
+
+//示例 1:
+
+//输入: [1,2,3,1]
+//输出: true
+//示例 2:
+
+//输入: [1,2,3,4]
+//输出: false
+
+bool mergeOrder(int* nums, int start, int end);
+bool mergeOnce(int* nums, int start, int end, int mid);
+
+bool containsDuplicate(int* nums, int numsSize){
+    return mergeOrder(nums, 0, numsSize-1);
+}
+
+bool mergeOrder(int* nums, int start, int end){
+    if(start >= end){
+        return false;
+    }
+    int mid = (start + end)/2;
+    bool fMerger = mergeOrder(nums, start, mid);
+    if(fMerger){
+        return true;
+    }
+    bool lMerger = mergeOrder(nums, mid+1, end);
+    if(lMerger){
+        return true;
+    }
+    return mergeOnce(nums, start, end, mid);
+}
+
+bool mergeOnce(int* nums, int start, int end, int mid){
+    int fSize = mid+1 - start;
+    int lSize = end - mid;
+    int fommer[fSize];
+    int latter[lSize];
+    for(int i=0; i<fSize; i++){
+        fommer[i] = nums[start+i];
+    } 
+    for(int j=0; j<lSize; j++){
+        latter[j] = nums[mid+1+j];
+    }
+    int m=0;
+    int n=0;
+    int k=start;
+    while(m<fSize&&n<lSize){
+        int dt = fommer[m] - latter[n];
+        if(dt<0){
+            nums[k++] = fommer[m++];
+        }else if(dt >0){
+            nums[k++] = latter[n++];
+        }else{
+            return true;
+        }
+    }
+    while(m<fSize){
+        if(k>0 && fommer[m] == nums[k-1]){
+            return true;
+        }
+        nums[k++] = fommer[m++];
+    }
+    while(n<lSize){
+        if(k>0 && latter[n] == nums[k-1]){
+            return true;
+        }
+        nums[k++] = latter[n++];
+    }
+    return false;
+
+}
