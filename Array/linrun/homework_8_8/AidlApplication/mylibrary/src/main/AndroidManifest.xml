@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.mylibrary">
+
+<!--    <application>-->
+<!--        <service android:name="com.example.myapplication.MyService" />-->
+<!--    </application>-->
+
+</manifest>

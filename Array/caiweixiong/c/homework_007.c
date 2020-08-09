@@ -2,37 +2,9 @@
 // Created by Vashon on 2020/6/9.
 //
 
-#include "list_node.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "homework_007.h"
 
-void listInsert(struct ListNode **list, int e);
-
-// 合并两个有序链表，LeetCode第21题
-void homework_007_021(void) {
-    struct ListNode *list1 = NULL, *list2 = NULL, *list = NULL;
-    void displayList(struct ListNode *list);
-    void destroyList(struct ListNode **list);
-    struct ListNode *mergeTwoLists(struct ListNode *, struct ListNode *);
-    listInsert(&list1, 1);
-    listInsert(&list1, 2);
-    listInsert(&list1, 4);
-    listInsert(&list2, 1);
-    listInsert(&list2, 3);
-    listInsert(&list2, 4);
-    printf("链表1的元素为： ");
-    displayList(list1);
-    printf("链表2的元素为： ");
-    displayList(list2);
-    list = mergeTwoLists(list1, list2);
-    printf("归并后链表的元素为： ");
-    displayList(list);
-    destroyList(&list1);
-    destroyList(&list2);
-    destroyList(&list);
-}
-
-struct ListNode *mergeTwoLists(struct ListNode *l1, struct ListNode *l2) {
+struct ListNode *mergeTwoLists_1(struct ListNode *l1, struct ListNode *l2) {
     if (l1 == NULL && l2 == NULL)
         return NULL;
     else {
@@ -86,4 +58,81 @@ struct ListNode *mergeTwoLists(struct ListNode *l1, struct ListNode *l2) {
     }
     prior->next = NULL;
     return list;
+}
+
+struct ListNode *mergeTwoLists_2(struct ListNode *l1, struct ListNode *l2) {
+    if (!l1 || !l2) return l1 ? l1 : l2;
+    struct ListNode head, *temp = &head;
+    while (l1 && l2) {
+        if (l1->val < l2->val) {
+            temp->next = l1;
+            l1 = l1->next;
+        } else {
+            temp->next = l2;
+            l2 = l2->next;
+        }
+        temp = temp->next;
+    }
+    if (l1) temp->next = l1;
+    if (l2) temp->next = l2;
+    return head.next;
+}
+
+struct ListNode *mergeTwoLists_3(struct ListNode *l1, struct ListNode *l2) {
+    if (!l1 || !l2) return l1 ? l1 : l2;
+    struct ListNode *head = NULL, *temp = NULL;
+    bool flag = false;
+    while (l1 && l2) {
+        if (l1->val < l2->val) {
+            if (!temp)
+                head = temp = l1;
+            else {
+                flag = true;
+                temp->next = l1;
+            }
+            l1 = l1->next;
+        } else {
+            if (!temp)
+                head = temp = l2;
+            else {
+                flag = true;
+                temp->next = l2;
+            }
+            l2 = l2->next;
+        }
+        if (flag) temp = temp->next;
+    }
+    if (l1) temp->next = l1;
+    if (l2) temp->next = l2;
+    return head;
+}
+
+struct ListNode *mergeTwoLists_4(struct ListNode *l1, struct ListNode *l2) {
+    if (!l1 || !l2) return l1 ? l1 : l2;
+    if (l1->val < l2->val) {
+        l1->next = mergeTwoLists_4(l1->next, l2);
+        return l1;
+    } else {
+        l2->next = mergeTwoLists_4(l1, l2->next);
+        return l2;
+    }
+}
+
+// 合并两个有序链表，LeetCode第21题
+void homework_007_021(void) {
+    struct ListNode *list1 = NULL, *list2 = NULL, *list = NULL;
+    listInsert(&list1, 1);
+    listInsert(&list1, 2);
+    listInsert(&list1, 4);
+    listInsert(&list2, 1);
+    listInsert(&list2, 3);
+    listInsert(&list2, 4);
+    printf("链表1的元素为： ");
+    displayList(list1);
+    printf("链表2的元素为： ");
+    displayList(list2);
+    list = mergeTwoLists_2(list1, list2);
+    printf("归并后链表的元素为： ");
+    displayList(list);
+    destroyList(&list);
 }

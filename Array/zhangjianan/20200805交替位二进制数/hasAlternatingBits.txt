@@ -1,0 +1,6 @@
+class Solution {
+    public boolean hasAlternatingBits(int n) {
+        int m=n^(n>>1);
+        return (n &(m+1))==0;
+    }
+}
