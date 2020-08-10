@@ -1,7 +1,6 @@
 package L951
 
 import Base.TreeNode
-import com.sun.org.apache.xpath.internal.operations.Bool
 
 fun flipEquiv(root1: TreeNode?, root2: TreeNode?): Boolean = dsf(root1, root2)
 
@@ -16,7 +15,7 @@ private fun dsf(t1: TreeNode?, t2: TreeNode?): Boolean {
 
     return (dsf(t1.left, t2.left) && dsf(t1.right, t2.right)) ||
             (dsf(t1.left, t2.right) && dsf(t1.right, t2.left))
-    
+
 
 }
 

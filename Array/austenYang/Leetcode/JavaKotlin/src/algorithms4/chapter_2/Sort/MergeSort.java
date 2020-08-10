@@ -7,7 +7,6 @@ package algorithms4.chapter_2.Sort;
 public class MergeSort {
     private static int[] aux;
 
-
     public static void sort(int[] a) {
         aux = new int[a.length];
         sort(a, 0, a.length - 1);
