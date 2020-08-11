@@ -11,9 +11,8 @@ void createHeadNode(ListNode *&node, int value) {
 bool insertNode(ListNode *&head, int value) {
     assert(head != nullptr);
     ListNode *temp = head;
-    while (temp->next) {
+    while (temp->next)
         temp = temp->next;
-    }
     auto *node = new ListNode(value);
     temp->next = node;
     return true;
