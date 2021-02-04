@@ -3,7 +3,9 @@ project(BaseDataStructure)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(LinkedList LinkedList.cpp LinkedList.h)
+add_executable(LinkedList list/LinkedList.cpp list/LinkedList.h)
+add_executable(DoublyLinkedList list/DoublyLinkedList.h list/DoublyLinkedList.cpp)
+add_executable(DoublyCircularList list/DoublyCircularList.cpp list/DoublyCircularList.h)
 add_executable(Stack Stack.cpp Stack.h)
 add_executable(PriorityQueue PriorityQueue.c)
 add_executable(queue queue.c)
@@ -15,6 +17,7 @@ add_executable(LinkedListHash LinkedListHash.cpp LinkedListHash.h)
 add_executable(HeapSort HeapSort.cpp)
 add_executable(Test Test.c)
 add_executable(BinarySearch BinarySearch.cpp)
+add_executable(Timer Timer.cpp Timer.h)
 add_executable(array array/JavaObject.cpp array/JavaObject.h array/String.cpp array/String.h array/Integer.cpp array/Integer.h array/People.cpp array/People.h array/Array.cpp array/Array.h)
 
 
