@@ -48,11 +48,13 @@ void destroy(LinkedList_* list){
     free(list);
     list = NULL;
 }
-//追加
+//追加 在写基本的 数据结构的时候 初学者一定要从API的设计开始  我的代码仅供参考
+//自己实现：想清楚API的设计
+          //内存泄漏避免
 void append(LinkedList_* list,int data){
     list->tail->data = data;
     Node_* node = make(0);
-    list->tail->next = node;
+    list->tail->next = node; //建立关系
     list->tail = node;
     list->length += 1;
 }

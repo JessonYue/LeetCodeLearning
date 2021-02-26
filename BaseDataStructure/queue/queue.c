@@ -15,7 +15,7 @@
  */
 typedef struct Queue{
     int Queue[MAX_SIZE];
-    int front; //对头指针
+    int front; //队头指针
     int rear; //队尾指针
 }SeqQueue;
 

@@ -20,10 +20,10 @@ void CreateLink(LinkList L,int n)
     {
         q=(LinkList)malloc(sizeof(Node));
         scanf("%d",&q->data);
-        p->next=q;
-        q->pre=p;
-        q->next=L;//尾插法
-        L->pre=q;
+        p->next=q;//前一个结点的后驱指针更新为指向新的结点
+        q->pre=p;//前一个结点的后驱指针更新为指向新的结点
+        q->next=L;//尾插法  新插入的结点的后驱指向头结点
+        L->pre=q;//头结点的前驱指针指向新加入的结点，
         p=q;
     }
 }
